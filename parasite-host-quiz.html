@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parasite → Host Quiz (A–Z) • Unique Draw</title>
+  <style>
+    :root{
+      --bg:#0b1220; --panel:#121a2b; --muted:#8ea0b5; --text:#e6edf5;
+      --accent:#66d9e8; --accent2:#a78bfa; --good:#22c55e; --bad:#ef4444;
+      --border:#1f2a44; --chip:#1b2740;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+         background:linear-gradient(180deg,#0b1220 0%,#0a1020 40%,#0b1628 100%), var(--bg);color:var(--text)}
+    header{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);background:rgba(11,18,32,.7);border-bottom:1px solid var(--border)}
+    .wrap{max-width:980px;margin:0 auto;padding:16px}
+    .brand{display:flex;gap:12px;align-items:center}.brand h1{font-size:20px;margin:0}
+    nav a{color:var(--muted);text-decoration:none;margin-right:14px;font-weight:600}
+    nav a.active{color:var(--accent)}
+    .panel{background:linear-gradient(180deg,#121a2b 0%,#0f182a 100%);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .row{display:flex;gap:16px;flex-wrap:wrap}.col{flex:1 1 320px}
+    .title{font-size:18px;margin:0 0 8px 0}.muted{color:var(--muted)}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--border);color:var(--muted);font-size:13px}
+    .question{font-size:22px;margin:6px 0 12px 0;letter-spacing:.2px;font-weight:700;color:#f0f6ff}
+    .options{display:grid;gap:10px}
+    .btn{border:1px solid var(--border);background:#111a2a;color:var(--text);padding:12px 14px;border-radius:12px;font-weight:600;cursor:pointer;transition:transform .02s ease, background .2s ease, border-color .2s ease;text-align:left}
+    .btn:hover{background:#0f1525;border-color:#2a365a}.btn:active{transform:scale(.997)}
+    .btn.block{text-align:center}.btn.primary{background:linear-gradient(180deg,#1a2a47,#16233f);border-color:#2a365a}.btn.ghost{background:transparent}
+    .btn.correct{border-color:rgba(34,197,94,.6);background:rgba(34,197,94,.08)} .btn.wrong{border-color:rgba(239,68,68,.6);background:rgba(239,68,68,.08)}
+    .answer-box{margin-top:12px;padding:12px;border:1px dashed var(--border);border-radius:12px;background:#0e1526}
+    .answer-box .good{color:var(--good);font-weight:800}.answer-box .bad{color:var(--bad);font-weight:800}
+    .grid{display:grid;gap:10px}.grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width:720px){.grid.cols-2{grid-template-columns:1fr}}
+    table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+    th,td{padding:10px 12px;border-bottom:1px solid var(--border)} th{text-align:left;background:#10192a;color:#adc3db;font-weight:700}
+    tr:last-child td{border-bottom:none} tr:nth-child(even) td{background:#0f182a}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.pill{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted)}
+    .score{font-weight:800;color:#bfe7ff} footer{color:#779;font-size:12px;padding:24px 0;text-align:center}
+    .kbd{border:1px solid var(--border);border-bottom-color:#43517a;background:#0d1425;padding:2px 6px;border-radius:6px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:#a8c4eb}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap row" style="align-items:center;justify-content:space-between;">
+    <div class="brand">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="url(#g1)" stroke-width="2"></circle>
+        <path d="M7 12a5 5 0 0 0 10 0" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#66d9e8"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#66d9e8"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+        </defs>
+      </svg>
+      <h1>Parasite → Host Quiz (Unique Draw)</h1>
+    </div>
+    <nav>
+      <a href="#/quiz" id="nav-quiz">Quiz</a>
+      <a href="#/answers" id="nav-answers">Answer Key (A–Z)</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="app" style="padding-top:18px;padding-bottom:32px;" aria-live="polite"></main>
+
+<footer>
+  Works offline in Safari & Chrome. <span class="kbd">R</span> เฉลย • <span class="kbd">Enter</span> ถัดไป.
+</footer>
+
+<script>
+const DATA = [
+  { name:"Aelurostrongylus abstrusus", host:"Cat" },
+  { name:"Ancylostoma caninum", host:"Dog" },
+  { name:"Ancylostoma ceylanicum", host:"Dog, Cat" },
+  { name:"Ascaridia galli (eggs)", host:"Poultry" },
+  { name:"Ascaris suum (eggs)", host:"Pig" },
+  { name:"Ascarops strongylina", host:"Pig" },
+  { name:"Bunostomum spp.", host:"Ruminant" },
+  { name:"Capillaria spp. (eggs)", host:"Ruminant / Poultry" },
+  { name:"Capillaria annulata", host:"Poultry" },
+  { name:"Capillaria contorta", host:"Poultry" },
+  { name:"Capillaria hepatica", host:"Dog, Cat, Rodent" },
+  { name:"Capillaria philippinensis", host:"Human (zoonotic)" },
+  { name:"Cooperia spp.", host:"Ruminant" },
+  { name:"Dictyocaulus spp.", host:"Ruminant, Horse" },
+  { name:"Dispharynx spiralis", host:"Poultry" },
+  { name:"Dirofilaria immitis (microfilaria)", host:"Dog, Cat" },
+  { name:"Draschia megastoma", host:"Horse" },
+  { name:"Elaeophora spp. (microfilaria)", host:"Ruminant" },
+  { name:"Gnathostoma doloresi (eggs)", host:"Pig" },
+  { name:"Gnathostoma hispidum (eggs)", host:"Pig" },
+  { name:"Gnathostoma spinigerum (eggs)", host:"Dog, Cat" },
+  { name:"Gongylonema ingluvicola", host:"Poultry" },
+  { name:"Habronema muscae", host:"Horse" },
+  { name:"Haemonchus contortus", host:"Sheep, Goat" },
+  { name:"Haemonchus placei", host:"Cattle" },
+  { name:"Heterakis gallinarum (eggs)", host:"Poultry" },
+  { name:"Macracanthorhynchus hirudinaceus (eggs)", host:"Pig" },
+  { name:"Mecistocirrus digitatus", host:"Ruminant" },
+  { name:"Nematodirus spp.", host:"Ruminant" },
+  { name:"Oesophagostomum radiatum", host:"Cattle" },
+  { name:"Oesophagostomum spp.", host:"Ruminant, Pig" },
+  { name:"Onchocerca spp. (worm nest)", host:"Ruminant, Horse" },
+  { name:"Onchocerca lupi", host:"Dog, Cat" },
+  { name:"Oxyspirura mansoni", host:"Poultry" },
+  { name:"Oxyuris equi (eggs)", host:"Horse" },
+  { name:"Parascaris spp. (eggs)", host:"Horse" },
+  { name:"Physaloptera praeputialis", host:"Cat" },
+  { name:"Setaria spp. (microfilaria)", host:"Ruminant, Horse" },
+  { name:"Setaria labiatopapillosa (microfilaria)", host:"Cattle" },
+  { name:"Setaria digitata", host:"Cattle" },
+  { name:"Spirocerca lupi (eggs)", host:"Dog" },
+  { name:"Strongylus edentatus", host:"Horse" },
+  { name:"Strongylus equinus", host:"Horse" },
+  { name:"Strongylus vulgaris", host:"Horse" },
+  { name:"Strongyloides papillosus (eggs)", host:"Ruminant" },
+  { name:"Strongyloides stercoralis (rhabditiform larva)", host:"Dog, Cat" },
+  { name:"Strongyloides westeri", host:"Horse" },
+  { name:"Syngamus trachea", host:"Poultry" },
+  { name:"Tetrameres americana", host:"Poultry" },
+  { name:"Tetrameres fissispina", host:"Poultry" },
+  { name:"Thelazia callipaeda", host:"Dog, Cat" },
+  { name:"Thelazia rhodesii", host:"Cattle" },
+  { name:"Toxascaris leonina (eggs)", host:"Dog, Cat" },
+  { name:"Toxocara canis (eggs)", host:"Dog" },
+  { name:"Toxocara cati (eggs)", host:"Cat" },
+  { name:"Toxocara vitulorum (eggs)", host:"Cattle, Buffalo" },
+  { name:"Trichinella spiralis (larva)", host:"Pig" },
+  { name:"Trichostrongylus spp.", host:"Ruminant" },
+  { name:"Trichuris globulosa (eggs)", host:"Ruminant" },
+  { name:"Trichuris ovis (eggs)", host:"Ruminant" },
+  { name:"Trichuris suis (eggs)", host:"Pig" },
+  { name:"Trichuris vulpis (eggs)", host:"Dog" }
+];
+DATA.sort((a,b)=>a.name.localeCompare(b.name));
+
+const $ = (s,el=document)=>el.querySelector(s);
+const $$ = (s,el=document)=>Array.from(el.querySelectorAll(s));
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b;}
+function uniqHosts(){const s=new Set();for(const d of DATA)s.add(d.host);return [...s];}
+const HOST_CHOICES=uniqHosts();
+
+const store={k:'phq-unique-v1',read(){try{return JSON.parse(localStorage.getItem(this.k)||'{}')}catch(_){return{}}},write(o){localStorage.setItem(this.k,JSON.stringify(o))},reset(){this.write({correct:0,total:0,round:1,seen:0})}};
+if(!('total'in store.read())) store.reset();
+
+let queue=[], idx=0;
+function resetQueue(){ queue=shuffle([...DATA]); idx=0; }
+resetQueue();
+
+let current=null, answered=false;
+
+function route(){
+  const hash=location.hash||'#/quiz';
+  $('#nav-quiz')?.classList.toggle('active',hash.startsWith('#/quiz'));
+  $('#nav-answers')?.classList.toggle('active',hash.startsWith('#/answers'));
+  if(hash.startsWith('#/answers')) renderAnswers(); else renderQuiz();
+}
+window.addEventListener('hashchange',route);
+
+function getNextQuestion(){
+  const st=store.read();
+  if(idx>=queue.length){ resetQueue(); st.round=(st.round||1)+1; st.seen=0; store.write(st); }
+  const q=queue[idx++];
+  st.seen=(st.seen||0)+1;
+  store.write(st);
+  return q;
+}
+
+function newQuestion(){
+  answered=false;
+  current=getNextQuestion();
+  const distractors=shuffle(HOST_CHOICES.filter(h=>h!==current.host)).slice(0,3);
+  const options=shuffle([current.host,...distractors]);
+  const s=store.read();
+  $('#app').innerHTML = `
+    <div class="row" style="align-items:flex-start;">
+      <div class="col">
+        <div class="panel">
+          <div class="toolbar" style="justify-content:space-between;margin-bottom:8px;">
+            <div class="pill">Score <span class="score">${s.correct||0}</span>/<span class="total">${s.total||0}</span></div>
+            <div class="pill">รอบที่ <span class="round">${s.round||1}</span> • ข้อที่ <span class="seen">${s.seen||1}</span>/<span class="len">${DATA.length}</span></div>
+            <button id="reset" class="btn ghost" title="รีเซ็ตคะแนนและเริ่มรอบใหม่">รีเซ็ตคะแนน/รอบ</button>
+          </div>
+          <div class="question">Host ของ <span style="color:var(--accent2)">${current.name}</span> คืออะไร?</div>
+          <div class="options">
+            ${options.map(opt=>`<button class="btn option" data-ans="${encodeURIComponent(opt)}">${opt}</button>`).join('')}
+          </div>
+          <div id="answer-box" class="answer-box" style="display:none;">
+            <div><span class="good">เฉลย:</span> ${current.host}</div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:12px;">
+            <button id="reveal" class="btn ghost">แสดงเฉลย</button>
+            <button id="next" class="btn primary">ข้อถัดไป ▶</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="panel">
+          <h3 class="title">ตัวเลือก Host ทั้งหมด</h3>
+          <div class="grid cols-2">
+            ${HOST_CHOICES.slice().sort((a,b)=>a.localeCompare(b)).map(h=>`<span class="chip">${h}</span>`).join('')}
+          </div>
+          <p class="muted" style="margin-top:10px;">ปล. บางปรสิตมีหลาย host (เช่น “Dog, Cat” หรือ “Ruminant / Poultry”)</p>
+        </div>
+      </div>
+    </div>`;
+  $$('#app .option').forEach(btn=>btn.addEventListener('click',()=>choose(btn)));
+  $('#reveal').addEventListener('click',reveal);
+  $('#next').addEventListener('click',next);
+  $('#reset').addEventListener('click',()=>{ store.reset(); resetQueue(); newQuestion(); });
+}
+
+function markSolution(picked=null){
+  $$('#app .option').forEach(b=>{
+    const ans=decodeURIComponent(b.dataset.ans);
+    if(ans===current.host) b.classList.add('correct');
+    if(picked && ans===picked && picked!==current.host) b.classList.add('wrong');
+    b.disabled=true;
+  });
+  $('#answer-box').style.display='block';
+}
+
+function choose(btn){
+  if(answered) return;
+  answered=true;
+  const pick=decodeURIComponent(btn.dataset.ans);
+  const correct=(pick===current.host);
+  const s=store.read();
+  s.total=(s.total||0)+1;
+  if(correct) s.correct=(s.correct||0)+1;
+  store.write(s);
+  markSolution(pick);
+  $('.score').textContent=s.correct;
+  $('.total').textContent=s.total;
+}
+
+function reveal(){
+  if(!answered){
+    const s=store.read();
+    s.total=(s.total||0)+1;
+    store.write(s);
+    $('.total').textContent=s.total;
+  }
+  answered=true;
+  markSolution(null);
+}
+
+function next(){ newQuestion(); }
+
+function renderQuiz(){ newQuestion(); }
+
+function renderAnswers(){
+  const rows=DATA.map(d=>`<tr><td>${d.name}</td><td>${d.host}</td></tr>`).join('');
+  $('#app').innerHTML = `
+    <div class="panel">
+      <div class="toolbar" style="justify-content:space-between;margin-bottom:10px;">
+        <h3 class="title" style="margin:0">Answer Key (A–Z): Parasite → Host</h3>
+        <div class="pill">รวม ${DATA.length} ตัว</div>
+        <a class="btn block" href="#/quiz">กลับไปทำแบบฝึกหัด</a>
+      </div>
+      <table>
+        <thead><tr><th>Parasite (A–Z)</th><th>Host</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+route();
+if(!location.hash) location.hash='#/quiz';
+window.addEventListener('keydown',(e)=>{ if(e.key==='Enter') next(); if(e.key.toLowerCase()==='r') reveal(); });
+</script>
+</body>
+</html>
