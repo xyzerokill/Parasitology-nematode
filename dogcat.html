@@ -113,7 +113,56 @@ function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const 
 /***********************
  * MCQ / TF – ประกาศไว้เฉย ๆ (ยังไม่ทำ)
  ***********************/
-const MCQ = [];
+const MCQ = [
+ {q:"ตำแหน่งที่พบตัวเต็มวัยของ <i>Spirocerca lupi</i> ในสุนัขคือที่ใด?",
+  choices:["fundus ของกระเพาะ","ผนังกระเพาะและหลอดอาหารส่วนทรวงอก","ลำไส้ใหญ่","ปอด","ตับ"],
+  a:1,
+  why:"อยู่ที่ thoracic esophagus และผนังกระเพาะของสุนัข"},
+
+ {q:"ลักษณะไข่ของ <i>S. lupi</i> ที่ใช้แยกชนิดได้เด่นที่สุดคืออะไร?",
+  choices:["มี operculum สีเหลือง","ผนังบางไม่ติดสี","ผนังหนาเรียบ ภายในมี L1 ขดอยู่","ผนังขรุขระมี polar plug","ใสและมี L2 ภายใน"],
+  a:2,
+  why:"เป็น embryonated egg ผนังหนาเรียบ มี L1 อยู่ภายใน"},
+
+ {q:"ลักษณะเด่นของตัวเต็มวัย <i>S. lupi</i> คือข้อใด",
+  choices:["หัวเป็นลูกโป่ง","ตัวสั้นแบน สีขาวขุ่น","สีแดง/ชมพูและขดเป็นเกลียว","มี cervical alae กว้าง","หางแฉก"],
+  a:2,
+  why:"ตัวหนา สีแดง/ชมพู และมักขดเป็นเกลียว (spiral)"},
+
+ {q:"ระยะติดต่อของ <i>S. lupi</i> คือข้อใด",
+  choices:["Egg","L1","L2","L3","Adult"],
+  a:3,
+  why:"สุนัขติดเชื้อจาก L3 ภายในตัวด้วงกินมูล (coprophagous beetle)"},
+
+ {q:"โฮสต์กลางของ <i>S. lupi</i> คืออะไร",
+  choices:["Cockroach","Earthworm","House fly","Snail","Coprophagous beetle"],
+  a:4,
+  why:"ใช้ด้วงที่กินมูลเป็น intermediate host"},
+
+ {q:"พยาธิสภาพเด่นที่สัมพันธ์กับ <i>S. lupi</i> ในสุนัขคือข้อใด",
+  choices:["Hemorrhagic enteritis","Pulmonary consolidation","Esophageal nodule และ aneurysm ของ aorta",
+           "Cystic nodule ในตับ","Melena"],
+  a:2,
+  why:"ทำให้เกิดก้อนที่หลอดอาหาร และอาจเกิด aortic nodule/aneurysm"},
+
+ {q:"การวินิจฉัยทางอุจจาระที่เหมาะสมสำหรับ <i>S. lupi</i> คือข้อใด",
+  choices:["Baermann technique","Sedimentation อย่างเดียว","Floatation ด้วยสารละลายความถ่วงจำเพาะสูง (~1.36)",
+           "Scotch tape test","ELISA สำหรับตัวเต็มวัย"],
+  a:2,
+  why:"ใช้ fecal floatation ด้วยสารละลาย SG สูงเพื่อลอยไข่ผนังหนา"},
+
+ {q:"ข้อใดถูกต้องเกี่ยวกับการก่อโรคของ <i>S. lupi</i>",
+  choices:["ทำให้ papilloma ที่กระเพาะ","ทำให้ osteosarcoma/fibrosarcoma ที่หลอดอาหารได้",
+           "ทำให้ hepatocellular carcinoma","ทำให้ tracheitis รุนแรง","ทำให้ nephritis เฉียบพลัน"],
+  a:1,
+  why:"esophageal sarcoma (osteosarcoma/fibrosarcoma) เป็นภาวะแทรกซ้อนสำคัญ"},
+
+ {q:"ข้อใดต่อไปนี้เป็นชนิดพยาธิที่พบเฉพาะในสุนัข",
+  choices:["<i>Strongyloides stercoralis</i>","<i>Dirofilaria immitis</i>","<i>Thelazia callipaeda</i>",
+           "<i>Ancylostoma ceylanicum</i>","<i>Spirocerca lupi</i>"],
+  a:4,
+  why:"<i>S. lupi</i> รายงานในสุนัข (หลอดอาหาร/ผนังกระเพาะ); ตัวเลือกอื่นพบได้หลายชนิดสัตว์"}
+];
 const TF = [];
 
 /***********************
