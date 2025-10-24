@@ -265,6 +265,126 @@ updateView();
   }
   shuffleAll();
 })();
+
+/***********************
+ * Mode 2 – MCQ (ไทย) — ทำทุกข้อที่มี
+ ***********************/
+ (function(){
+  const host=document.getElementById('mode-mcq');
+  // ใช้ทุกข้อที่มี (ไม่ slice)
+  let order = shuffle(MCQ.map((_,i)=>i));
+  let i=0, score=0;
+  const total = order.length;
+
+  const hud=document.createElement('div'); hud.className='scorebox';
+  hud.innerHTML = `<div class="badge" id="mcqProg">ข้อ 1 / ${total}</div>
+                   <div class="badge" id="mcqScore">คะแนน 0</div>
+                   <button class="secondary" id="mcqRestart">เริ่มใหม่/สุ่มใหม่</button>`;
+  host.appendChild(hud);
+
+  const qc=document.createElement('div'); qc.className='qcard'; host.appendChild(qc);
+
+  function renderQ(){
+    const item = MCQ[order[i]];
+    document.getElementById('mcqProg').textContent = `ข้อ ${i+1} / ${total}`;
+    qc.innerHTML = `<div><b>Q${i+1}.</b> ${item.q}</div>`;
+    const box=document.createElement('div'); box.className='choices'; qc.appendChild(box);
+    const shuffledChoices = shuffle(item.choices.map((c,idx)=>({c,idx})));
+    let locked=false;
+
+    shuffledChoices.forEach(({c,idx})=>{
+      const div=document.createElement('div');
+      div.className='choice'; div.innerHTML=c; box.appendChild(div);
+      div.onclick=()=>{
+        if(locked) return; locked=true;
+        const isCorrect = idx===item.a;
+        if(isCorrect){div.classList.add('correct'); score++;}
+        else{div.classList.add('wrong');}
+        // ไฮไลต์ตัวที่ถูก
+        [...box.children].forEach(el=>{
+          const originalIndex=item.choices.indexOf(el.innerHTML);
+          if(originalIndex===item.a) el.classList.add('correct');
+        });
+        // เฉลย
+        const exp=document.createElement('div'); exp.className='answer';
+        exp.innerHTML = `<b>เฉลย:</b> ${item.choices[item.a]}<br><span class="muted">เหตุผล:</span> ${item.why}`;
+        qc.appendChild(exp);
+        // ปุ่มถัดไป
+        const nx=document.createElement('div'); nx.style.marginTop='10px';
+        nx.innerHTML = `<button id="btnNext">ถัดไป</button>`; qc.appendChild(nx);
+        document.getElementById('mcqScore').textContent = `คะแนน ${score}`;
+        document.getElementById('btnNext').onclick = ()=>{
+          i++; if(i>=total){
+            qc.innerHTML = `<div class="row"><div class="badge">จบชุด MCQ</div><div class="badge">คะแนนรวม: ${score} / ${total}</div></div>`;
+          } else { renderQ(); }
+        };
+      };
+    });
+  }
+
+  document.getElementById('mcqRestart').onclick=()=>{
+    order = shuffle(MCQ.map((_,i)=>i)); i=0; score=0;
+    document.getElementById('mcqScore').textContent='คะแนน 0';
+    renderQ();
+  };
+
+  renderQ();
+})();
+
+/***********************
+ * Mode 3 – True / False (ไทย) — ทำทุกข้อที่มี
+ ***********************/
+ (function(){
+  const host=document.getElementById('mode-tf');
+  // ใช้ทุกข้อที่มี (ไม่ slice)
+  let order = shuffle(TF.map((_,i)=>i));
+  let i=0, score=0;
+  const total = order.length;
+
+  const hud=document.createElement('div'); hud.className='scorebox';
+  hud.innerHTML = `<div class="badge" id="tfProg">ข้อ 1 / ${total}</div>
+                   <div class="badge" id="tfScore">คะแนน 0</div>
+                   <button class="secondary" id="tfRestart">เริ่มใหม่/สุ่มใหม่</button>`;
+  host.appendChild(hud);
+
+  const qc=document.createElement('div'); qc.className='qcard'; host.appendChild(qc);
+
+  function renderQ(){
+    const item=TF[order[i]];
+    document.getElementById('tfProg').textContent=`ข้อ ${i+1} / ${total}`;
+    qc.innerHTML = `<div><b>Q${i+1}.</b> ${item.q}</div>`;
+
+    const box=document.createElement('div'); box.className='choices'; qc.appendChild(box);
+    const btnT=document.createElement('button'); btnT.textContent='ถูก (True)';
+    const btnF=document.createElement('button'); btnF.textContent='ผิด (False)'; btnF.className='secondary';
+    const btnRow=document.createElement('div'); btnRow.style.display='flex'; btnRow.style.gap='8px'; btnRow.append(btnT,btnF); qc.appendChild(btnRow);
+
+    let locked=false;
+    function mark(ans){
+      if(locked) return; locked=true;
+      const cor = item.a===ans; if(cor) score++;
+      document.getElementById('tfScore').textContent=`คะแนน ${score}`;
+      const exp=document.createElement('div'); exp.className='answer';
+      exp.innerHTML=`<b>เฉลย:</b> ${item.a?'<span class="ok">True</span>':'<span class="ng">False</span>'} · <span class="muted">เหตุผล:</span> ${item.why}`;
+      qc.appendChild(exp);
+      const nx=document.createElement('div'); nx.style.marginTop='10px'; nx.innerHTML='<button id="tfNext">ถัดไป</button>'; qc.appendChild(nx);
+      document.getElementById('tfNext').onclick=()=>{
+        i++; if(i>=total){
+          qc.innerHTML = `<div class="row"><div class="badge">จบชุด True/False</div><div class="badge">คะแนนรวม: ${score} / ${total}</div></div>`;
+        } else { renderQ(); }
+      };
+    }
+    btnT.onclick=()=>mark(true); btnF.onclick=()=>mark(false);
+  }
+
+  document.getElementById('tfRestart').onclick=()=>{
+    order = shuffle(TF.map((_,i)=>i)); i=0; score=0;
+    document.getElementById('tfScore').textContent='คะแนน 0';
+    renderQ();
+  };
+
+  renderQ();
+})();
 </script>
 </body>
 </html>
