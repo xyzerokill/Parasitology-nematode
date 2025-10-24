@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parasitology Quiz Hub</title>
+  <style>
+    :root{--bg:#0b1220;--panel:#121a2b;--muted:#8ea0b5;--text:#e6edf5;--accent:#66d9e8;--accent2:#a78bfa;--border:#1f2a44}
+    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(180deg,#0b1220,#0b1628);color:var(--text)}
+    .wrap{max-width:1000px;margin:0 auto;padding:24px}
+    h1{margin:0 0 8px 0;font-size:28px} p.muted{color:var(--muted)}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:620px){.grid{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,#121a2b,#0f182a);border:1px solid var(--border);border-radius:16px;padding:18px;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:8px;min-height:140px}
+    .card:hover{border-color:#2a365a}
+    .label{font-size:12px;color:#a8c4eb;letter-spacing:.6px;text-transform:uppercase}
+    .title{font-size:20px;font-weight:800}
+    .desc{color:var(--muted);font-size:14px}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+    .chip{border:1px solid var(--border);padding:6px 10px;border-radius:999px;color:#a8c4eb}
+    footer{margin-top:24px;color:#779;font-size:12px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Parasitology Quiz Hub</h1>
+        <p class="muted">เลือกหัวข้อที่ต้องการทำแบบฝึกหัด (สุ่มไม่ซ้ำ + เฉลยได้ทันที)</p>
+      </div>
+      <div class="chip">Works on Safari & Chrome</div>
+    </header>
+
+    <div class="grid">
+      <a class="card" href="quiz.html?group=horse">
+        <div class="label">Quiz</div>
+        <div class="title">Nematode in Horse</div>
+        <div class="desc">Strongylus spp., Oxyuris equi, Parascaris spp., Habronema/Draschia ฯลฯ</div>
+      </a>
+
+      <a class="card" href="quiz.html?group=pig">
+        <div class="label">Quiz</div>
+        <div class="title">Nematode in Pig</div>
+        <div class="desc">Ascaris suum, Trichuris suis, Macracanthorhynchus, Oesophagostomum, Gnathostoma ฯลฯ</div>
+      </a>
+
+      <a class="card" href="quiz.html?group=ruminant">
+        <div class="label">Quiz</div>
+        <div class="title">Nematode in Ruminant</div>
+        <div class="desc">Haemonchus, Trichostrongylus, Cooperia, Nematodirus, Setaria, Onchocerca ฯลฯ</div>
+      </a>
+
+      <a class="card" href="quiz.html?group=dogcat">
+        <div class="label">Quiz</div>
+        <div class="title">Nematode in Dog & Cat</div>
+        <div class="desc">Toxocara/Toxascaris, Dirofilaria, Ancylostoma, Aelurostrongylus, Spirocerca ฯลฯ</div>
+      </a>
+
+      <a class="card" href="quiz.html?group=poultry">
+        <div class="label">Quiz</div>
+        <div class="title">Nematode in Poultry</div>
+        <div class="desc">Ascaridia, Heterakis, Syngamus, Tetrameres, Capillaria, Oxyspirura ฯลฯ</div>
+      </a>
+
+      <a class="card" href="lab.html">
+        <div class="label">Lab</div>
+        <div class="title">Laboratory (slides/notes)</div>
+        <div class="desc">เปิดไฟล์ Lab ที่คุณมีอยู่ (แก้ลิงก์นี้ให้ชี้ไปยังไฟล์ของคุณได้)</div>
+      </a>
+
+      <a class="card" href="quiz.html?group=all">
+        <div class="label">Quiz</div>
+        <div class="title">All Nematodes (A–Z)</div>
+        <div class="desc">รวมทุกกลุ่ม สุ่มไม่ซ้ำครบก่อนเริ่มรอบใหม่</div>
+      </a>
+    </div>
+
+    <footer>Tip: เพิ่มหัวข้อใหม่ได้โดยแก้ <code>index.html</code> ให้ลิงก์ไป <code>quiz.html?group=ชื่อใหม่</code> และเพิ่มข้อมูลใน GROUPS ที่ <code>quiz.html</code>.</footer>
+  </div>
+</body>
+</html>
