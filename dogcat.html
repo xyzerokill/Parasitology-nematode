@@ -49,6 +49,14 @@
 </head>
 <body>
 <header>
+  <div style="margin:10px 0;">
+  <a href="index.html" 
+     style="display:inline-block;padding:8px 14px;background:#0b2436;
+            border:1px solid #0ea5e9;border-radius:10px;
+            color:#7dd3fc;text-decoration:none;font-weight:600;">
+    🏠กลับไปหน้าแรก
+  </a>
+</div>
   <div class="wrap">
     <h1>🐶🐱 พยาธิตัวกลมในสุนัขและแมว – ชุดแบบทดสอบ (ภาษาไทย)</h1>
     <div class="muted">สามโหมดในหน้าเดียว: <span class="pill">Prediction site</span> · <span class="pill">MCQ</span> · <span class="pill">True/False</span></div>
@@ -77,12 +85,12 @@
  ***********************/
 const SITES = [
   "Thoracic esophagus / Stomach wall",
-  "Stomach (lumen/gland)",
+  "Stomach",
   "Small intestine",
-  "Large intestine (Caecum/Colon)",
-  "Eye (Conjunctival sac / Naso-lacrimal duct)",
-  "Respiratory (Small bronchiole / Lung parenchyma)",
-  "Cardiovascular (Right ventricle / Pulmonary artery)",
+  "Large intestine",
+  "Eye",
+  "Respiratory",
+  "Cardiovascular",
   "Liver parenchyma",
   "Periocular/Subconjunctival tissue",
   "Lymphatic vessels"
@@ -91,8 +99,8 @@ const SITES = [
 // Mapping สำหรับโหมด Prediction Site (อ้างอิงไฟล์สุนัขและแมว)
 const PARASITES = [
   {name:"Spirocerca lupi", site:"Thoracic esophagus / Stomach wall"},
-  {name:"Gnathostoma spinigerum", site:"Stomach (lumen/gland)"},
-  {name:"Physaloptera praeputialis", site:"Stomach (lumen/gland)"},
+  {name:"Gnathostoma spinigerum", site:"Stomach"},
+  {name:"Physaloptera praeputialis", site:"Stomach"},
   {name:"Toxocara canis", site:"Small intestine"},
   {name:"Toxocara cati", site:"Small intestine"},
   {name:"Toxascaris leonina", site:"Small intestine"},
@@ -100,10 +108,10 @@ const PARASITES = [
   {name:"Ancylostoma ceylanicum", site:"Small intestine"},
   {name:"Uncinaria stenocephala", site:"Small intestine"},
   {name:"Strongyloides stercoralis", site:"Small intestine"},
-  {name:"Trichuris vulpis", site:"Large intestine (Caecum/Colon)"},
-  {name:"Thelazia callipaeda", site:"Eye (Conjunctival sac / Naso-lacrimal duct)"},
-  {name:"Aelurostrongylus abstrusus", site:"Respiratory (Small bronchiole / Lung parenchyma)"},
-  {name:"Dirofilaria immitis", site:"Cardiovascular (Right ventricle / Pulmonary artery)"},
+  {name:"Trichuris vulpis", site:"Large intestine"},
+  {name:"Thelazia callipaeda", site:"Eye"},
+  {name:"Aelurostrongylus abstrusus", site:"Respiratory"},
+  {name:"Dirofilaria immitis", site:"Cardiovascular"},
   {name:"Capillaria hepatica (Calodium hepaticum)", site:"Liver parenchyma"},
   {name:"Onchocerca lupi", site:"Periocular/Subconjunctival tissue"}
 ];
