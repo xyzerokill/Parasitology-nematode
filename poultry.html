@@ -114,137 +114,376 @@ function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const 
 /***********************
  * MCQ (ภาษาไทย 40 ข้อ)
  ***********************/
-const MCQ = [
- {q:"ระยะติดเชื้อที่ทำให้ <i>Capillaria annulata</i> แตกต่างจากพยาธิตัวกลมในสัตว์ปีกชนิดอื่นคืออะไร?",
-  choices:["L3 ใน paratenic host","L2 (ภายใน earthworm)","L3 ในไข่","L3 อิสระบนพืช"], a:1,
-  why:"<i>C. annulata</i> ใช้ earthworm เป็น intermediate host โดยมีระยะติดเชื้อคือ L2 แต่ชนิดอื่นส่วนมากเป็น L3"},
- {q:"พยาธิตัวกลมชนิดใดที่มีวงจรชีวิตได้ทั้งแบบ <b>direct</b> และ <b>indirect</b> (มีหรือไม่มี earthworm ก็ได้)?",
-  choices:["Capillaria contorta","Gongylonema ingluvicola","Dispharynx spiralis","Heterakis gallinarum"], a:0,
-  why:"<i>C. contorta</i> อาจติดโดยกินไข่ที่มี L1 หรือผ่าน earthworm ได้"},
- {q:"ตัวเต็มวัยที่มี <b>cuticular plate</b> เรียงเป็นแถวตามยาวบริเวณ anterior และพบใน oesophagus/crop คือ?",
-  choices:["Gongylonema ingluvicola","Oxyspirura mansoni","Syngamus trachea","Tetrameres americana"], a:0,
-  why:"แผ่น cuticular plate ที่ anterior เป็นลักษณะเฉพาะของ <i>Gongylonema</i>"},
- {q:"ไข่ที่มี <b>operculum</b> ที่ปลายทั้งสองข้าง (bi-operculate) เป็นของชนิดใด?",
-  choices:["Syngamus trachea","Ascaridia galli","Heterakis gallinarum","Capillaria annulata"], a:0,
-  why:"ไข่ของ <i>Syngamus</i> มี operculum สองด้านและเปลือกบาง"},
- {q:"พยาธิที่เป็น <b>vector ของ Histomonas meleagridis</b> (blackhead disease) ในไก่งวงคือ?",
-  choices:["Gongylonema ingluvicola","Heterakis gallinarum","Ascaridia galli","Capillaria contorta"], a:1,
-  why:"<i>Heterakis</i> เป็นตัวพาเชื้อสู่ไก่งวง"},
- {q:"ตัวเมียสีแดงสด รูปร่างกลม อยู่ใน proventricular glands ทำให้ serosa เห็นจุดแดงเข้มหรือดำ คือ?",
-  choices:["Tetrameres americana","Dispharynx spiralis","Syngamus trachea","Oxyspirura mansoni"], a:0,
-  why:"ตัวเมีย <i>Tetrameres</i> สีแดง โป่งกลม เห็นเป็นจุดแดงบนผิวนอกของ proventriculus"},
- {q:"สัตว์ปีกติด <i>Ascaridia galli</i> ได้จากการกินสัตว์ใดซึ่งเป็น <b>transport host</b>?",
-  choices:["ตั๊กแตนและไส้เดือน","แมลงสาบ","หอยทาก/ทากบก","มด"], a:0,
-  why:"ตั๊กแตนและไส้เดือนสามารถพาไข่ที่มีระยะติดเชื้อได้ (no development ภายใน)"},
- {q:"พยาธิตัวใดมี <b>คู่ผสมถาวรเป็นรูปตัว Y</b> และอยู่ที่ trachea?",
-  choices:["Syngamus trachea","Ascaridia galli","Dispharynx spiralis","Oxyspirura mansoni"], a:0,
-  why:"คู่เพศจับกันถาวร Y-shaped เป็น hallmark ของ gapeworm"},
- {q:"ชนิดใด <b>ไม่มี intermediate host</b> แต่ใช้ <b>transport host</b> ได้?",
-  choices:["Heterakis gallinarum","Syngamus trachea","Dispharynx spiralis","Tetrameres fissispina"], a:0,
-  why:"<i>Heterakis</i> วงจรตรง แต่ไข่ถูกพาโดย earthworm/แมลงได้"},
- {q:"ชนิดใดติดโฮสต์ได้ 3 เส้นทาง: กินไข่ที่มี L3, กิน L3 ที่ฟักแล้ว, หรือกิน transport host?",
-  choices:["Syngamus trachea","Ascaridia galli","Gongylonema ingluvicola","Capillaria contorta"], a:0,
-  why:"สามเส้นทางเป็นจุดเด่นของ <i>Syngamus</i>"},
- {q:"ชนิดใดมี <b>cuticle โป่งบวมที่หัว</b> และมี stichosome esophagus?",
-  choices:["Capillaria annulata","Capillaria contorta","Gongylonema ingluvicola","Dispharynx spiralis"], a:0,
-  why:"หัวบวมเป็นลักษณะเด่นของ <i>C. annulata</i>"},
- {q:"ตัวผู้ของ <i>Ascaridia galli</i> มี precloacal sucker และ caudal alae เล็ก ข้อใดถูกเกี่ยวกับ alae?",
-  choices:["ไม่มีความไม่สมมาตร","ไม่สมมาตร","ไม่มี alae","ใหญ่และสมมาตร"], a:0,
-  why:"ของ <i>A. galli</i> เป็น alae เล็ก ไม่ใช่แบบไม่สมมาตร"},
- {q:"ไข่ใด <b>หน้าตาคล้าย</b> <i>Heterakis gallinarum</i> แต่ใหญ่กว่าและผนังไม่ขนานมาก?",
-  choices:["Ascaridia galli","Oxyspirura mansoni","Dispharynx spiralis","Syngamus trachea"], a:0,
-  why:"ไข่ <i>A. galli</i> ใหญ่กว่า <i>Heterakis</i>"},
- {q:"ไข่ของชนิดใด <b>มีตัวอ่อนอยู่ภายในเมื่อขับออก</b>?",
-  choices:["Dispharynx spiralis","Syngamus trachea","Ascaridia galli","Capillaria contorta"], a:0,
-  why:"ไข่ <i>Dispharynx</i> (Spirurida) มักมีตัวอ่อนแล้ว"},
- {q:"ตัวผู้ของ <i>Dispharynx spiralis</i> ไม่มี precloacal sucker ต่างจาก?",
-  choices:["Ascaridia galli","Syngamus trachea","Gongylonema ingluvicola","Heterakis gallinarum"], a:0,
-  why:"<i>A. galli</i> มี precloacal sucker"},
- {q:"ตำแหน่งของ <i>Oxyspirura mansoni</i> และ IH ตามลำดับคือ?",
-  choices:["ตา; แมลงสาบ","กระเพาะพัก; ไส้เดือน","หลอดลม; หอย","กระเพาะจริง; ด้วง"], a:0,
-  why:"eyeworm + cockroach IH"},
- {q:"จับคู่ <b>พยาธิ → ตำแหน่ง</b> ใดถูกต้อง?",
-  choices:["Gongylonema → Oesophagus/Crop","Heterakis → Small intestine","Dispharynx → Trachea","Syngamus → Caecum"], a:0,
-  why:"ตัวเลือกอื่นเป็นตำแหน่งสลับ"},
- {q:"รอยโรค <b>serosa ของ proventriculus มีจุดแดง/ดำ</b> สัมพันธ์กับ?",
-  choices:["Tetrameres americana (♀) ใน gland","Ascaridia galli ระยะ mucosal","Dispharynx spiralis","Capillaria annulata"], a:0,
-  why:"จุดแดงคือร่างตัวเมียสีแดงของ Tetrameres"},
- {q:"พยาธิที่มี <b>cuticular cordon</b> 4 เส้นด้านหน้า ใน proventriculus คือ?",
-  choices:["Dispharynx spiralis","Tetrameres fissispina","Gongylonema ingluvicola","Capillaria contorta"], a:0,
-  why:"cordon 4 เส้น = <i>Dispharynx</i>"},
- {q:"ข้อใด <b>ไม่ใช่</b> IH ของกลุ่ม proventricular nematodes?",
-  choices:["แมลงสาบ","isopod (pillbug/sowbug)","ตั๊กแตน","หอย"], a:3,
-  why:"กลุ่มนี้ใช้ arthropod (roach, isopod, beetle, grasshopper) ไม่ใช้หอย"},
- {q:"transport host ของ <i>Heterakis gallinarum</i> อาจเป็น?",
-  choices:["ไส้เดือน, แมลงวัน, sowbug, จิ้งหรีด","Cyclops, ปลา, กบ","หอยทาก, ทาก","มด, ปลวก"], a:0,
-  why:"หลายชนิดเป็นพาหะเชิงกล/พาเทนิก"},
- {q:"จับคู่ <b>ชนิด → ระยะติดเชื้อ</b> ที่ถูกต้อง?",
-  choices:["Ascaridia galli → L3 ในไข่","Capillaria annulata → L3 อิสระ","Oxyspirura mansoni → L2 ใน roach","Syngamus trachea → L2 ในไข่"], a:0,
-  why:"<i>A. galli</i> ติดโดย L3 ในไข่; Oxyspirura เป็น L3 ใน roach; Syngamus คือ L3"},
- {q:"ตัวผู้ที่มี <b>caudal alae ไม่สมมาตร</b> และ left spicule เรียว พบที่ oesophagus/crop คือ?",
-  choices:["Gongylonema ingluvicola","Ascaridia galli","Capillaria contorta","Dispharynx spiralis"], a:0,
-  why:"เป็นเอกลักษณ์ของ <i>Gongylonema</i>"},
- {q:"ไข่ของสกุลใดเป็นทรงถัง <b>มี bipolar plugs</b>?",
-  choices:["Capillaria spp.","Heterakis spp.","Syngamus spp.","Ascaridia spp."], a:0,
-  why:"สไตล์ Trichurid/Capillariid"},
- {q:"พยาธิที่มักก่อโรคไม่รุนแรงแต่เป็น <b>ตัวพา protozoa</b> สำคัญคือ?",
-  choices:["Heterakis gallinarum","Ascaridia galli","Gongylonema ingluvicola","Capillaria annulata"], a:0,
-  why:"พา <i>Histomonas</i>"},
- {q:"พยาธิใดอยู่ที่ <b>ตา</b> และทำให้ตาน้ำตาไหล/ตาอักเสบเมื่อหนัก?",
-  choices:["Oxyspirura mansoni","Thelazia callipaeda","Dispharynx spiralis","Tetrameres americana"], a:0,
-  why:"eyeworm ของสัตว์ปีก"},
- {q:"ข้อใดเป็นจริงเกี่ยวกับไข่ของ <i>Syngamus trachea</i>?",
-  choices:["มี operculum สองด้าน; ภายในมี blastomeres 8–16","มี bipolar plugs","เปลือกหนาเป็นหลุม ๆ","ตัวอ่อน L1 เต็มที่เมื่อออก"], a:0,
-  why:"ลักษณะ bi-operculate พร้อม blastomeres"},
- {q:"จับคู่ site: <i>Ascaridia</i> → ?, <i>Heterakis</i> → ?",
-  choices:["Small intestine; Caecum","Caecum; Small intestine","Proventriculus; Trachea","Oesophagus; Eye"], a:0,
-  why:"classic mapping"},
- {q:"สปีชีส์ใดใช้ <b>isopod</b> (pillbug/sowbug) เป็น IH?",
-  choices:["Dispharynx spiralis","Tetrameres americana","Oxyspirura mansoni","Gongylonema ingluvicola"], a:0,
-  why:"IH ของ <i>Dispharynx</i> คือ isopod"},
- {q:"จับคู่ (สกุล → ลักษณะเด่น) ใดถูกต้อง?",
-  choices:["Tetrameres → ตัวเมียกลมสีแดง","Gongylonema → แผ่น cuticular ด้านหน้า","Capillaria → บางชนิดหัวบวม","ทั้งหมดถูก"], a:3,
-  why:"ทั้งสามข้อถูก"},
- {q:"ไข่ของสกุลใดโดยมากเป็น <b>embryonated</b> ตอนขับออก?",
-  choices:["Tetrameres spp.","Ascaridia spp.","Heterakis spp.","Capillaria spp."], a:0,
-  why:"Spirurida หลายชนิดไข่มีตัวอ่อนแล้ว"},
- {q:"ความเร็วพัฒนาระยะติดเชื้อ: ชนิดใดขึ้นเป็น L3 ใน IH ได้ไว ~10 วัน?",
-  choices:["Tetrameres fissispina","Tetrameres americana","Dispharynx spiralis","Gongylonema ingluvicola"], a:0,
-  why:"<i>T. fissispina</i> เร็วกว่า <i>T. americana</i> (~42 วัน) และ <i>Dispharynx</i> (~26 วัน)"},
- {q:"กลุ่มที่อยู่ <b>Oesophagus/Crop</b> คือชุดใด?",
-  choices:["Capillaria annulata, C. contorta, Gongylonema","Dispharynx, Tetrameres, Oxyspirura","Ascaridia, Heterakis","Syngamus เท่านั้น"], a:0,
-  why:"สามชนิดนี้อยู่ส่วนบนของทางเดินอาหาร"},
- {q:"พยาธิใดทำให้เกิด <b>deep ulcer</b> และ mucosal hypertrophy ที่ proventriculus เมื่อมาก?",
-  choices:["Dispharynx spiralis","Ascaridia galli","Capillaria contorta","Gongylonema ingluvicola"], a:0,
-  why:"ปลายหน้าเสียบใน mucosa"},
- {q:"ข้อใดถูกเกี่ยวกับ <i>Ascaridia galli</i>?",
-  choices:["ตัวผู้มี precloacal sucker","ไข่ bi-operculate","อาศัยใน caecum","ต้องมี IH"], a:0,
-  why:"ตัวผู้มี sucker; ไข่เปลือกหนาไม่ operculate; อยู่ลำไส้เล็ก; วงจรตรง"},
- {q:"IH สำหรับ <i>Gongylonema ingluvicola</i> คือ?",
-  choices:["ด้วงและแมลงสาบ","isopod","หอย","ยุง"], a:0,
-  why:"Coleoptera/Blattodea เป็น IH สำคัญ"},
- {q:"จับคู่ (ชนิด → ลักษณะไข่) ใดถูกต้อง?",
-  choices:["Capillaria → bipolar plugs","Syngamus → bi-operculate","Ascaridia → เปลือกหนาเรียบ","ทั้งหมดถูก"], a:3,
-  why:"ถูกทั้งหมด"},
- {q:"ลิงก์ <b>ตา</b> + <b>แมลงสาบ</b> ในสัตว์ปีกคือ?",
-  choices:["Oxyspirura mansoni","Thelazia callipaeda","Tetrameres americana","Dispharynx spiralis"], a:0,
-  why:"eyeworm ของนกใช้ cockroach เป็น IH"},
- {q:"พยาธิที่มี <b>stichosome esophagus</b> และไข่ทรงถังมีปลั๊กที่ oesophagus/crop คือ?",
-  choices:["Capillaria spp.","Gongylonema ingluvicola","Syngamus trachea","Heterakis gallinarum"], a:0,
-  why:"stichosome + bipolar plugs = Capillaria"},
- {q:"ข้อใดจับคู่ <b>ชนิด → ระยะติดเชื้อ & พาหะ</b> ผิด?",
-  choices:["Capillaria annulata → L2 ใน earthworm","Dispharynx spiralis → L3 ใน isopod","Tetrameres americana → L3 ในแมลงสาบ","Oxyspirura mansoni → L2 ในแมลงสาบ"], a:3,
-  why:"<i>Oxyspirura</i> เป็น L3 ใน cockroach ไม่ใช่ L2"},
- {q:"ลูกไก่/นกอายุน้อยหายใจลำบาก มีเมือกอุด trachea เจอหนอนจับคู่เป็น Y คือ?",
-  choices:["Syngamus trachea","Ascaridia galli","Heterakis gallinarum","Gongylonema ingluvicola"], a:0,
-  why:"classic gapeworm"},
- {q:"สกุลใดมี <b>sexual dimorphism</b> ชัด: ตัวเมียแดงกลมใน gland ตัวผู้เรียวขาว?",
-  choices:["Tetrameres","Syngamus","Gongylonema","Capillaria"], a:0,
-  why:"เอกลักษณ์ของ Tetrameres"},
- {q:"ไข่ที่ถูกล้างจาก <b>naso-lacrimal duct</b> แล้วกลืนลงทางเดินอาหาร ก่อนขับออกและถูก IH กิน คือของ?",
-  choices:["Oxyspirura mansoni","Dispharynx spiralis","Capillaria contorta","Syngamus trachea"], a:0,
-  why:"เส้นทางไข่ของ eyeworm"},
+ const MCQ = [
+  {q:"พยาธิตัวใดมีรูปร่างเรียวยาว ปลายหัวโป่งเล็กน้อย และมี <i>stichosome esophagus</i> ชัดเจน?",
+   choices:["<i>Capillaria annulata</i>","<i>Ascaridia galli</i>","<i>Syngamus trachea</i>","<i>Gongylonema ingluvicola</i>","<i>Dispharynx spiralis</i>"],
+   a:0,
+   why:"หัวบวมเล็กน้อย + stichosome เป็นลักษณะเด่นของ <i>Capillaria</i> โดยเฉพาะ <i>C. annulata</i> ใน oesophagus/crop."},
+
+  {q:"ระยะติดเชื้อของ <i>Capillaria annulata</i> คืออะไร?",
+   choices:["L1 ในไข่","L2 ใน earthworm (IH)","L3 ใน earthworm (IH)","L3 อิสระบนพืช","L3 ในไข่"],
+   a:1,
+   why:"<i>C. annulata</i> อาศัย earthworm เป็น IH โดยมีระยะติดเชื้อเป็น L2 ภายในไส้เดือน"},
+
+  {q:"ข้อใดอธิบายวงจรชีวิตของ <i>Capillaria contorta</i> ได้ถูกต้องที่สุด?",
+   choices:["ต้องมี earthworm เสมอ","อาจเป็นวงจรตรงได้ (กินไข่ที่มีตัวอ่อน)","อยู่ที่ proventriculus","ไข่มี operculum สองด้าน","ใช้หอยเป็น IH"],
+   a:1,
+   why:"<i>C. contorta</i> สามารถติดโดยกินไข่ที่มีตัวอ่อนได้โดยไม่ต้องผ่าน IH"},
+
+  {q:"ไข่ของสกุล <i>Capillaria</i> มีลักษณะจำเพาะอย่างไร?",
+   choices:["เปลือกบาง มี operculum สองด้าน","เปลือกหนา เรียบ ขนาดใหญ่","ทรงถัง (barrel) มี bipolar plugs","ผนังเป็นหลุมๆ (pitted)","กลมเล็กไม่มีปลั๊ก"],
+   a:2,
+   why:"ลักษณะคล้ายกลุ่ม Trichurids: ทรงถัง มี bipolar plugs ไม่ใช่ operculum"},
+
+  {q:"ตำแหน่งที่พบบ่อยของ <i>Capillaria annulata</i>/<i>C. contorta</i> ในสัตว์ปีกคือที่ใด?",
+   choices:["ตา","หลอดลม","oesophagus และ crop","caecum","proventriculus"],
+   a:2,
+   why:"ทั้งสองชนิดอยู่ส่วนบนของทางเดินอาหาร คือ oesophagus/crop"},
+
+   {q:"ลักษณะรูปร่างทั่วไปของพยาธิในสกุล <i>Capillaria</i> เป็นอย่างไร?",
+   choices:[
+     "ตัวกลมหนา ปลายแหลมทั้งสองด้าน",
+     "เรียวยาว คล้ายเส้นด้าย (thread-like) ส่วนหัวบวมเล็กน้อย",
+     "ตัวสั้น ป้อม สีแดงสด",
+     "ตัวแบนคล้ายใบไม้",
+     "ลำตัวมีสัน cuticular cordon 4 เส้น"
+   ],
+   a:1,
+   why:"<i>Capillaria spp.</i> มีรูปร่างเรียวยาวมาก คล้ายเส้นด้าย ส่วนหัวมักบวมเล็กน้อย เหมาะกับการฝังในเยื่อบุ oesophagus/crop"},
+
+  {q:"หลอดอาหาร (<i>esophagus</i>) ของ <i>Capillaria</i> มีลักษณะพิเศษใดที่ช่วยในการจำแนก?",
+   choices:[
+     "เป็นแบบ rhabditiform",
+     "มี stichosome ประกอบด้วยเซลล์เรียงเป็นแถวรอบหลอดอาหาร",
+     "เป็นแบบ muscular-glandular แบ่งสองส่วนชัดเจน",
+     "เป็นแบบ short club-shape ไม่มีต่อม",
+     "มี cuticular plates ที่ปลายหัว"
+   ],
+   a:1,
+   why:"หลอดอาหารของ <i>Capillaria</i> เป็นแบบ stichosome ประกอบด้วยเซลล์ glandular (stichocytes) เรียงเป็นแถว เป็นลักษณะเฉพาะของกลุ่มนี้"},
+
+  {q:"เพศผู้ของ <i>Capillaria</i> มีลักษณะเด่นใดในการจำแนก?",
+   choices:[
+     "ไม่มี spicule",
+     "มี spicule ยาว เส้นเดียว พร้อม sheath",
+     "มี spicule สั้นสองข้างและ caudal alae ใหญ่",
+     "มี sucker ก่อน cloaca (precloacal sucker)",
+     "ไม่มี bursa copulatrix"
+   ],
+   a:1,
+   why:"เพศผู้ของ <i>Capillaria</i> มี spicule เส้นเดียว ยาว หุ้มด้วย sheath ซึ่งเป็นจุดเด่นสำคัญในการจำแนก"},
+
+  {q:"เพศเมียของ <i>Capillaria</i> มีลักษณะการวางไข่อย่างไร?",
+   choices:[
+     "เป็น viviparous (ออกลูกเป็นตัว)",
+     "ไข่ยังไม่เป็นตัวอ่อนเมื่อขับออก",
+     "ไข่มีตัวอ่อนสมบูรณ์เมื่อขับออก",
+     "ไข่มี operculum 2 ด้าน",
+     "ไข่กลมไม่มีปลั๊ก"
+   ],
+   a:1,
+   why:"ไข่ของ <i>Capillaria</i> มักยังไม่เป็นตัวอ่อนเมื่อขับออก ต้องพัฒนาในสิ่งแวดล้อมหรือใน IH ก่อนถึงระยะติดเชื้อ"},
+
+  {q:"เพศเมียของ <i>Capillaria</i> มีตำแหน่งช่องเปิดของช่องคลอด (vulva) อย่างไร?",
+   choices:[
+     "อยู่กลางลำตัว",
+     "อยู่ใกล้ anterior end",
+     "อยู่ใกล้ posterior end",
+     "อยู่ปลายสุดของร่างกาย",
+     "อยู่ภายใน stichosome"
+   ],
+   a:1,
+   why:"ช่องเปิด vulva ของเพศเมีย <i>Capillaria</i> อยู่บริเวณ anterior part ใกล้ส่วนหัว"},
+
+  {q:"สรุปลักษณะสำคัญของ <i>Capillaria spp.</i> ข้อใดถูกต้องมากที่สุด?",
+   choices:[
+     "เป็นพยาธิตัวสั้น มี sucker ชัดเจน และไข่มี operculum",
+     "เป็นพยาธิตัวแบน รูปใบไม้ อยู่ในลำไส้เล็ก",
+     "เป็นพยาธิคล้ายเส้นด้าย มี stichosome และไข่ทรงถังมี bipolar plugs",
+     "เป็นพยาธิตัวกลมใหญ่ มี alae และ sucker",
+     "เป็นพยาธิในตา ใช้ cockroach เป็น IH"
+   ],
+   a:2,
+   why:"<i>Capillaria spp.</i> เป็นพยาธิรูปร่างคล้ายเส้นด้าย (thread-like) มี stichosome และไข่แบบ barrel shape มี bipolar plugs ที่ปลายทั้งสองข้าง"},
+
+  {q:"พยาธิตัวใดพบใน oesophagus/crop และมีแผ่น <b>cuticular plates</b> เรียงตามยาวบริเวณด้านหน้า?",
+   choices:["<i>Capillaria annulata</i>","<i>Gongylonema ingluvicola</i>","<i>Tetrameres americana</i>","<i>Dispharynx spiralis</i>","<i>Ascaridia galli</i>"],
+   a:1,
+   why:"แผ่น cuticular plate ที่ anterior เป็นเอกลักษณ์ของ <i>Gongylonema</i>"},
+
+  {q:"ไข่ของ <i>Gongylonema ingluvicola</i> มีลักษณะอย่างไรเมื่อขับออก?",
+   choices:["ยังไม่เป็นตัวอ่อน","มีตัวอ่อน L1 อยู่ภายใน","มี bipolar plugs","มี operculum สองด้าน","ผนังหนาไม่ขนาน"],
+   a:1,
+   why:"ไข่เป็น embryonated (มี L1) เมื่อขับออกจากร่างกายโฮสต์"},
+
+  {q:"ตัวกลาง (IH) ของ <i>Gongylonema ingluvicola</i> คือสิ่งใดมากที่สุด?",
+   choices:["หอยน้ำจืด","earthworm","แมลงสาบหรือด้วง","มด","isopod (pillbug/sowbug)"],
+   a:2,
+   why:"Coleoptera (ด้วง) และ Blattodea (แมลงสาบ) เป็น IH สำคัญ"},
+
+  {q:"ตัวผู้ของ <i>Gongylonema</i> มีลักษณะส่วนปลายก้นอย่างไรที่ช่วยจำแนก?",
+   choices:["ไม่มี alae","alae สมมาตรทั้งสองข้าง","alae ไม่สมมาตร ด้านซ้ายเรียวกว่า","มี precloacal sucker","ไม่มี spicule"],
+   a:2,
+   why:"ลักษณะ alae ไม่สมมาตร โดยด้านซ้ายเรียว เป็น key ของ <i>Gongylonema</i>"},
+
+  {q:"มักพบ <i>Gongylonema ingluvicola</i> ที่ตำแหน่งใดในซากผ่าพิสูจน์?",
+   choices:["proventriculus","ฝังใต้เยื่อเมือกของ oesophagus/crop","caecum","trachea","eye"],
+   a:1,
+   why:"ตัวหนอนฝังใต้ mucosa ของ oesophagus/crop ทำให้เห็นเป็นทางคดเคี้ยว"},
+
+  {q:"พยาธิตัวใดมี <b>cuticular cordons 4 เส้น</b> ที่ด้านหน้า (anterior end)?",
+   choices:["<i>Tetrameres americana</i>","<i>Dispharynx spiralis</i>","<i>Gongylonema ingluvicola</i>","<i>Capillaria contorta</i>","<i>Heterakis gallinarum</i>"],
+   a:1,
+   why:"เป็นเอกลักษณ์ของ <i>Dispharynx spiralis</i> ที่ proventriculus"},
+
+  {q:"ข้อใดคือผลทางพยาธิวิทยาที่สัมพันธ์กับการติด <i>Dispharynx spiralis</i> จำนวนมาก?",
+   choices:["catarrhal tracheitis","deep ulcers ของ proventriculus","keratitis","caecal core","fibrinous airsacculitis"],
+   a:1,
+   why:"ปลาย anterior ฝังใน mucosa ของ proventriculus ทำให้เกิดแผลลึกเมื่อหนัก"},
+
+   {q:"เพศผู้ของ <i>Dispharynx spiralis</i> มีลักษณะของ <b>spicules</b> อย่างไรที่ช่วยจำแนกชนิดได้ชัดเจน?",
+   choices:[
+     "spicules คู่สั้นรูปกรวย (conical)",
+     "spicules ยาวเท่ากันทั้งสองข้าง มี sheath ใส",
+     "spicules คู่ไม่เท่ากัน ข้างหนึ่งยาวรูปเรือ (boat-shaped)",
+     "spicule เดี่ยว ยาวมากกว่าลำตัว",
+     "ไม่มี spicule แต่มี sucker แทน"
+   ],
+   a:2,
+   why:"เพศผู้ของ <i>Dispharynx spiralis</i> มี spicules สองข้างไม่เท่ากัน โดยข้างหนึ่งสั้น อีกข้างยาวและมีรูปร่างคล้ายเรือ (boat-shaped) ซึ่งเป็นลักษณะจำเพาะของสกุลนี้"},
+
+  {q:"ตัวกลาง (IH) ของ <i>Dispharynx spiralis</i> คืออะไร?",
+   choices:["earthworm","หอย","แมลงสาบ","isopod (pillbug/sowbug)","ด้วงน้ำ"],
+   a:3,
+   why:"isopod เป็น IH จำเพาะของ <i>Dispharynx</i>"},
+
+  {q:"ไข่ของ <i>Dispharynx spiralis</i> มีลักษณะใดต่อไปนี้?",
+   choices:["ไม่เป็นตัวอ่อน","มีตัวอ่อน L1 อยู่ภายใน (embryonated)","มี bipolar plugs","มี operculum สองด้าน","เปลือกหนาเป็นหลุม"],
+   a:1,
+   why:"ไข่แบบ embryonated (มี L1) เมื่อขับออก"},
+
+  {q:"ข้อใดสรุปความแตกต่างหลักระหว่าง <i>Dispharynx spiralis</i> กับ <i>Tetrameres americana</i> ได้ถูกต้อง?",
+   choices:["แตกต่างเฉพาะสีตัวเมีย","แตกต่างเฉพาะ IH","แตกต่างเฉพาะลักษณะไข่","แตกต่างเฉพาะตำแหน่ง","แตกต่างหลายด้าน: IH/สี/ตำแหน่ง/ไข่"],
+   a:4,
+   why:"IH ต่างกัน (isopod vs cockroach/beetle), สีตัวเมีย, site และลักษณะไข่ต่างกัน"},
+
+  {q:"ตัวเมียของ <i>Tetrameres americana</i> มีลักษณะใดเด่นที่สุดเมื่อมองจาก serosa?",
+   choices:["ซีดเรียวยาว","สีแดงสด กลมโป่ง","เหลืองนวล","ใสยาวเป็นเส้น","ดำขุ่น"],
+   a:1,
+   why:"ตัวเมียสะสมเลือดใน gland ของ proventriculus จนเห็นเป็นจุดแดง/ดำจาก serosa"},
+
+  {q:"ตัวกลาง (IH) สำคัญของ <i>Tetrameres americana</i> คืออะไร?",
+   choices:["หอยน้ำจืด","แมลงสาบ/ด้วง","earthworm","isopod","ตั๊กแตน"],
+   a:1,
+   why:"แมลงสาบ/ด้วงเป็น IH หลักของ <i>Tetrameres</i>"},
+
+  {q:"ตำแหน่งหลักที่พบ <i>Tetrameres</i> ในสัตว์ปีกคือที่ใด?",
+   choices:["crop","proventriculus (glandular stomach)","small intestine","caecum","eye"],
+   a:1,
+   why:"ตัวเมียอยู่ในต่อมของ proventriculus"},
+
+  {q:"ไข่ของ <i>Tetrameres americana</i> เมื่อขับออกมีสถานะอย่างไร?",
+   choices:["ยังไม่เป็นตัวอ่อน","มีตัวอ่อน L1 เพิ่งเริ่มแบ่ง","embryonated egg พร้อมตัวอ่อน","มี bipolar plugs","มี operculum"],
+   a:2,
+   why:"เป็นไข่แบบ embryonated เมื่อขับออก"},
+
+   {q:"ลักษณะใดเป็นจุดเด่นช่วยจำแนก <i>Tetrameres fissispina</i> จาก <i>T. americana</i>?",
+   choices:[
+     "ตัวเมียสีแดงสดและอยู่ใน proventriculus",
+     "มี cuticular cordon ที่ anterior end",
+     "ปลายหางของตัวผู้มีรอยแยกคล้ายหนาม (fissured spine)",
+     "ไข่มี operculum สองด้าน",
+     "ใช้ earthworm เป็น IH"
+   ],
+   a:2,
+   why:"<i>T. fissispina</i> มีลักษณะเด่นคือปลายหางของตัวผู้มีรอยแยกคล้ายหนาม (fissured spine) ซึ่งไม่มีใน <i>T. americana</i>"},
+
+  {q:"จับคู่อย่างถูกต้อง: ตำแหน่ง + ตัวกลาง ของ <i>Oxyspirura mansoni</i> คืออะไร?",
+   choices:["ตา; หอยน้ำจืด","ตา; แมลงสาบ","proventriculus; beetle","oesophagus/crop; earthworm","trachea; isopod"],
+   a:1,
+   why:"<i>Oxyspirura</i> เป็น eyeworm ของสัตว์ปีก ใช้ cockroach เป็น IH"},
+
+  {q:"เส้นทางของไข่ <i>Oxyspirura mansoni</i> ในร่างกายโฮสต์เป็นอย่างไร?",
+   choices:["ออกทางท่อน้ำตา → กลืน → ขับออกทางอุจจาระ","ออกตรงที่ conjunctiva → ดรอปสู่ดิน","ออกทาง trachea → ไอออกมา","ฝังใน cornea แล้วฟัก","ไหลสู่ air sac แล้วขับออกทางปาก"],
+   a:0,
+   why:"ไข่ถูกชะผ่าน naso-lacrimal duct ลงสู่คอหอย จึงถูกกลืนและขับออกมากับอุจจาระ"},
+
+  {q:"ระยะติดเชื้อของ <i>Oxyspirura mansoni</i> ในตัวกลางคืออะไร?",
+   choices:["L2 ใน cockroach","L2 ใน isopod","L3 ใน cockroach","L3 ใน earthworm","L3 ในน้ำอิสระ"],
+   a:2,
+   why:"ตัวอ่อนพัฒนาเป็น L3 ภายใน cockroach (IH) และเป็นระยะติดเชื้อ"},
+
+  {q:"อาการเด่นที่สัมพันธ์กับการติด <i>Oxyspirura mansoni</i> มากคืออะไร?",
+   choices:["gasping หายใจลำบาก","ตาน้ำตาไหล/ระคายเคืองตา","ท้องเสียรุนแรง","caecal core","hemorrhagic tracheitis"],
+   a:1,
+   why:"เป็น eyeworm จึงก่อระคายเคืองตา epiphora, conjunctivitis เมื่อการติดมาก"},
+
+  {q:"ข้อใดถูกต้องที่สุดเกี่ยวกับวงจรชีวิตของ <i>Ascaridia galli</i>?",
+   choices:["ต้องมี IH เสมอ","เป็นวงจรตรง ระยะติดเชื้อคือ L3 ในไข่","เป็นวงจรทางน้ำ มี cercariae","ต้องผ่าน transport host เท่านั้น","ระยะติดเชื้อคือ L2 ในไข่"],
+   a:1,
+   why:"<i>A. galli</i> เป็นวงจรตรงและติดโดยกินไข่ที่มี L3 อยู่ภายใน"},
+
+  {q:"ลักษณะ <i>caudal alae</i> ของตัวผู้ <i>Ascaridia galli</i> เป็นอย่างไร?",
+   choices:["ไม่มี alae","ใหญ่และไม่สมมาตร","เล็กและค่อนข้างสมมาตร","แบนกว้างมาก","เป็นแผ่นมีหนาม"],
+   a:2,
+   why:"ตัวผู้มี precloacal sucker และ alae ขนาดเล็กค่อนข้างสมมาตร"},
+
+   {q:"พยาธิตัวใดมี <b>strongyliform esophagus</b> ที่ไม่มี <b>posterior bulb</b> ซึ่งแตกต่างจากกลุ่มที่มี <b>posterior bulb</b>?",
+   choices:[
+     "<i>Capillaria annulata</i>",
+     "<i>Dispharynx spiralis</i>",
+     "<i>Tetrameres americana</i>",
+     "<i>Syngamus trachea</i>",
+     "<i>Ascaridia galli</i>"
+   ],
+   a:4,
+   why:"<i>Ascaridia galli มี Esophagus club-shaped without posterior bulb ต่างจาก Heterakis gallinarum ที่มี bulb"},
+
+   {q:"พยาธิตัวใดต่อไปนี้มีการใช้ <b>transport (paratenic) host</b> ในวงจรชีวิต?",
+   choices:[
+     "<i>Ascaridia galli</i>",
+     "<i>Heterakis gallinarum</i>",
+     "<i>Syngamus trachea</i>",
+     "<i>Tetrameres americana</i>",
+     "ถูกทั้ง 1,2,3"
+   ],
+   a:4,
+   why:"ทั้ง <i>Ascaridia galli</i> และ <i>Heterakis gallinarum</i> มีวงจรตรงแต่ไข่สามารถถูกพาโดย transport host ได้ ส่วน <i>Syngamus trachea</i> มีทั้ง direct และ indirect cycle ผ่าน transport host (เช่น earthworm, snail, slug)"},
+
+  {q:"ไข่ของ <i>Ascaridia galli</i> เทียบกับ <i>Heterakis gallinarum</i> มีลักษณะอย่างไร?",
+   choices:["เล็กกว่าและผนังขนานกว่า","ใหญ่กว่าและผนังไม่ขนานมาก","มี operculum สองด้าน","มี bipolar plugs","บางและโปร่งใสกว่า"],
+   a:1,
+   why:"ไข่ <i>A. galli</i> ใหญ่กว่า <i>Heterakis</i> และผนังไม่ขนานเท่า"},
+
+  {q:"พาหนะ (transport host) ที่พบบ่อยในการพาไข่ระยะติดเชื้อของ <i>Ascaridia galli</i> คืออะไร?",
+   choices:["หอยทาก/ทาก","มด/ปลวก","ตั๊กแตนและไส้เดือน","copepod และปลา","ยุงและแมลงวัน",
+   ],
+   a:2,
+   why:"แม้เป็นวงจรตรง แต่ไข่ที่มี L3 อาจถูกพาโดยตั๊กแตน/ไส้เดือนได้ (พาหะเชิงกล/พาเทนิก)"},
+
+  {q:"ตำแหน่งหลักของ <i>Heterakis gallinarum</i> ในไก่และไก่งวงคือที่ใด?",
+   choices:["small intestine","proventriculus","trachea","caecum","oesophagus"],
+   a:3,
+   why:"<i>Heterakis</i> เป็นพยาธิของ caecum"},
+
+  {q:"เหตุการณ์สำคัญทางระบาดวิทยาที่สัมพันธ์กับ <i>Heterakis gallinarum</i> คือข้อใด?",
+   choices:["เป็นสาเหตุหลักของ gapeworm ในไก่","นำพา <i>Histomonas meleagridis</i> สู่ไก่งวง (blackhead)","เป็น eyeworm ของสัตว์ปีก","ทำให้เกิด deep ulcer ที่ proventriculus","จำเป็นต้องมี IH เป็นหอยน้ำจืด"],
+   a:1,
+   why:"ไข่ของ <i>Heterakis</i> พาโปรโตซัวก่อโรค blackhead ไปสู่ไก่งวงได้"},
+
+  {q:"วงจรชีวิตของ <i>Heterakis gallinarum</i> เป็นอย่างไร?",
+   choices:["ต้องมี IH เสมอ","เป็นวงจรตรง แต่ใช้ transport host ได้หลายชนิด","ต้องผ่าน isopod เท่านั้น","ต้องผ่าน cockroach เสมอ","เป็นวงจรน้ำมี cercariae"],
+   a:1,
+   why:"เป็นวงจรตรง แต่ไข่ที่มี L2/ตัวอ่อนอาจถูกพาโดย earthworm/แมลงหลายชนิด"},
+
+  {q:"ไข่ชนิดใดในกลุ่มสัตว์ปีกที่มี <b>operculum สองด้าน</b> และภายในมักเห็น 8–16 blastomeres?",
+   choices:["<i>Ascaridia galli</i>","<i>Capillaria annulata</i>","<i>Syngamus trachea</i>","<i>Heterakis gallinarum</i>","<i>Gongylonema ingluvicola</i>"],
+   a:2,
+   why:"เอกลักษณ์ของ <i>Syngamus trachea</i> (gapeworm) คือไข่ bi-operculate"},
+
+  {q:"การติด <i>Syngamus trachea</i> สามารถเกิดขึ้นได้กี่เส้นทางหลัก?",
+   choices:["1 ทาง: กินไข่ที่มี L2","2 ทาง: กินไข่หรือตัวเต็มวัย","3 ทาง: กินไข่ที่มี L3, กิน L3 ที่ฟัก, หรือกิน transport host","เฉพาะการกิน earthworm เท่านั้น","เฉพาะการสูด L3 ทางอากาศ"],
+   a:2,
+   why:"<i>Syngamus</i> มี 3 เส้นทางเด่นในการติดเชื้อ โดยระยะติดเชื้อคือ L3"},
+
+  {q:"ภาพชันสูตรพบหนอนจับคู่ถาวรรูปตัว Y อยู่ใน trachea ของลูกไก่ที่หายใจลำบาก ควรนึกถึงพยาธิใดก่อน?",
+   choices:["<i>Heterakis gallinarum</i>","<i>Syngamus trachea</i>","<i>Ascaridia galli</i>","<i>Dispharynx spiralis</i>","<i>Oxyspirura mansoni</i>"],
+   a:1,
+   why:"คู่เพศเกาะกันถาวรเป็น Y-shape ใน trachea เป็น hallmark ของ <i>Syngamus</i>"},
+
+  {q:"ช่องปาก (buccal capsule) ของ <i>Syngamus trachea</i> มีลักษณะใดช่วยในการจำแนก?",
+   choices:["ไม่มีฟัน","มีฟัน 6–10 ซี่ที่ขอบ","เป็น stylet ยาว","มี lateral alae ใหญ่","เป็นท่อเรียวยาวไร้โครง"],
+   a:1,
+   why:"<i>Syngamus</i> จัดใน Strongylida มี buccal capsule พร้อมฟันหลายซี่"},
+
+  {q:"ข้อใด <b>ไม่ใช่</b> ตัวกลาง/พาหนะของกลุ่มพยาธิที่อยู่ <b>proventriculus</b> (เช่น <i>Dispharynx</i>, <i>Tetrameres</i>)?",
+   choices:["isopod (pillbug/sowbug)","cockroach","beetle","grasshopper","snail/slug"],
+   a:4,
+   why:"กลุ่มนี้ใช้ arthropods (isopod, cockroach, beetle, grasshopper) ไม่ใช้หอยเป็น IH/พาหนะ"},
+
+  {q:"ข้อใดจับคู่ <b>ชนิด → ตำแหน่ง</b> ได้ถูกต้องครบถ้วนที่สุด?",
+   choices:[
+     "<i>Gongylonema</i>→oesophagus/crop; <i>Dispharynx</i>/<i>Tetrameres</i>→proventriculus; <i>Oxyspirura</i>→eye",
+     "<i>Ascaridia</i>→caecum; <i>Heterakis</i>→small intestine; <i>Syngamus</i>→proventriculus",
+     "<i>Capillaria</i>→trachea; <i>Syngamus</i>→eye; <i>Oxyspirura</i>→trachea",
+     "<i>Heterakis</i>→small intestine; <i>Ascaridia</i>→caecum; <i>Gongylonema</i>→trachea",
+     "<i>Tetrameres</i>→eye; <i>Dispharynx</i>→oesophagus; <i>Capillaria</i>→proventriculus"
+   ],
+   a:0,
+   why:"เป็น mapping มาตรฐานในสัตว์ปีก: G/Crop; D/Tet→proventriculus; Oxy→eye; Ascaridia→SI; Heterakis→caeca; Syngamus→trachea"},
+
+  {q:"ข้อใดสรุปลักษณะไข่ <b>ได้ถูกต้องทุกข้อ</b> ในตัวเลือกเดียวกัน?",
+   choices:[
+     "<i>Capillaria</i>→bipolar plugs; <i>Syngamus</i>→bi-operculate; <i>Ascaridia</i>→เปลือกหนาเรียบ",
+     "<i>Capillaria</i>→bi-operculate; <i>Syngamus</i>→bipolar plugs; <i>Ascaridia</i>→pitted shell",
+     "<i>Gongylonema</i>→ไม่เป็นตัวอ่อน; <i>Tetrameres</i>→ไม่เป็นตัวอ่อน",
+     "<i>Heterakis</i>→bi-operculate; <i>Ascaridia</i>→bipolar plugs",
+     "ทั้งหมดไม่ถูก"
+   ],
+   a:0,
+   why:"ตรงตามตำรา: Capillaria (bipolar plugs), Syngamus (bi-operculate), Ascaridia (thick smooth shell)"},
+
+  {q:"ลูกไก่อายุน้อยหายใจลำบาก มีเมือกอุด trachea และพบหนอนจับคู่รูปตัว Y สาเหตุที่น่าจะเป็นที่สุดคือ?",
+   choices:["<i>Ascaridia galli</i>","<i>Syngamus trachea</i>","<i>Heterakis gallinarum</i>","<i>Gongylonema ingluvicola</i>","<i>Dispharynx spiralis</i>"],
+   a:1,
+   why:"อาการ gapeworm คลาสสิกของ <i>Syngamus</i>"},
+
+  {q:"ข้อใดต่อไปนี้ <b>ไม่ใช่</b> ตัวเลือกที่ถูกต้องเกี่ยวกับตัวกลาง/พาหะของกลุ่ม proventriculus nematodes?",
+   choices:[
+     "isopod เป็น IH ของ <i>Dispharynx</i>",
+     "cockroach/beetle เป็น IH ของ <i>Tetrameres</i>",
+     "snail/slug เป็น IH ทั่วไปของกลุ่มนี้",
+     "grasshopper อาจเป็นพาหะได้",
+     "Coleoptera/Blattodea เกี่ยวข้องบ่อยในวงจร"
+   ],
+   a:2,
+   why:"กลุ่มนี้ไม่ใช้หอยเป็น IH"},
+
+  {q:"ข้อใดถูกต้องเกี่ยวกับ <i>Ascaridia</i> และ <i>Heterakis</i> ในแง่ตำแหน่งอาศัย?",
+   choices:[
+     "<i>Ascaridia</i>→small intestine; <i>Heterakis</i>→caecum",
+     "<i>Ascaridia</i>→caecum; <i>Heterakis</i>→small intestine",
+     "ทั้งสองชนิดอยู่ที่ proventriculus",
+     "<i>Ascaridia</i> และ <i>Heterakis</i> อยู่ที่ trachea",
+     "ทั้งสองอยู่ที่ eye"
+   ],
+   a:0,
+   why:"เป็น mapping มาตรฐาน: <i>Ascaridia</i> ที่ลำไส้เล็ก, <i>Heterakis</i> ที่ caeca"},
+
+  {q:"ข้อใดจับคู่ <b>ชนิด → ระยะติดเชื้อ & ตัวกลาง</b> ได้ถูกต้องที่สุด?",
+   choices:[
+     "<i>Capillaria annulata</i>→L2 ใน earthworm",
+     "<i>Dispharynx spiralis</i>→L3 ใน isopod",
+     "<i>Tetrameres americana</i>→L3 ใน cockroach/beetle",
+     "<i>Oxyspirura mansoni</i>→L3 ใน cockroach",
+     "ถูกทุกข้อ"
+   ],
+   a:4,
+   why:"ทั้งสี่บรรทัดถูกต้องตามวงจรในสัตว์ปีก"},
+
+  {q:"พยาธิตัวใดแม้ก่อโรคไม่รุนแรงนัก แต่มีความสำคัญในฐานะ <b>ตัวพา</b> โปรโตซัวก่อโรค <i>Histomonas meleagridis</i> สู่ไก่งวง?",
+   choices:["<i>Heterakis gallinarum</i>","<i>Ascaridia galli</i>","<i>Gongylonema ingluvicola</i>","<i>Capillaria annulata</i>","<i>Syngamus trachea</i>"],
+   a:0,
+   why:"<i>Heterakis</i> เป็น vector สำคัญของ blackhead"},
+
+  {q:"พยาธิตัวใดมีชีวิตคู่เพศเกาะกันถาวร (permanent copulation) และพบได้ที่ trachea?",
+   choices:["<i>Syngamus trachea</i>","<i>Ascaridia galli</i>","<i>Dispharynx spiralis</i>","<i>Oxyspirura mansoni</i>","<i>Heterakis gallinarum</i>"],
+   a:0,
+   why:"คู่เพศของ <i>Syngamus</i> เกาะกันรูปตัว Y ถาวรใน trachea"},
+
+  {q:"ข้อใด <b>ผิด</b> ในการจับคู่ <b>ชนิด → ตัวกลาง (IH)</b> ต่อไปนี้?",
+   choices:[
+     "<i>Oxyspirura mansoni</i> → cockroach",
+     "<i>Dispharynx spiralis</i> → isopod",
+     "<i>Tetrameres americana</i> → earthworm",
+     "<i>Gongylonema ingluvicola</i> → beetle/cockroach",
+     "<i>Capillaria annulata</i> → earthworm"
+   ],
+   a:2,
+   why:"<i>Tetrameres americana</i> ใช้ cockroach/beetle เป็น IH ไม่ใช่ earthworm"}
+
 ];
+
 
 // เติมให้ครบ 40 ข้อหากน้อยกว่า (ใช้ข้อบูรณาการภาษาไทย)
 if(MCQ.length!==40){
@@ -261,28 +500,110 @@ if(MCQ.length!==40){
 /***********************
  * TRUE/FALSE (ภาษาไทย 20 ข้อ)
  ***********************/
+// True/False — Poultry Nematodes (Refined & Re-checked, 20 ข้อ)
 const TF = [
- {q:"ตัวผู้ของ <i>Dispharynx spiralis</i> ไม่มี precloacal sucker", a:true, why:"มี papillae แต่ไม่มี sucker ต่างจาก <i>Ascaridia</i>"},
- {q:"ระยะติดเชื้อของ <i>Capillaria annulata</i> คือ L2 ใน earthworm", a:true, why:"earthworm เป็น IH"},
- {q:"<i>Capillaria contorta</i> ต้องมี earthworm เท่านั้น", a:false, why:"อาจเป็นวงจรตรงได้ (กินไข่ที่มี L1)"},
- {q:"<i>Gongylonema ingluvicola</i> ใช้ด้วง/แมลงสาบเป็น IH และนกติดจากการกิน L3", a:true, why:"L3 ใน arthropod"},
- {q:"ตัวเมียของ <i>Tetrameres americana</i> ซีดและเรียวยาวเหมือนตัวผู้", a:false, why:"ตัวเมียแดงสดและกลม"},
- {q:"<i>Oxyspirura mansoni</i> เป็นพยาธิในตา; IH คือแมลงสาบ", a:true, why:"cockroach IH"},
- {q:"<i>Syngamus trachea</i> ติดได้ 3 ทาง: L3 ในไข่, L3 ที่ฟัก, หรือ transport host", a:true, why:"triple route"},
- {q:"<i>Heterakis gallinarum</i> ต้องมี IH", a:false, why:"direct LC; อาศัย transport host ได้"},
- {q:"ไข่ของ <i>Syngamus trachea</i> มี operculum สองด้าน", a:true, why:"bi-operculate"},
- {q:"ตัวผู้ของ <i>Ascaridia galli</i> มี alae ไม่สมมาตร", a:false, why:"เป็น alae เล็ก สมมาตร"},
- {q:"<i>Dispharynx spiralis</i> ทำให้เกิดแผลลึกที่ proventriculus เมื่อการติดมาก", a:true, why:"ปลาย anterior ฝังใน mucosa"},
- {q:"ไข่ของ <i>Gongylonema</i> ไม่มีตัวอ่อนภายใน", a:false, why:"มี L1 เมื่อขับออก"},
- {q:"ไข่ของ <i>Capillaria</i> มี bipolar plugs", a:true, why:"ลักษณะเฉพาะของกลุ่ม"},
- {q:"<i>Oxyspirura</i> มักทำให้เกิดโรครุนแรงทั่วร่างกาย", a:false, why:"โดยทั่วไปจำกัดที่ตา"},
- {q:"ตัวเมียของ <i>Tetrameres</i> มองเห็นเป็นจุดสีแดงบน serosa ของ proventriculus", a:true, why:"necropsy clue"},
- {q:"<i>Ascaridia galli</i> ต้องมี arthropod IH", a:false, why:"วงจรตรง"},
- {q:"<i>Syngamus</i> จัดอยู่ใน Strongylida มี buccal capsule พร้อมฟัน", a:true, why:"6–10 ฟัน"},
- {q:"<i>Heterakis</i> และ <i>Ascaridia</i> อยู่คนละตำแหน่ง (caecum vs small intestine)", a:true, why:"site ต่างกัน"},
- {q:"<i>Capillaria annulata</i> และ <i>C. contorta</i> อยู่ oesophagus/crop", a:true, why:"upper GI"},
- {q:"ตัวผู้ของ <i>Gongylonema</i> มี alae สมมาตร", a:false, why:"ไม่สมมาตร; ซ้ายเรียว"},
+  {
+    q:"ตัวผู้ของ <i>Dispharynx spiralis</i> <b>ไม่มี</b> precloacal sucker",
+    a:true,
+    why:"มีเพียง papillae รอบ cloaca แต่ <b>ไม่มี</b> sucker ตรงข้ามกับ <i>Ascaridia</i> ที่มี precloacal sucker"
+  },
+  {
+    q:"ระยะติดเชื้อของ <i>Capillaria annulata</i> คือ <b>L2 ภายในไส้เดือน (earthworm, IH)</b>",
+    a:true,
+    why:"วงจรแบบ indirect ผ่านไส้เดือน โดย L2 ใน IH เป็นระยะติดเชื้อ"
+  },
+  {
+    q:"<i>Capillaria contorta</i> <b>ต้อง</b>มี earthworm เป็น IH เสมอ",
+    a:false,
+    why:"สามารถเป็นวงจรตรงได้ โดยนกติดจากการกินไข่ที่มีตัวอ่อน (ไม่จำเป็นต้องมี IH)"
+  },
+  {
+    q:"<i>Gongylonema ingluvicola</i> ใช้ด้วง/แมลงสาบเป็น IH และนกติดจากการกิน <b>L3</b>",
+    a:true,
+    why:"ตัวอ่อนพัฒนาเป็น L3 ใน arthropod (Coleoptera/Blattodea) ซึ่งเป็นระยะติดเชื้อ"
+  },
+  {
+    q:"ตัวเมียของ <i>Tetrameres americana</i> มีสีซีดและเรียวยาวเหมือนตัวผู้",
+    a:false,
+    why:"ตัวเมียมีสีแดงสด รูปทรงกลมโป่ง อยู่ใน proventricular glands (เห็นเป็นจุดแดงจาก serosa)"
+  },
+  {
+    q:"<i>Oxyspirura mansoni</i> เป็นพยาธิในตา; IH คือ <b>แมลงสาบ</b>",
+    a:true,
+    why:"เป็น eyeworm ของสัตว์ปีกและใช้ cockroach เป็น intermediate host"
+  },
+  {
+    q:"<i>Syngamus trachea</i> ติดได้ 3 ทาง: กินไข่ที่มี L3, กิน L3 ที่ฟักแล้ว, หรือกิน <b>transport host</b>",
+    a:true,
+    why:"เป็นลักษณะเด่นของ gapeworm (ระยะติดเชื้อคือ L3)"
+  },
+  {
+    q:"<i>Heterakis gallinarum</i> ต้องมี IH",
+    a:false,
+    why:"เป็นวงจรตรง แต่ไข่สามารถถูกพาโดย <b>transport host</b> (เช่น ไส้เดือน/แมลง)"
+  },
+  {
+    q:"ไข่ของ <i>Syngamus trachea</i> มี <b>operculum สองด้าน</b>",
+    a:true,
+    why:"เป็นลักษณะ bi-operculate และภายในมักเห็น 8–16 blastomeres"
+  },
+  {
+    q:"ตัวผู้ของ <i>Ascaridia galli</i> มี <b>alae ไม่สมมาตร</b>",
+    a:false,
+    why:"<i>A. galli</i> มี alae ขนาดเล็กค่อนข้างสมมาตร และมี precloacal sucker"
+  },
+  {
+    q:"<i>Dispharynx spiralis</i> ทำให้เกิด <b>แผลลึก</b>ที่ proventriculus เมื่อการติดมาก",
+    a:true,
+    why:"ส่วนหัวฝังใน mucosa (มี cuticular cordons) ทำให้เกิด deep ulcer ในการติดรุนแรง"
+  },
+  {
+    q:"ไข่ของ <i>Gongylonema</i> <b>ไม่มี</b>ตัวอ่อนภายในเมื่อขับออก",
+    a:false,
+    why:"ไข่เป็น <b>embryonated</b> มี L1 เมื่อขับออกจากโฮสต์"
+  },
+  {
+    q:"ไข่ของ <i>Capillaria</i> มีลักษณะ <b>bipolar plugs</b>",
+    a:true,
+    why:"ไข่ทรงถัง (barrel-shaped) ปลายทั้งสองข้างมีปลั๊ก เป็นลักษณะเฉพาะของกลุ่มนี้"
+  },
+  {
+    q:"การติด <i>Oxyspirura</i> มักทำให้เกิดโรครุนแรงทั่วร่างกาย",
+    a:false,
+    why:"โดยมากจำกัดที่ตา (epiphora, conjunctivitis); systemic disease ไม่ใช่ลักษณะเด่น"
+  },
+  {
+    q:"ตัวเมียของ <i>Tetrameres</i> มักมองเห็นเป็น <b>จุดสีแดง</b> บน serosa ของ proventriculus",
+    a:true,
+    why:"ตัวเมียสะสมเลือดในต่อมของ proventriculus จึงเห็นเป็นจุดแดง/ดำจากผิวนอก"
+  },
+  {
+    q:"<i>Ascaridia galli</i> ต้องมี <b>arthropod IH</b>",
+    a:false,
+    why:"เป็นวงจรตรง; ระยะติดเชื้อคือ L3 ในไข่ (arthropod ทำหน้าที่ได้เพียง transport host)"
+  },
+  {
+    q:"<i>Syngamus</i> จัดอยู่ใน Strongylida และมี <b>buccal capsule พร้อมฟัน</b>",
+    a:true,
+    why:"buccal capsule มีฟันหลายซี่ (ประมาณ 6–10) เป็นลักษณะจำแนกสำคัญ"
+  },
+  {
+    q:"<i>Heterakis</i> และ <i>Ascaridia</i> อาศัยคนละตำแหน่ง (caecum vs small intestine)",
+    a:true,
+    why:"<i>Heterakis</i> ที่ caeca; <i>Ascaridia</i> ที่ลำไส้เล็ก"
+  },
+  {
+    q:"<i>Capillaria annulata</i> และ <i>C. contorta</i> พบใน <b>oesophagus/crop</b>",
+    a:true,
+    why:"ทั้งสองชนิดอยู่ส่วนบนของทางเดินอาหาร (upper GI) ในสัตว์ปีก"
+  },
+  {
+    q:"ตัวผู้ของ <i>Gongylonema</i> มี alae <b>สมมาตร</b>",
+    a:false,
+    why:"alae <b>ไม่สมมาตร</b>; ด้านซ้ายเรียวกว่า (ลักษณะจำแนกของ <i>Gongylonema</i>)"
+  }
 ];
+
 
 /***********************
  * UI – Tabs
