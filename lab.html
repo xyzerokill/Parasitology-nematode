@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Parasite → Host Quiz (A–Z) • Unique Draw</title>
+  <title>Parasite → Host Quiz • Random & A–Z</title>
   <style>
     :root{
       --bg:#0b1220; --panel:#121a2b; --muted:#8ea0b5; --text:#e6edf5;
@@ -27,7 +27,9 @@
     .btn{border:1px solid var(--border);background:#111a2a;color:var(--text);padding:12px 14px;border-radius:12px;font-weight:600;cursor:pointer;transition:transform .02s ease, background .2s ease, border-color .2s ease;text-align:left}
     .btn:hover{background:#0f1525;border-color:#2a365a}.btn:active{transform:scale(.997)}
     .btn.block{text-align:center}.btn.primary{background:linear-gradient(180deg,#1a2a47,#16233f);border-color:#2a365a}.btn.ghost{background:transparent}
-    .btn.correct{border-color:rgba(34,197,94,.6);background:rgba(34,197,94,.08)} .btn.wrong{border-color:rgba(239,68,68,.6);background:rgba(239,68,68,.08)}
+    .btn.correct{border-color:rgba(34,197,94,.6);background:rgba(34,197,94,.08)}
+    .btn.wrong{border-color:rgba(239,68,68,.6);background:rgba(239,68,68,.08)}
+    .btn[disabled]{opacity:.6;cursor:not-allowed}
     .answer-box{margin-top:12px;padding:12px;border:1px dashed var(--border);border-radius:12px;background:#0e1526}
     .answer-box .good{color:var(--good);font-weight:800}.answer-box .bad{color:var(--bad);font-weight:800}
     .grid{display:grid;gap:10px}.grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -38,6 +40,10 @@
     .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.pill{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted)}
     .score{font-weight:800;color:#bfe7ff} footer{color:#779;font-size:12px;padding:24px 0;text-align:center}
     .kbd{border:1px solid var(--border);border-bottom-color:#43517a;background:#0d1425;padding:2px 6px;border-radius:6px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:#a8c4eb}
+    select{background:#0f182a;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:8px 10px;width:100%}
+    .ok{color:var(--good);font-weight:700}.ng{color:var(--bad);font-weight:700}
+    .tag{display:inline-block;padding:4px 8px;border:1px solid var(--border);border-radius:999px;color:#a8c4eb}
+    .back{margin-right:10px}
   </style>
 </head>
 <body>
@@ -52,10 +58,12 @@
           <linearGradient id="g2" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#66d9e8"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
         </defs>
       </svg>
-      <h1>Parasite → Host Quiz (Unique Draw)</h1>
+      <h1>Parasite → Host Quiz</h1>
     </div>
     <nav>
-      <a href="#/quiz" id="nav-quiz">Quiz</a>
+      <a class="back btn ghost" href="index.html">⬅ กลับหน้าแรก</a>
+      <a href="#/random" id="nav-random">โหมดสุ่มทีละข้อ</a>
+      <a href="#/az" id="nav-az">โหมดเรียง A–Z (เลือกทั้งหมด)</a>
       <a href="#/answers" id="nav-answers">Answer Key (A–Z)</a>
     </nav>
   </div>
@@ -68,6 +76,7 @@
 </footer>
 
 <script>
+/* ---------- Data ---------- */
 const DATA = [
   { name:"Aelurostrongylus abstrusus", host:"Cat" },
   { name:"Ancylostoma caninum", host:"Dog" },
@@ -131,124 +140,260 @@ const DATA = [
   { name:"Trichuris ovis (eggs)", host:"Ruminant" },
   { name:"Trichuris suis (eggs)", host:"Pig" },
   { name:"Trichuris vulpis (eggs)", host:"Dog" }
-];
-DATA.sort((a,b)=>a.name.localeCompare(b.name));
+].sort((a,b)=>a.name.localeCompare(b.name));
 
 const $ = (s,el=document)=>el.querySelector(s);
 const $$ = (s,el=document)=>Array.from(el.querySelectorAll(s));
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b;}
 function uniqHosts(){const s=new Set();for(const d of DATA)s.add(d.host);return [...s];}
-const HOST_CHOICES=uniqHosts();
+const HOST_CHOICES = uniqHosts().sort((a,b)=>a.localeCompare(b));
 
-const store={k:'phq-unique-v1',read(){try{return JSON.parse(localStorage.getItem(this.k)||'{}')}catch(_){return{}}},write(o){localStorage.setItem(this.k,JSON.stringify(o))},reset(){this.write({correct:0,total:0,round:1,seen:0})}};
-if(!('total'in store.read())) store.reset();
+/* ---------- State (no localStorage; resets on refresh) ---------- */
+let state = { correct:0, total:0 };
+function resetScore(){ state.correct=0; state.total=0; }
+function setScoreDisplay(){
+  $('.score')?.textContent = state.correct;
+  $('.total')?.textContent = state.total;
+}
 
-let queue=[], idx=0;
-function resetQueue(){ queue=shuffle([...DATA]); idx=0; }
-resetQueue();
-
-let current=null, answered=false;
+/* ---------- Router ---------- */
+function setActiveNav(){
+  const h=location.hash||'#/random';
+  $('#nav-random')?.classList.toggle('active',h.startsWith('#/random'));
+  $('#nav-az')?.classList.toggle('active',h.startsWith('#/az'));
+  $('#nav-answers')?.classList.toggle('active',h.startsWith('#/answers'));
+}
 
 function route(){
-  const hash=location.hash||'#/quiz';
-  $('#nav-quiz')?.classList.toggle('active',hash.startsWith('#/quiz'));
-  $('#nav-answers')?.classList.toggle('active',hash.startsWith('#/answers'));
-  if(hash.startsWith('#/answers')) renderAnswers(); else renderQuiz();
+  setActiveNav();
+  const h = location.hash || '#/random';
+  if(h.startsWith('#/answers')) renderAnswers();
+  else if(h.startsWith('#/az')) renderAZMode();
+  else renderRandomQuiz();
 }
-window.addEventListener('hashchange',route);
+window.addEventListener('hashchange', ()=>{ resetScore(); route(); });
+
+/* ---------- Random mode (unique draw-ish per session) ---------- */
+let queue=[], idx=0, current=null, answered=false;
+function resetQueue(){ queue = shuffle([...DATA]); idx=0; }
 
 function getNextQuestion(){
-  const st=store.read();
-  if(idx>=queue.length){ resetQueue(); st.round=(st.round||1)+1; st.seen=0; store.write(st); }
-  const q=queue[idx++];
-  st.seen=(st.seen||0)+1;
-  store.write(st);
-  return q;
+  if(idx>=queue.length){ resetQueue(); }
+  return queue[idx++];
 }
 
-function newQuestion(){
-  answered=false;
-  current=getNextQuestion();
-  const distractors=shuffle(HOST_CHOICES.filter(h=>h!==current.host)).slice(0,3);
-  const options=shuffle([current.host,...distractors]);
-  const s=store.read();
+function renderRandomQuiz(){
+  // reset session data
+  resetScore(); resetQueue(); answered=false; current=null;
+
+  current = getNextQuestion();
+  const distractors = shuffle(HOST_CHOICES.filter(h=>h!==current.host)).slice(0,3);
+  const options = shuffle([current.host, ...distractors]);
+
   $('#app').innerHTML = `
-    <div class="row" style="align-items:flex-start;">
-      <div class="col">
-        <div class="panel">
-          <div class="toolbar" style="justify-content:space-between;margin-bottom:8px;">
-            <div class="pill">Score <span class="score">${s.correct||0}</span>/<span class="total">${s.total||0}</span></div>
-            <div class="pill">รอบที่ <span class="round">${s.round||1}</span> • ข้อที่ <span class="seen">${s.seen||1}</span>/<span class="len">${DATA.length}</span></div>
-            <button id="reset" class="btn ghost" title="รีเซ็ตคะแนนและเริ่มรอบใหม่">รีเซ็ตคะแนน/รอบ</button>
-          </div>
-          <div class="question">Host ของ <span style="color:var(--accent2)">${current.name}</span> คืออะไร?</div>
-          <div class="options">
-            ${options.map(opt=>`<button class="btn option" data-ans="${encodeURIComponent(opt)}">${opt}</button>`).join('')}
-          </div>
-          <div id="answer-box" class="answer-box" style="display:none;">
-            <div><span class="good">เฉลย:</span> ${current.host}</div>
-          </div>
-          <div style="display:flex; gap:10px; margin-top:12px;">
-            <button id="reveal" class="btn ghost">แสดงเฉลย</button>
-            <button id="next" class="btn primary">ข้อถัดไป ▶</button>
-          </div>
+    <div class="panel">
+      <div class="toolbar" style="justify-content:space-between;margin-bottom:8px;">
+        <div class="pill">โหมด: <span class="tag">สุ่มทีละข้อ</span></div>
+        <div class="pill">Score <span class="score">0</span>/<span class="total">0</span></div>
+        <div style="display:flex;gap:8px;">
+          <button id="reset" class="btn ghost">รีเซ็ต</button>
         </div>
       </div>
-      <div class="col">
-        <div class="panel">
-          <h3 class="title">ตัวเลือก Host ทั้งหมด</h3>
-          <div class="grid cols-2">
-            ${HOST_CHOICES.slice().sort((a,b)=>a.localeCompare(b)).map(h=>`<span class="chip">${h}</span>`).join('')}
-          </div>
-          <p class="muted" style="margin-top:10px;">ปล. บางปรสิตมีหลาย host (เช่น “Dog, Cat” หรือ “Ruminant / Poultry”)</p>
-        </div>
-      </div>
-    </div>`;
-  $$('#app .option').forEach(btn=>btn.addEventListener('click',()=>choose(btn)));
-  $('#reveal').addEventListener('click',reveal);
-  $('#next').addEventListener('click',next);
-  $('#reset').addEventListener('click',()=>{ store.reset(); resetQueue(); newQuestion(); });
-}
 
-function markSolution(picked=null){
-  $$('#app .option').forEach(b=>{
-    const ans=decodeURIComponent(b.dataset.ans);
-    if(ans===current.host) b.classList.add('correct');
-    if(picked && ans===picked && picked!==current.host) b.classList.add('wrong');
-    b.disabled=true;
+      <div class="question">Host ของ <span style="color:var(--accent2)">${current.name}</span> คืออะไร?</div>
+      <div class="options">
+        ${options.map(opt=>`<button class="btn option" data-ans="${encodeURIComponent(opt)}">${opt}</button>`).join('')}
+      </div>
+
+      <div id="answer-box" class="answer-box" style="display:none;">
+        <div><span class="good">เฉลย:</span> ${current.host}</div>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:12px;">
+        <button id="reveal" class="btn ghost">แสดงเฉลย</button>
+        <button id="next" class="btn primary" disabled>ข้อถัดไป ▶</button>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:14px;">
+      <h3 class="title">ตัวเลือก Host ทั้งหมด</h3>
+      <div class="grid cols-2">
+        ${HOST_CHOICES.map(h=>`<span class="chip">${h}</span>`).join('')}
+      </div>
+      <p class="muted" style="margin-top:10px;">ปล. บางปรสิตมีหลาย host (เช่น “Dog, Cat” หรือ “Ruminant / Poultry”)</p>
+    </div>
+  `;
+
+  setScoreDisplay();
+
+  $$('.option').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(answered) return;
+      answered = true;
+      const pick = decodeURIComponent(btn.dataset.ans);
+      const correct = (pick===current.host);
+      // mark styles
+      $$('.option').forEach(b=>{
+        const ans=decodeURIComponent(b.dataset.ans);
+        if(ans===current.host) b.classList.add('correct');
+        if(ans===pick && !correct) b.classList.add('wrong');
+        b.disabled=true;
+      });
+      $('#answer-box').style.display='block';
+      // update score only when user picks (NOT when reveal)
+      state.total += 1;
+      if(correct) state.correct += 1;
+      setScoreDisplay();
+      // allow next ONLY after a selection
+      $('#next').disabled = false;
+    });
   });
-  $('#answer-box').style.display='block';
+
+  $('#reveal').addEventListener('click', ()=>{
+    // show solution but DO NOT advance score/total, and still require selection before next
+    if($('#answer-box').style.display!=='block'){
+      $$('.option').forEach(b=>{
+        const ans=decodeURIComponent(b.dataset.ans);
+        if(ans===current.host) b.classList.add('correct');
+      });
+      $('#answer-box').style.display='block';
+    }
+  });
+
+  $('#next').addEventListener('click', ()=>{
+    // must have answered (selected) before next; button stays disabled until then
+    // draw next
+    answered=false;
+    current=getNextQuestion();
+    const distractors=shuffle(HOST_CHOICES.filter(h=>h!==current.host)).slice(0,3);
+    const options=shuffle([current.host,...distractors]);
+    // re-render the inner question block quickly
+    const qHTML = `
+      <div class="question">Host ของ <span style="color:var(--accent2)">${current.name}</span> คืออะไร?</div>
+      <div class="options">
+        ${options.map(opt=>`<button class="btn option" data-ans="${encodeURIComponent(opt)}">${opt}</button>`).join('')}
+      </div>
+      <div id="answer-box" class="answer-box" style="display:none;">
+        <div><span class="good">เฉลย:</span> ${current.host}</div>
+      </div>
+      <div style="display:flex; gap:10px; margin-top:12px;">
+        <button id="reveal" class="btn ghost">แสดงเฉลย</button>
+        <button id="next" class="btn primary" disabled>ข้อถัดไป ▶</button>
+      </div>
+    `;
+    // replace only the first panel content after toolbar
+    const panel = $('#app .panel');
+    panel.innerHTML = panel.innerHTML.replace(/<div class="question"[\s\S]*/,'') + qHTML;
+
+    // re-wire events
+    setScoreDisplay();
+    $$('.option').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(answered) return;
+        answered = true;
+        const pick = decodeURIComponent(btn.dataset.ans);
+        const correct = (pick===current.host);
+        $$('.option').forEach(b=>{
+          const ans=decodeURIComponent(b.dataset.ans);
+          if(ans===current.host) b.classList.add('correct');
+          if(ans===pick && !correct) b.classList.add('wrong');
+          b.disabled=true;
+        });
+        $('#answer-box').style.display='block';
+        state.total += 1;
+        if(correct) state.correct += 1;
+        setScoreDisplay();
+        $('#next').disabled = false;
+      });
+    });
+    $('#reveal').addEventListener('click', ()=>{
+      if($('#answer-box').style.display!=='block'){
+        $$('.option').forEach(b=>{
+          const ans=decodeURIComponent(b.dataset.ans);
+          if(ans===current.host) b.classList.add('correct');
+        });
+        $('#answer-box').style.display='block';
+      }
+    });
+    $('#next').addEventListener('click', ()=>$('#next').click()); // no-op safeguard
+  });
+
+  $('#reset').addEventListener('click', ()=>{ resetScore(); setScoreDisplay(); resetQueue(); route(); });
 }
 
-function choose(btn){
-  if(answered) return;
-  answered=true;
-  const pick=decodeURIComponent(btn.dataset.ans);
-  const correct=(pick===current.host);
-  const s=store.read();
-  s.total=(s.total||0)+1;
-  if(correct) s.correct=(s.correct||0)+1;
-  store.write(s);
-  markSolution(pick);
-  $('.score').textContent=s.correct;
-  $('.total').textContent=s.total;
+/* ---------- A–Z all-at-once mode ---------- */
+function renderAZMode(){
+  resetScore(); // start fresh
+  const rows = DATA.map((d,i)=>`
+    <tr data-idx="${i}">
+      <td>${d.name}</td>
+      <td>
+        <select>
+          <option value="" selected disabled>— เลือก host —</option>
+          ${HOST_CHOICES.map(h=>`<option value="${h}">${h}</option>`).join('')}
+        </select>
+        <div class="muted" style="margin-top:6px;display:none;"></div>
+      </td>
+    </tr>
+  `).join('');
+
+  $('#app').innerHTML = `
+    <div class="panel">
+      <div class="toolbar" style="justify-content:space-between;margin-bottom:10px;">
+        <div class="pill">โหมด: <span class="tag">เรียง A–Z เลือกทั้งหมด</span></div>
+        <div class="pill">Score <span class="score">0</span>/<span class="total">0</span></div>
+        <div style="display:flex;gap:8px;">
+          <button id="reset" class="btn ghost">รีเซ็ต</button>
+          <button id="revealAll" class="btn ghost">เฉลยทั้งหมด</button>
+          <button id="check" class="btn primary">ตรวจคำตอบ ✅</button>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Parasite (A–Z)</th><th>เลือก Host</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div id="result" class="answer-box" style="display:none;margin-top:12px;"></div>
+    </div>
+  `;
+
+  setScoreDisplay();
+
+  $('#check').addEventListener('click', ()=>{
+    let correct=0, total=DATA.length;
+    $$('#app tbody tr').forEach((tr)=>{
+      const i = Number(tr.dataset.idx);
+      const sel = $('select', tr);
+      const msg = $('.muted', tr);
+      const val = sel.value || '';
+      const expected = DATA[i].host;
+      msg.style.display='block';
+      if(val===expected){
+        correct++;
+        msg.innerHTML = `<span class="ok">ถูกต้อง</span> (${expected})`;
+      }else{
+        msg.innerHTML = `<span class="ng">ผิด</span> → เฉลย: ${expected}`;
+      }
+    });
+    state.correct = correct;
+    state.total = total;
+    setScoreDisplay();
+    const pct = ((correct/total)*100).toFixed(1);
+    $('#result').style.display='block';
+    $('#result').innerHTML = `<div><span class="good">สรุปคะแนน:</span> ${correct}/${total} (${pct}%)</div>`;
+  });
+
+  $('#revealAll').addEventListener('click', ()=>{
+    $$('#app tbody tr').forEach((tr)=>{
+      const i = Number(tr.dataset.idx);
+      const sel = $('select', tr);
+      sel.value = DATA[i].host;
+    });
+  });
+
+  $('#reset').addEventListener('click', ()=>{ route(); });
 }
 
-function reveal(){
-  if(!answered){
-    const s=store.read();
-    s.total=(s.total||0)+1;
-    store.write(s);
-    $('.total').textContent=s.total;
-  }
-  answered=true;
-  markSolution(null);
-}
-
-function next(){ newQuestion(); }
-
-function renderQuiz(){ newQuestion(); }
-
+/* ---------- Answers page ---------- */
 function renderAnswers(){
   const rows=DATA.map(d=>`<tr><td>${d.name}</td><td>${d.host}</td></tr>`).join('');
   $('#app').innerHTML = `
@@ -256,7 +401,7 @@ function renderAnswers(){
       <div class="toolbar" style="justify-content:space-between;margin-bottom:10px;">
         <h3 class="title" style="margin:0">Answer Key (A–Z): Parasite → Host</h3>
         <div class="pill">รวม ${DATA.length} ตัว</div>
-        <a class="btn block" href="#/quiz">กลับไปทำแบบฝึกหัด</a>
+        <a class="btn block" href="#/random">กลับไปทำแบบฝึกหัด</a>
       </div>
       <table>
         <thead><tr><th>Parasite (A–Z)</th><th>Host</th></tr></thead>
@@ -265,9 +410,18 @@ function renderAnswers(){
     </div>`;
 }
 
+/* ---------- Init ---------- */
 route();
-if(!location.hash) location.hash='#/quiz';
-window.addEventListener('keydown',(e)=>{ if(e.key==='Enter') next(); if(e.key.toLowerCase()==='r') reveal(); });
+if(!location.hash) location.hash='#/random';
+
+// Keyboard: Enter → next (only if enabled), R → reveal (random mode only)
+window.addEventListener('keydown',(e)=>{
+  const h = location.hash || '#/random';
+  if(h.startsWith('#/random')){
+    if(e.key==='Enter'){ const n=$('#next'); if(n && !n.disabled) n.click(); }
+    if(e.key.toLowerCase()==='r'){ $('#reveal')?.click(); }
+  }
+});
 </script>
 </body>
 </html>
