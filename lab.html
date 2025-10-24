@@ -173,40 +173,37 @@ function route(){
 }
 window.addEventListener('hashchange', ()=>{ resetScore(); route(); });
 
-/* ---------- Random mode (unique draw-ish per session) ---------- */
+/* ---------- Random mode (unique draw per session) ---------- */
 let queue=[], idx=0, current=null, answered=false;
-function resetQueue(){ queue = shuffle([...DATA]); idx=0; }
 
+function resetQueue(){ queue = shuffle([...DATA]); idx=0; }
 function getNextQuestion(){
-  if(idx>=queue.length){ resetQueue(); }
+  if(idx>=queue.length) resetQueue();
   return queue[idx++];
 }
 
-function renderRandomQuiz(){
-  // reset session data
-  resetScore(); resetQueue(); answered=false; current=null;
-
-  current = getNextQuestion();
-  const distractors = shuffle(HOST_CHOICES.filter(h=>h!==current.host)).slice(0,3);
-  const options = shuffle([current.host, ...distractors]);
+/* สร้างทั้ง panel ของโหมดสุ่มทุกครั้งที่มีคำถามใหม่ (เลี่ยง regex replace DOM) */
+function renderRandomPanel(q){
+  const distractors = shuffle(HOST_CHOICES.filter(h=>h!==q.host)).slice(0,3);
+  const options = shuffle([q.host, ...distractors]);
 
   $('#app').innerHTML = `
-    <div class="panel">
+    <div class="panel" id="random-panel">
       <div class="toolbar" style="justify-content:space-between;margin-bottom:8px;">
         <div class="pill">โหมด: <span class="tag">สุ่มทีละข้อ</span></div>
-        <div class="pill">Score <span class="score">0</span>/<span class="total">0</span></div>
+        <div class="pill">Score <span class="score">${state.correct}</span>/<span class="total">${state.total}</span></div>
         <div style="display:flex;gap:8px;">
           <button id="reset" class="btn ghost">รีเซ็ต</button>
         </div>
       </div>
 
-      <div class="question">Host ของ <span style="color:var(--accent2)">${current.name}</span> คืออะไร?</div>
+      <div class="question">Host ของ <span style="color:var(--accent2)">${q.name}</span> คืออะไร?</div>
       <div class="options">
         ${options.map(opt=>`<button class="btn option" data-ans="${encodeURIComponent(opt)}">${opt}</button>`).join('')}
       </div>
 
       <div id="answer-box" class="answer-box" style="display:none;">
-        <div><span class="good">เฉลย:</span> ${current.host}</div>
+        <div><span class="good">เฉลย:</span> ${q.host}</div>
       </div>
 
       <div style="display:flex; gap:10px; margin-top:12px;">
@@ -224,101 +221,62 @@ function renderRandomQuiz(){
     </div>
   `;
 
-  setScoreDisplay();
-
+  // event handlers
+  answered=false;
   $$('.option').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       if(answered) return;
       answered = true;
       const pick = decodeURIComponent(btn.dataset.ans);
-      const correct = (pick===current.host);
-      // mark styles
+      const correct = (pick===q.host);
+
       $$('.option').forEach(b=>{
         const ans=decodeURIComponent(b.dataset.ans);
-        if(ans===current.host) b.classList.add('correct');
+        if(ans===q.host) b.classList.add('correct');
         if(ans===pick && !correct) b.classList.add('wrong');
         b.disabled=true;
       });
+
       $('#answer-box').style.display='block';
-      // update score only when user picks (NOT when reveal)
+
+      // นับคะแนนเฉพาะเมื่อ “เลือกคำตอบ”
       state.total += 1;
       if(correct) state.correct += 1;
       setScoreDisplay();
-      // allow next ONLY after a selection
-      $('#next').disabled = false;
+
+      $('#next').disabled = false; // ไปต่อได้หลังเลือก
     });
   });
 
   $('#reveal').addEventListener('click', ()=>{
-    // show solution but DO NOT advance score/total, and still require selection before next
+    // เฉลยได้ แต่ยังต้อง “เลือกคำตอบ” ก่อนถึงจะกดถัดไปได้
     if($('#answer-box').style.display!=='block'){
       $$('.option').forEach(b=>{
         const ans=decodeURIComponent(b.dataset.ans);
-        if(ans===current.host) b.classList.add('correct');
+        if(ans===q.host) b.classList.add('correct');
       });
       $('#answer-box').style.display='block';
     }
   });
 
   $('#next').addEventListener('click', ()=>{
-    // must have answered (selected) before next; button stays disabled until then
-    // draw next
-    answered=false;
-    current=getNextQuestion();
-    const distractors=shuffle(HOST_CHOICES.filter(h=>h!==current.host)).slice(0,3);
-    const options=shuffle([current.host,...distractors]);
-    // re-render the inner question block quickly
-    const qHTML = `
-      <div class="question">Host ของ <span style="color:var(--accent2)">${current.name}</span> คืออะไร?</div>
-      <div class="options">
-        ${options.map(opt=>`<button class="btn option" data-ans="${encodeURIComponent(opt)}">${opt}</button>`).join('')}
-      </div>
-      <div id="answer-box" class="answer-box" style="display:none;">
-        <div><span class="good">เฉลย:</span> ${current.host}</div>
-      </div>
-      <div style="display:flex; gap:10px; margin-top:12px;">
-        <button id="reveal" class="btn ghost">แสดงเฉลย</button>
-        <button id="next" class="btn primary" disabled>ข้อถัดไป ▶</button>
-      </div>
-    `;
-    // replace only the first panel content after toolbar
-    const panel = $('#app .panel');
-    panel.innerHTML = panel.innerHTML.replace(/<div class="question"[\s\S]*/,'') + qHTML;
-
-    // re-wire events
-    setScoreDisplay();
-    $$('.option').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        if(answered) return;
-        answered = true;
-        const pick = decodeURIComponent(btn.dataset.ans);
-        const correct = (pick===current.host);
-        $$('.option').forEach(b=>{
-          const ans=decodeURIComponent(b.dataset.ans);
-          if(ans===current.host) b.classList.add('correct');
-          if(ans===pick && !correct) b.classList.add('wrong');
-          b.disabled=true;
-        });
-        $('#answer-box').style.display='block';
-        state.total += 1;
-        if(correct) state.correct += 1;
-        setScoreDisplay();
-        $('#next').disabled = false;
-      });
-    });
-    $('#reveal').addEventListener('click', ()=>{
-      if($('#answer-box').style.display!=='block'){
-        $$('.option').forEach(b=>{
-          const ans=decodeURIComponent(b.dataset.ans);
-          if(ans===current.host) b.classList.add('correct');
-        });
-        $('#answer-box').style.display='block';
-      }
-    });
-    $('#next').addEventListener('click', ()=>$('#next').click()); // no-op safeguard
+    // โหลดข้อใหม่ โดย “เรนเดอร์ทั้งแผง” ใหม่
+    current = getNextQuestion();
+    renderRandomPanel(current);
   });
 
-  $('#reset').addEventListener('click', ()=>{ resetScore(); setScoreDisplay(); resetQueue(); route(); });
+  $('#reset').addEventListener('click', ()=>{
+    resetScore(); setScoreDisplay(); resetQueue();
+    current = getNextQuestion();
+    renderRandomPanel(current);
+  });
+}
+
+/* หน้าห่อโหมดสุ่ม */
+function renderRandomQuiz(){
+  resetScore(); setScoreDisplay(); resetQueue();
+  current = getNextQuestion();
+  renderRandomPanel(current);
 }
 
 /* ---------- A–Z all-at-once mode ---------- */
