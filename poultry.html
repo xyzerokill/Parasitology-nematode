@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>พยาธิตัวกลมในสัตว์ปีก – ชุดแบบทดสอบ (TH)</title>
+<style>
+  :root{--bg:#0f172a;--card:#111827;--ink:#e5e7eb;--muted:#94a3b8;--accent:#22d3ee;--good:#22c55e;--bad:#ef4444;--warn:#f59e0b}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0e1526);color:var(--ink)}
+  header{position:sticky;top:0;background:#0b1220cc;backdrop-filter:blur(6px);border-bottom:1px solid #1f2937;z-index:10}
+  .wrap{max-width:1100px;margin:0 auto;padding:18px}
+  h1{font-size:clamp(20px,2.8vw,34px);margin:8px 0 2px}
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .tab{padding:10px 14px;border:1px solid #1f2937;border-radius:10px;background:#0b1324;color:#cbd5e1;cursor:pointer}
+  .tab.active{border-color:#0ea5e9;background:#0b2436;box-shadow:0 0 0 2px #0ea5e933 inset;color:#e2e8f0}
+  .card{background:var(--card);border:1px solid #1f2937;border-radius:14px;padding:18px;margin:16px 0;box-shadow:0 10px 30px #0004}
+  .grid{display:grid;gap:12px}
+  .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .muted{color:var(--muted)}
+  select,button,input[type="radio"]{accent-color:#06b6d4}
+  select{width:100%;padding:8px 10px;border-radius:10px;border:1px solid #334155;background:#0b1320;color:#e2e8f0}
+  button{background:#0ea5e9;border:none;padding:10px 14px;border-radius:10px;color:#001018;font-weight:700;cursor:pointer}
+  button.secondary{background:#0b1728;color:#e2e8f0;border:1px solid #1f2937}
+  .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid #1f2937;background:#0b1320;color:#a5b4fc;font-size:12px}
+  .row{display:flex;align-items:center;gap:8px}
+  .k{font-weight:700;color:#67e8f9}
+  .ok{color:var(--good)}
+  .ng{color:var(--bad)}
+  .warn{color:var(--warn)}
+  .qcard{border:1px dashed #334155;padding:14px;border-radius:12px}
+  .choices{display:grid;gap:8px;margin-top:10px}
+  .choice{padding:10px;border:1px solid #293241;border-radius:10px;cursor:pointer;background:#0a1120}
+  .choice.correct{border-color:#14532d;background:#052014}
+  .choice.wrong{border-color:#7f1d1d;background:#1a0b0b}
+  .hide{display:none}
+  .tag{font-size:11px;opacity:.9;color:#a5b4fc;margin-left:6px}
+  .answer{border-left:3px solid #334155;padding-left:10px;margin-top:8px;color:#cbd5e1}
+  .inline-kbd{display:inline-block;border:1px solid #334155;border-bottom-width:3px;padding:2px 6px;border-radius:6px;background:#0b1320;color:#e5e7eb;font:600 12px/1 system-ui}
+  .siteGrid{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;align-items:center}
+  .siteGrid h4{margin:0}
+  .scorebox{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .badge{padding:6px 10px;border-radius:10px;background:#062334;border:1px solid #0ea5e9;color:#7dd3fc}
+  .mini{font-size:12px}
+  footer{opacity:.7;text-align:center;padding:26px}
+  details{background:#0b1320;border:1px solid #1f2937;border-radius:10px;padding:8px}
+  summary{cursor:pointer;color:#7dd3fc}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🐔 พยาธิตัวกลมในสัตว์ปีก – ชุดแบบทดสอบ (ภาษาไทย)</h1>
+    <div class="muted">สามโหมดในหน้าเดียว: <span class="pill">ทำนายตำแหน่งอาศัย (Prediction site)</span> · <span class="pill">MCQ 40 ข้อ</span> · <span class="pill">True/False 20 ข้อ</span></div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+</header>
+<main class="wrap">
+  <section id="mode-predict" class="card hide"></section>
+  <section id="mode-mcq" class="card hide"></section>
+  <section id="mode-tf" class="card hide"></section>
+  <section class="card">
+    <details>
+      <summary>📝 วิธีใช้</summary>
+      <ul>
+        <li><b>Prediction site</b>: เลือกตำแหน่งอาศัย (predilection site) ให้ครบ → กด <span class="inline-kbd">ตรวจคำตอบ</span> เพื่อดูคะแนนและเฉลย</li>
+        <li><b>MCQ</b>: ตอบทีละข้อ สุ่มลำดับทุกครั้ง ต้องคลิกคำตอบก่อน จึงเห็นเฉลยและไปข้อถัดไป</li>
+        <li><b>True/False</b>: แนวเดียวกับ MCQ</li>
+        <li>คง <i>technical terms</i> ภาษาอังกฤษ (เช่น stichosome, precloacal sucker, cuticular cordon, intermediate/transport host ฯลฯ)</li>
+      </ul>
+    </details>
+  </section>
+</main>
+<footer class="muted">© 2025 – Vet Parasitology Drill • Morphology · Life cycle · Site · Lesions</footer>
+<script>
+/***********************
+ * DATA – ตำแหน่งอาศัย
+ ***********************/
+const SITES = [
+  "Oesophagus & Crop (หลอดอาหาร/กระเพาะพัก)",
+  "Proventriculus (กระเพาะจริง)",
+  "Small intestine (ลำไส้เล็ก)",
+  "Caecum (ไส้ตัน)",
+  "Eyes (ตา)",
+  "Trachea (หลอดลม)",
+];
+
+// Mapping สำหรับโหมด Prediction Site
+const PARASITES = [
+  {name:"Capillaria annulata", site:"Oesophagus & Crop (หลอดอาหาร/กระเพาะพัก)"},
+  {name:"Capillaria contorta", site:"Oesophagus & Crop (หลอดอาหาร/กระเพาะพัก)"},
+  {name:"Gongylonema ingluvicola", site:"Oesophagus & Crop (หลอดอาหาร/กระเพาะพัก)"},
+  {name:"Dispharynx spiralis", site:"Proventriculus (กระเพาะจริง)"},
+  {name:"Tetrameres americana", site:"Proventriculus (กระเพาะจริง)"},
+  {name:"Tetrameres fissispina", site:"Proventriculus (กระเพาะจริง)"},
+  {name:"Ascaridia galli", site:"Small intestine (ลำไส้เล็ก)"},
+  {name:"Heterakis gallinarum", site:"Caecum (ไส้ตัน)"},
+  {name:"Oxyspirura mansoni", site:"Eyes (ตา)"},
+  {name:"Syngamus trachea", site:"Trachea (หลอดลม)"},
+];
+
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
+
+/***********************
+ * MCQ (ภาษาไทย 40 ข้อ)
+ ***********************/
+const MCQ = [
+ {q:"ระยะติดเชื้อที่ทำให้ <i>Capillaria annulata</i> แตกต่างจากพยาธิตัวกลมในสัตว์ปีกชนิดอื่นคืออะไร?",
+  choices:["L3 ใน paratenic host","L2 (ภายใน earthworm)","L3 ในไข่","L3 อิสระบนพืช"], a:1,
+  why:"<i>C. annulata</i> ใช้ earthworm เป็น intermediate host โดยมีระยะติดเชื้อคือ L2 แต่ชนิดอื่นส่วนมากเป็น L3"},
+ {q:"พยาธิตัวกลมชนิดใดที่มีวงจรชีวิตได้ทั้งแบบ <b>direct</b> และ <b>indirect</b> (มีหรือไม่มี earthworm ก็ได้)?",
+  choices:["Capillaria contorta","Gongylonema ingluvicola","Dispharynx spiralis","Heterakis gallinarum"], a:0,
+  why:"<i>C. contorta</i> อาจติดโดยกินไข่ที่มี L1 หรือผ่าน earthworm ได้"},
+ {q:"ตัวเต็มวัยที่มี <b>cuticular plate</b> เรียงเป็นแถวตามยาวบริเวณ anterior และพบใน oesophagus/crop คือ?",
+  choices:["Gongylonema ingluvicola","Oxyspirura mansoni","Syngamus trachea","Tetrameres americana"], a:0,
+  why:"แผ่น cuticular plate ที่ anterior เป็นลักษณะเฉพาะของ <i>Gongylonema</i>"},
+ {q:"ไข่ที่มี <b>operculum</b> ที่ปลายทั้งสองข้าง (bi-operculate) เป็นของชนิดใด?",
+  choices:["Syngamus trachea","Ascaridia galli","Heterakis gallinarum","Capillaria annulata"], a:0,
+  why:"ไข่ของ <i>Syngamus</i> มี operculum สองด้านและเปลือกบาง"},
+ {q:"พยาธิที่เป็น <b>vector ของ Histomonas meleagridis</b> (blackhead disease) ในไก่งวงคือ?",
+  choices:["Gongylonema ingluvicola","Heterakis gallinarum","Ascaridia galli","Capillaria contorta"], a:1,
+  why:"<i>Heterakis</i> เป็นตัวพาเชื้อสู่ไก่งวง"},
+ {q:"ตัวเมียสีแดงสด รูปร่างกลม อยู่ใน proventricular glands ทำให้ serosa เห็นจุดแดงเข้มหรือดำ คือ?",
+  choices:["Tetrameres americana","Dispharynx spiralis","Syngamus trachea","Oxyspirura mansoni"], a:0,
+  why:"ตัวเมีย <i>Tetrameres</i> สีแดง โป่งกลม เห็นเป็นจุดแดงบนผิวนอกของ proventriculus"},
+ {q:"สัตว์ปีกติด <i>Ascaridia galli</i> ได้จากการกินสัตว์ใดซึ่งเป็น <b>transport host</b>?",
+  choices:["ตั๊กแตนและไส้เดือน","แมลงสาบ","หอยทาก/ทากบก","มด"], a:0,
+  why:"ตั๊กแตนและไส้เดือนสามารถพาไข่ที่มีระยะติดเชื้อได้ (no development ภายใน)"},
+ {q:"พยาธิตัวใดมี <b>คู่ผสมถาวรเป็นรูปตัว Y</b> และอยู่ที่ trachea?",
+  choices:["Syngamus trachea","Ascaridia galli","Dispharynx spiralis","Oxyspirura mansoni"], a:0,
+  why:"คู่เพศจับกันถาวร Y-shaped เป็น hallmark ของ gapeworm"},
+ {q:"ชนิดใด <b>ไม่มี intermediate host</b> แต่ใช้ <b>transport host</b> ได้?",
+  choices:["Heterakis gallinarum","Syngamus trachea","Dispharynx spiralis","Tetrameres fissispina"], a:0,
+  why:"<i>Heterakis</i> วงจรตรง แต่ไข่ถูกพาโดย earthworm/แมลงได้"},
+ {q:"ชนิดใดติดโฮสต์ได้ 3 เส้นทาง: กินไข่ที่มี L3, กิน L3 ที่ฟักแล้ว, หรือกิน transport host?",
+  choices:["Syngamus trachea","Ascaridia galli","Gongylonema ingluvicola","Capillaria contorta"], a:0,
+  why:"สามเส้นทางเป็นจุดเด่นของ <i>Syngamus</i>"},
+ {q:"ชนิดใดมี <b>cuticle โป่งบวมที่หัว</b> และมี stichosome esophagus?",
+  choices:["Capillaria annulata","Capillaria contorta","Gongylonema ingluvicola","Dispharynx spiralis"], a:0,
+  why:"หัวบวมเป็นลักษณะเด่นของ <i>C. annulata</i>"},
+ {q:"ตัวผู้ของ <i>Ascaridia galli</i> มี precloacal sucker และ caudal alae เล็ก ข้อใดถูกเกี่ยวกับ alae?",
+  choices:["ไม่มีความไม่สมมาตร","ไม่สมมาตร","ไม่มี alae","ใหญ่และสมมาตร"], a:0,
+  why:"ของ <i>A. galli</i> เป็น alae เล็ก ไม่ใช่แบบไม่สมมาตร"},
+ {q:"ไข่ใด <b>หน้าตาคล้าย</b> <i>Heterakis gallinarum</i> แต่ใหญ่กว่าและผนังไม่ขนานมาก?",
+  choices:["Ascaridia galli","Oxyspirura mansoni","Dispharynx spiralis","Syngamus trachea"], a:0,
+  why:"ไข่ <i>A. galli</i> ใหญ่กว่า <i>Heterakis</i>"},
+ {q:"ไข่ของชนิดใด <b>มีตัวอ่อนอยู่ภายในเมื่อขับออก</b>?",
+  choices:["Dispharynx spiralis","Syngamus trachea","Ascaridia galli","Capillaria contorta"], a:0,
+  why:"ไข่ <i>Dispharynx</i> (Spirurida) มักมีตัวอ่อนแล้ว"},
+ {q:"ตัวผู้ของ <i>Dispharynx spiralis</i> ไม่มี precloacal sucker ต่างจาก?",
+  choices:["Ascaridia galli","Syngamus trachea","Gongylonema ingluvicola","Heterakis gallinarum"], a:0,
+  why:"<i>A. galli</i> มี precloacal sucker"},
+ {q:"ตำแหน่งของ <i>Oxyspirura mansoni</i> และ IH ตามลำดับคือ?",
+  choices:["ตา; แมลงสาบ","กระเพาะพัก; ไส้เดือน","หลอดลม; หอย","กระเพาะจริง; ด้วง"], a:0,
+  why:"eyeworm + cockroach IH"},
+ {q:"จับคู่ <b>พยาธิ → ตำแหน่ง</b> ใดถูกต้อง?",
+  choices:["Gongylonema → Oesophagus/Crop","Heterakis → Small intestine","Dispharynx → Trachea","Syngamus → Caecum"], a:0,
+  why:"ตัวเลือกอื่นเป็นตำแหน่งสลับ"},
+ {q:"รอยโรค <b>serosa ของ proventriculus มีจุดแดง/ดำ</b> สัมพันธ์กับ?",
+  choices:["Tetrameres americana (♀) ใน gland","Ascaridia galli ระยะ mucosal","Dispharynx spiralis","Capillaria annulata"], a:0,
+  why:"จุดแดงคือร่างตัวเมียสีแดงของ Tetrameres"},
+ {q:"พยาธิที่มี <b>cuticular cordon</b> 4 เส้นด้านหน้า ใน proventriculus คือ?",
+  choices:["Dispharynx spiralis","Tetrameres fissispina","Gongylonema ingluvicola","Capillaria contorta"], a:0,
+  why:"cordon 4 เส้น = <i>Dispharynx</i>"},
+ {q:"ข้อใด <b>ไม่ใช่</b> IH ของกลุ่ม proventricular nematodes?",
+  choices:["แมลงสาบ","isopod (pillbug/sowbug)","ตั๊กแตน","หอย"], a:3,
+  why:"กลุ่มนี้ใช้ arthropod (roach, isopod, beetle, grasshopper) ไม่ใช้หอย"},
+ {q:"transport host ของ <i>Heterakis gallinarum</i> อาจเป็น?",
+  choices:["ไส้เดือน, แมลงวัน, sowbug, จิ้งหรีด","Cyclops, ปลา, กบ","หอยทาก, ทาก","มด, ปลวก"], a:0,
+  why:"หลายชนิดเป็นพาหะเชิงกล/พาเทนิก"},
+ {q:"จับคู่ <b>ชนิด → ระยะติดเชื้อ</b> ที่ถูกต้อง?",
+  choices:["Ascaridia galli → L3 ในไข่","Capillaria annulata → L3 อิสระ","Oxyspirura mansoni → L2 ใน roach","Syngamus trachea → L2 ในไข่"], a:0,
+  why:"<i>A. galli</i> ติดโดย L3 ในไข่; Oxyspirura เป็น L3 ใน roach; Syngamus คือ L3"},
+ {q:"ตัวผู้ที่มี <b>caudal alae ไม่สมมาตร</b> และ left spicule เรียว พบที่ oesophagus/crop คือ?",
+  choices:["Gongylonema ingluvicola","Ascaridia galli","Capillaria contorta","Dispharynx spiralis"], a:0,
+  why:"เป็นเอกลักษณ์ของ <i>Gongylonema</i>"},
+ {q:"ไข่ของสกุลใดเป็นทรงถัง <b>มี bipolar plugs</b>?",
+  choices:["Capillaria spp.","Heterakis spp.","Syngamus spp.","Ascaridia spp."], a:0,
+  why:"สไตล์ Trichurid/Capillariid"},
+ {q:"พยาธิที่มักก่อโรคไม่รุนแรงแต่เป็น <b>ตัวพา protozoa</b> สำคัญคือ?",
+  choices:["Heterakis gallinarum","Ascaridia galli","Gongylonema ingluvicola","Capillaria annulata"], a:0,
+  why:"พา <i>Histomonas</i>"},
+ {q:"พยาธิใดอยู่ที่ <b>ตา</b> และทำให้ตาน้ำตาไหล/ตาอักเสบเมื่อหนัก?",
+  choices:["Oxyspirura mansoni","Thelazia callipaeda","Dispharynx spiralis","Tetrameres americana"], a:0,
+  why:"eyeworm ของสัตว์ปีก"},
+ {q:"ข้อใดเป็นจริงเกี่ยวกับไข่ของ <i>Syngamus trachea</i>?",
+  choices:["มี operculum สองด้าน; ภายในมี blastomeres 8–16","มี bipolar plugs","เปลือกหนาเป็นหลุม ๆ","ตัวอ่อน L1 เต็มที่เมื่อออก"], a:0,
+  why:"ลักษณะ bi-operculate พร้อม blastomeres"},
+ {q:"จับคู่ site: <i>Ascaridia</i> → ?, <i>Heterakis</i> → ?",
+  choices:["Small intestine; Caecum","Caecum; Small intestine","Proventriculus; Trachea","Oesophagus; Eye"], a:0,
+  why:"classic mapping"},
+ {q:"สปีชีส์ใดใช้ <b>isopod</b> (pillbug/sowbug) เป็น IH?",
+  choices:["Dispharynx spiralis","Tetrameres americana","Oxyspirura mansoni","Gongylonema ingluvicola"], a:0,
+  why:"IH ของ <i>Dispharynx</i> คือ isopod"},
+ {q:"จับคู่ (สกุล → ลักษณะเด่น) ใดถูกต้อง?",
+  choices:["Tetrameres → ตัวเมียกลมสีแดง","Gongylonema → แผ่น cuticular ด้านหน้า","Capillaria → บางชนิดหัวบวม","ทั้งหมดถูก"], a:3,
+  why:"ทั้งสามข้อถูก"},
+ {q:"ไข่ของสกุลใดโดยมากเป็น <b>embryonated</b> ตอนขับออก?",
+  choices:["Tetrameres spp.","Ascaridia spp.","Heterakis spp.","Capillaria spp."], a:0,
+  why:"Spirurida หลายชนิดไข่มีตัวอ่อนแล้ว"},
+ {q:"ความเร็วพัฒนาระยะติดเชื้อ: ชนิดใดขึ้นเป็น L3 ใน IH ได้ไว ~10 วัน?",
+  choices:["Tetrameres fissispina","Tetrameres americana","Dispharynx spiralis","Gongylonema ingluvicola"], a:0,
+  why:"<i>T. fissispina</i> เร็วกว่า <i>T. americana</i> (~42 วัน) และ <i>Dispharynx</i> (~26 วัน)"},
+ {q:"กลุ่มที่อยู่ <b>Oesophagus/Crop</b> คือชุดใด?",
+  choices:["Capillaria annulata, C. contorta, Gongylonema","Dispharynx, Tetrameres, Oxyspirura","Ascaridia, Heterakis","Syngamus เท่านั้น"], a:0,
+  why:"สามชนิดนี้อยู่ส่วนบนของทางเดินอาหาร"},
+ {q:"พยาธิใดทำให้เกิด <b>deep ulcer</b> และ mucosal hypertrophy ที่ proventriculus เมื่อมาก?",
+  choices:["Dispharynx spiralis","Ascaridia galli","Capillaria contorta","Gongylonema ingluvicola"], a:0,
+  why:"ปลายหน้าเสียบใน mucosa"},
+ {q:"ข้อใดถูกเกี่ยวกับ <i>Ascaridia galli</i>?",
+  choices:["ตัวผู้มี precloacal sucker","ไข่ bi-operculate","อาศัยใน caecum","ต้องมี IH"], a:0,
+  why:"ตัวผู้มี sucker; ไข่เปลือกหนาไม่ operculate; อยู่ลำไส้เล็ก; วงจรตรง"},
+ {q:"IH สำหรับ <i>Gongylonema ingluvicola</i> คือ?",
+  choices:["ด้วงและแมลงสาบ","isopod","หอย","ยุง"], a:0,
+  why:"Coleoptera/Blattodea เป็น IH สำคัญ"},
+ {q:"จับคู่ (ชนิด → ลักษณะไข่) ใดถูกต้อง?",
+  choices:["Capillaria → bipolar plugs","Syngamus → bi-operculate","Ascaridia → เปลือกหนาเรียบ","ทั้งหมดถูก"], a:3,
+  why:"ถูกทั้งหมด"},
+ {q:"ลิงก์ <b>ตา</b> + <b>แมลงสาบ</b> ในสัตว์ปีกคือ?",
+  choices:["Oxyspirura mansoni","Thelazia callipaeda","Tetrameres americana","Dispharynx spiralis"], a:0,
+  why:"eyeworm ของนกใช้ cockroach เป็น IH"},
+ {q:"พยาธิที่มี <b>stichosome esophagus</b> และไข่ทรงถังมีปลั๊กที่ oesophagus/crop คือ?",
+  choices:["Capillaria spp.","Gongylonema ingluvicola","Syngamus trachea","Heterakis gallinarum"], a:0,
+  why:"stichosome + bipolar plugs = Capillaria"},
+ {q:"ข้อใดจับคู่ <b>ชนิด → ระยะติดเชื้อ & พาหะ</b> ผิด?",
+  choices:["Capillaria annulata → L2 ใน earthworm","Dispharynx spiralis → L3 ใน isopod","Tetrameres americana → L3 ในแมลงสาบ","Oxyspirura mansoni → L2 ในแมลงสาบ"], a:3,
+  why:"<i>Oxyspirura</i> เป็น L3 ใน cockroach ไม่ใช่ L2"},
+ {q:"ลูกไก่/นกอายุน้อยหายใจลำบาก มีเมือกอุด trachea เจอหนอนจับคู่เป็น Y คือ?",
+  choices:["Syngamus trachea","Ascaridia galli","Heterakis gallinarum","Gongylonema ingluvicola"], a:0,
+  why:"classic gapeworm"},
+ {q:"สกุลใดมี <b>sexual dimorphism</b> ชัด: ตัวเมียแดงกลมใน gland ตัวผู้เรียวขาว?",
+  choices:["Tetrameres","Syngamus","Gongylonema","Capillaria"], a:0,
+  why:"เอกลักษณ์ของ Tetrameres"},
+ {q:"ไข่ที่ถูกล้างจาก <b>naso-lacrimal duct</b> แล้วกลืนลงทางเดินอาหาร ก่อนขับออกและถูก IH กิน คือของ?",
+  choices:["Oxyspirura mansoni","Dispharynx spiralis","Capillaria contorta","Syngamus trachea"], a:0,
+  why:"เส้นทางไข่ของ eyeworm"},
+];
+
+// เติมให้ครบ 40 ข้อหากน้อยกว่า (ใช้ข้อบูรณาการภาษาไทย)
+if(MCQ.length!==40){
+  const extra=[
+    {q:"ชนิดใดเป็นวงจรชีวิตแบบ <b>direct</b> โดยพื้นฐาน (ไม่ต้องมี IH)?",choices:["Ascaridia galli","Dispharynx spiralis","Tetrameres americana","Oxyspirura mansoni"],a:0,why:"<i>A. galli</i> เป็น direct"},
+    {q:"ตัวเต็มวัยชนิดใด <b>ฝังส่วนหัวใน mucosa ของ proventriculus</b> ทำให้เกิด ulcer?",choices:["Dispharynx spiralis","Capillaria annulata","Gongylonema","Oxyspirura"],a:0,why:"เป็น hallmark ของ <i>D. spiralis</i>"},
+    {q:"ชนิดใดมี <b>L3 เป็นระยะติดเชื้อ</b> และติดผ่าน <b>transport host</b> หลายชนิดได้?",choices:["Syngamus trachea","Ascaridia galli","Capillaria annulata","Gongylonema"],a:0,why:"<i>Syngamus</i> ใช้ L3"},
+    {q:"พยาธิ oesophagus/crop ที่ไข่มี <b>L1</b> เมื่อขับออกคือ?",choices:["Gongylonema ingluvicola","Capillaria contorta","Ascaridia galli","Heterakis gallinarum"],a:0,why:"ไข่มี L1"},
+    {q:"จับคู่ (สกุล → ตำแหน่ง) ใดผิด?",choices:["Heterakis → Caecum","Ascaridia → Small intestine","Oxyspirura → Proventriculus","Syngamus → Trachea"],a:2,why:"<i>Oxyspirura</i> อยู่ที่ตา"},
+  ];
+  while(MCQ.length<40){ MCQ.push(extra[(MCQ.length)%extra.length]); }
+}
+
+/***********************
+ * TRUE/FALSE (ภาษาไทย 20 ข้อ)
+ ***********************/
+const TF = [
+ {q:"ตัวผู้ของ <i>Dispharynx spiralis</i> ไม่มี precloacal sucker", a:true, why:"มี papillae แต่ไม่มี sucker ต่างจาก <i>Ascaridia</i>"},
+ {q:"ระยะติดเชื้อของ <i>Capillaria annulata</i> คือ L2 ใน earthworm", a:true, why:"earthworm เป็น IH"},
+ {q:"<i>Capillaria contorta</i> ต้องมี earthworm เท่านั้น", a:false, why:"อาจเป็นวงจรตรงได้ (กินไข่ที่มี L1)"},
+ {q:"<i>Gongylonema ingluvicola</i> ใช้ด้วง/แมลงสาบเป็น IH และนกติดจากการกิน L3", a:true, why:"L3 ใน arthropod"},
+ {q:"ตัวเมียของ <i>Tetrameres americana</i> ซีดและเรียวยาวเหมือนตัวผู้", a:false, why:"ตัวเมียแดงสดและกลม"},
+ {q:"<i>Oxyspirura mansoni</i> เป็นพยาธิในตา; IH คือแมลงสาบ", a:true, why:"cockroach IH"},
+ {q:"<i>Syngamus trachea</i> ติดได้ 3 ทาง: L3 ในไข่, L3 ที่ฟัก, หรือ transport host", a:true, why:"triple route"},
+ {q:"<i>Heterakis gallinarum</i> ต้องมี IH", a:false, why:"direct LC; อาศัย transport host ได้"},
+ {q:"ไข่ของ <i>Syngamus trachea</i> มี operculum สองด้าน", a:true, why:"bi-operculate"},
+ {q:"ตัวผู้ของ <i>Ascaridia galli</i> มี alae ไม่สมมาตร", a:false, why:"เป็น alae เล็ก สมมาตร"},
+ {q:"<i>Dispharynx spiralis</i> ทำให้เกิดแผลลึกที่ proventriculus เมื่อการติดมาก", a:true, why:"ปลาย anterior ฝังใน mucosa"},
+ {q:"ไข่ของ <i>Gongylonema</i> ไม่มีตัวอ่อนภายใน", a:false, why:"มี L1 เมื่อขับออก"},
+ {q:"ไข่ของ <i>Capillaria</i> มี bipolar plugs", a:true, why:"ลักษณะเฉพาะของกลุ่ม"},
+ {q:"<i>Oxyspirura</i> มักทำให้เกิดโรครุนแรงทั่วร่างกาย", a:false, why:"โดยทั่วไปจำกัดที่ตา"},
+ {q:"ตัวเมียของ <i>Tetrameres</i> มองเห็นเป็นจุดสีแดงบน serosa ของ proventriculus", a:true, why:"necropsy clue"},
+ {q:"<i>Ascaridia galli</i> ต้องมี arthropod IH", a:false, why:"วงจรตรง"},
+ {q:"<i>Syngamus</i> จัดอยู่ใน Strongylida มี buccal capsule พร้อมฟัน", a:true, why:"6–10 ฟัน"},
+ {q:"<i>Heterakis</i> และ <i>Ascaridia</i> อยู่คนละตำแหน่ง (caecum vs small intestine)", a:true, why:"site ต่างกัน"},
+ {q:"<i>Capillaria annulata</i> และ <i>C. contorta</i> อยู่ oesophagus/crop", a:true, why:"upper GI"},
+ {q:"ตัวผู้ของ <i>Gongylonema</i> มี alae สมมาตร", a:false, why:"ไม่สมมาตร; ซ้ายเรียว"},
+];
+
+/***********************
+ * UI – Tabs
+ ***********************/
+const tabsEl = document.getElementById('tabs');
+const views = [
+  {id:'mode-predict', title:'🔮 ทำนายตำแหน่งอาศัย'},
+  {id:'mode-mcq', title:'🧩 MCQ (40 ข้อ)'},
+  {id:'mode-tf', title:'✅ True / False (20 ข้อ)'}
+];
+let activeTab = views[0].id;
+function renderTabs(){
+  tabsEl.innerHTML = '';
+  views.forEach(v=>{
+    const b = document.createElement('button');
+    b.className = 'tab'+(v.id===activeTab?' active':'');
+    b.textContent = v.title;
+    b.onclick = ()=>{activeTab=v.id;updateView()}
+    tabsEl.appendChild(b);
+  })
+}
+function updateView(){
+  views.forEach(v=>{
+    const s = document.getElementById(v.id);
+    if(v.id===activeTab){s.classList.remove('hide')} else{s.classList.add('hide')}
+  });
+  renderTabs();
+}
+renderTabs();
+
+/***********************
+ * Mode 1 – Prediction site (ไทย)
+ ***********************/
+(function(){
+  const host = document.getElementById('mode-predict');
+  const intro = document.createElement('div');
+  intro.innerHTML = `<div class="scorebox"><span class="badge">เลือกตำแหน่งอาศัยของแต่ละสปีชีส์</span><button class="secondary" id="btnShuffle">สุ่มรายชื่อ</button></div>`;
+  host.appendChild(intro);
+  const listDiv = document.createElement('div'); host.appendChild(listDiv);
+  const actions = document.createElement('div'); actions.style.display='flex'; actions.style.gap='10px'; actions.style.flexWrap='wrap'; actions.style.marginTop='10px';
+  actions.innerHTML = `<button id=\"btnCheck\">ตรวจคำตอบ</button><button class=\"secondary\" id=\"btnReset\">รีเซ็ต</button>`;
+  host.appendChild(actions);
+  const result = document.createElement('div'); host.appendChild(result);
+
+  let choices = [];
+  function render(){
+    listDiv.innerHTML='';
+    const grid = document.createElement('div'); grid.className='grid';
+    choices.forEach((row,i)=>{
+      const card = document.createElement('div'); card.className='qcard siteGrid';
+      card.innerHTML = `
+        <div>
+          <h4>${i+1}. <span class="k">${row.name}</span></h4>
+          <div class="muted mini">เลือก: Oesophagus & Crop · Proventriculus · Small intestine · Caecum · Eyes · Trachea</div>
+        </div>
+        <div>
+          <select data-i="${i}">
+            <option value="">— เลือก site —</option>
+            ${SITES.map(s=>`<option>${s}</option>`).join('')}
+          </select>
+        </div>`;
+      grid.appendChild(card);
+    });
+    listDiv.appendChild(grid);
+    listDiv.querySelectorAll('select').forEach(sel=>{
+      sel.addEventListener('change',e=>{
+        const idx=+e.target.getAttribute('data-i');
+        choices[idx].pick = e.target.value;
+      })
+    })
+  }
+  function shuffleAll(){ choices = shuffle(PARASITES).map(p=>({name:p.name, ans:p.site, pick:''})); render(); result.innerHTML=''; }
+  document.getElementById('btnShuffle').onclick = shuffleAll;
+  document.getElementById('btnReset').onclick = shuffleAll;
+  document.getElementById('btnCheck').onclick = ()=>{
+    let correct=0; const total=choices.length;
+    const rows = choices.map((r,i)=>{
+      const ok = r.pick===r.ans; if(ok) correct++;
+      return `<div class="row"><span class="mini">${i+1}.</span> <b>${r.name}</b> → <span class="${ok?'ok':'ng'}">${r.pick||'ยังไม่เลือก'}</span> ${ok?'<span class="tag">ถูก</span>':`<span class="tag warn">ควรเป็น ${r.ans}</span>`}</div>`
+    }).join('');
+    result.innerHTML = `<div class="card"><div class="scorebox"><div class="badge">คะแนน: ${correct} / ${total}</div><div class="muted mini">กดสุ่มเพื่อฝึกซ้ำ</div></div>${rows}</div>`
+  }
+  shuffleAll();
+})();
+
+/***********************
+ * Mode 2 – MCQ (ไทย)
+ ***********************/
+(function(){
+  const host=document.getElementById('mode-mcq');
+  let order = shuffle(MCQ.map((_,i)=>i)).slice(0,40);
+  let i=0, score=0;
+
+  const hud=document.createElement('div'); hud.className='scorebox';
+  hud.innerHTML = `<div class=\"badge\" id=\"mcqProg\">ข้อ 1 / 40</div><div class=\"badge\" id=\"mcqScore\">คะแนน 0</div><button class=\"secondary\" id=\"mcqRestart\">เริ่มใหม่/สุ่มใหม่</button>`;
+  host.appendChild(hud);
+
+  const qc=document.createElement('div'); qc.className='qcard'; host.appendChild(qc);
+
+  function renderQ(){
+    const item = MCQ[order[i]];
+    document.getElementById('mcqProg').textContent = `ข้อ ${i+1} / 40`;
+    qc.innerHTML = `<div><b>Q${i+1}.</b> ${item.q}</div>`;
+    const box=document.createElement('div'); box.className='choices'; qc.appendChild(box);
+    const shuffledChoices = shuffle(item.choices.map((c,idx)=>({c,idx})));
+    let locked=false;
+    shuffledChoices.forEach(({c,idx})=>{
+      const div=document.createElement('div');
+      div.className='choice'; div.textContent=c; box.appendChild(div);
+      div.onclick=()=>{
+        if(locked) return; locked=true;
+        const isCorrect = idx===item.a;
+        if(isCorrect){div.classList.add('correct'); score++;}
+        else{div.classList.add('wrong');}
+        // ทำไฮไลต์ตัวที่ถูก
+        [...box.children].forEach(el=>{
+          const text=el.textContent; const originalIndex=item.choices.indexOf(text);
+          if(originalIndex===item.a) el.classList.add('correct');
+        })
+        // เฉลย
+        const exp=document.createElement('div'); exp.className='answer';
+        exp.innerHTML = `<b>เฉลย:</b> ${item.choices[item.a]}<br><span class=\"muted\">เหตุผล:</span> ${item.why}`;
+        qc.appendChild(exp);
+        // ปุ่มถัดไป
+        const nx=document.createElement('div'); nx.style.marginTop='10px';
+        nx.innerHTML = `<button id=\"btnNext\">ถัดไป</button>`; qc.appendChild(nx);
+        document.getElementById('mcqScore').textContent = `คะแนน ${score}`;
+        document.getElementById('btnNext').onclick = ()=>{
+          i++; if(i>=40){
+            qc.innerHTML = `<div class=\"row\"><div class=\"badge\">จบชุด MCQ</div><div class=\"badge\">คะแนนรวม: ${score} / 40</div></div>`;
+          } else { renderQ(); }
+        };
+      }
+    })
+  }
+  document.getElementById('mcqRestart').onclick=()=>{order=shuffle(MCQ.map((_,i)=>i)).slice(0,40); i=0; score=0; document.getElementById('mcqScore').textContent='คะแนน 0'; renderQ();}
+  renderQ();
+})();
+
+/***********************
+ * Mode 3 – True / False (ไทย)
+ ***********************/
+(function(){
+  const host=document.getElementById('mode-tf');
+  let order = shuffle(TF.map((_,i)=>i)).slice(0,20);
+  let i=0, score=0;
+
+  const hud=document.createElement('div'); hud.className='scorebox';
+  hud.innerHTML = `<div class=\"badge\" id=\"tfProg\">ข้อ 1 / 20</div><div class=\"badge\" id=\"tfScore\">คะแนน 0</div><button class=\"secondary\" id=\"tfRestart\">เริ่มใหม่/สุ่มใหม่</button>`;
+  host.appendChild(hud);
+
+  const qc=document.createElement('div'); qc.className='qcard'; host.appendChild(qc);
+
+  function renderQ(){
+    const item=TF[order[i]];
+    document.getElementById('tfProg').textContent=`ข้อ ${i+1} / 20`;
+    qc.innerHTML = `<div><b>Q${i+1}.</b> ${item.q}</div>`;
+    const box=document.createElement('div'); box.className='choices'; qc.appendChild(box);
+    const btnT=document.createElement('button'); btnT.textContent='ถูก (True)';
+    const btnF=document.createElement('button'); btnF.textContent='ผิด (False)'; btnF.className='secondary';
+    const btnRow=document.createElement('div'); btnRow.style.display='flex'; btnRow.style.gap='8px'; btnRow.append(btnT,btnF); qc.appendChild(btnRow);
+    let locked=false;
+    function mark(ans){
+      if(locked) return; locked=true;
+      const cor = item.a===ans; if(cor) score++;
+      document.getElementById('tfScore').textContent=`คะแนน ${score}`;
+      const exp=document.createElement('div'); exp.className='answer';
+      exp.innerHTML=`<b>เฉลย:</b> ${item.a?'<span class="ok">True</span>':'<span class="ng">False</span>'} · <span class="muted">เหตุผล:</span> ${item.why}`;
+      qc.appendChild(exp);
+      const nx=document.createElement('div'); nx.style.marginTop='10px'; nx.innerHTML='<button id="tfNext">ถัดไป</button>'; qc.appendChild(nx);
+      document.getElementById('tfNext').onclick=()=>{ i++; if(i>=20){
+        qc.innerHTML = `<div class=\"row\"><div class=\"badge\">จบชุด True/False</div><div class=\"badge\">คะแนนรวม: ${score} / 20</div></div>`
+      } else { renderQ(); } };
+    }
+    btnT.onclick=()=>mark(true); btnF.onclick=()=>mark(false);
+  }
+  document.getElementById('tfRestart').onclick=()=>{order=shuffle(TF.map((_,i)=>i)).slice(0,20); i=0; score=0; document.getElementById('tfScore').textContent='คะแนน 0'; renderQ();}
+  renderQ();
+})();
+</script>
+</body>
+</html>
