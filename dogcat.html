@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>พยาธิตัวกลมในสุนัขและแมว – ชุดแบบทดสอบ (TH)</title>
+<style>
+  :root{--bg:#0f172a;--card:#111827;--ink:#e5e7eb;--muted:#94a3b8;--accent:#22d3ee;--good:#22c55e;--bad:#ef4444;--warn:#f59e0b}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0e1526);color:var(--ink)}
+  header{position:sticky;top:0;background:#0b1220cc;backdrop-filter:blur(6px);border-bottom:1px solid #1f2937;z-index:10}
+  .wrap{max-width:1100px;margin:0 auto;padding:18px}
+  h1{font-size:clamp(20px,2.8vw,34px);margin:8px 0 2px}
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .tab{padding:10px 14px;border:1px solid #1f2937;border-radius:10px;background:#0b1324;color:#cbd5e1;cursor:pointer}
+  .tab.active{border-color:#0ea5e9;background:#0b2436;box-shadow:0 0 0 2px #0ea5e933 inset;color:#e2e8f0}
+  .card{background:var(--card);border:1px solid #1f2937;border-radius:14px;padding:18px;margin:16px 0;box-shadow:0 10px 30px #0004}
+  .grid{display:grid;gap:12px}
+  .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .muted{color:var(--muted)}
+  select,button,input[type="radio"]{accent-color:#06b6d4}
+  select{width:100%;padding:8px 10px;border-radius:10px;border:1px solid #334155;background:#0b1320;color:#e2e8f0}
+  button{background:#0ea5e9;border:none;padding:10px 14px;border-radius:10px;color:#001018;font-weight:700;cursor:pointer}
+  button.secondary{background:#0b1728;color:#e2e8f0;border:1px solid #1f2937}
+  .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid #1f2937;background:#0b1320;color:#a5b4fc;font-size:12px}
+  .row{display:flex;align-items:center;gap:8px}
+  .k{font-weight:700;color:#67e8f9}
+  .ok{color:var(--good)}
+  .ng{color:var(--bad)}
+  .warn{color:var(--warn)}
+  .qcard{border:1px dashed #334155;padding:14px;border-radius:12px}
+  .choices{display:grid;gap:8px;margin-top:10px}
+  .choice{padding:10px;border:1px solid #293241;border-radius:10px;cursor:pointer;background:#0a1120}
+  .choice.correct{border-color:#14532d;background:#052014}
+  .choice.wrong{border-color:#7f1d1d;background:#1a0b0b}
+  .hide{display:none}
+  .tag{font-size:11px;opacity:.9;color:#a5b4fc;margin-left:6px}
+  .answer{border-left:3px solid #334155;padding-left:10px;margin-top:8px;color:#cbd5e1}
+  .inline-kbd{display:inline-block;border:1px solid #334155;border-bottom-width:3px;padding:2px 6px;border-radius:6px;background:#0b1320;color:#e5e7eb;font:600 12px/1 system-ui}
+  .siteGrid{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;align-items:center}
+  .siteGrid h4{margin:0}
+  .scorebox{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .badge{padding:6px 10px;border-radius:10px;background:#062334;border:1px solid #0ea5e9;color:#7dd3fc}
+  .mini{font-size:12px}
+  footer{opacity:.7;text-align:center;padding:26px}
+  details{background:#0b1320;border:1px solid #1f2937;border-radius:10px;padding:8px}
+  summary{cursor:pointer;color:#7dd3fc}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🐶🐱 พยาธิตัวกลมในสุนัขและแมว – ชุดแบบทดสอบ (ภาษาไทย)</h1>
+    <div class="muted">สามโหมดในหน้าเดียว: <span class="pill">Prediction site</span> · <span class="pill">MCQ</span> · <span class="pill">True/False</span></div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+</header>
+<main class="wrap">
+  <section id="mode-predict" class="card hide"></section>
+  <section id="mode-mcq" class="card hide"></section>
+  <section id="mode-tf" class="card hide"></section>
+  <section class="card">
+    <details>
+      <summary>📝 วิธีใช้</summary>
+      <ul>
+        <li><b>Prediction site</b>: เลือกตำแหน่งอาศัย (predilection site) ให้ครบ → กด <span class="inline-kbd">ตรวจคำตอบ</span> เพื่อดูคะแนนและเฉลย</li>
+        <li>คง <i>technical terms</i> ภาษาอังกฤษ (เช่น cervical alae, buccal capsule, stichosome, microfilaria เป็นต้น)</li>
+      </ul>
+    </details>
+  </section>
+</main>
+<footer class="muted">© 2025 – Vet Parasitology Drill • Morphology · Life cycle · Site · Lesions</footer>
+
+<script>
+/***********************
+ * DATA – ตำแหน่งอาศัย (Dog & Cat)
+ ***********************/
+const SITES = [
+  "Thoracic esophagus / Stomach wall",
+  "Stomach (lumen/gland)",
+  "Small intestine",
+  "Large intestine (Caecum/Colon)",
+  "Eye (Conjunctival sac / Naso-lacrimal duct)",
+  "Respiratory (Small bronchiole / Lung parenchyma)",
+  "Cardiovascular (Right ventricle / Pulmonary artery)",
+  "Liver parenchyma",
+  "Periocular/Subconjunctival tissue",
+  "Lymphatic vessels"
+];
+
+// Mapping สำหรับโหมด Prediction Site (อ้างอิงไฟล์สุนัขและแมว)
+const PARASITES = [
+  {name:"Spirocerca lupi", site:"Thoracic esophagus / Stomach wall"},
+  {name:"Gnathostoma spinigerum", site:"Stomach (lumen/gland)"},
+  {name:"Physaloptera praeputialis", site:"Stomach (lumen/gland)"},
+  {name:"Toxocara canis", site:"Small intestine"},
+  {name:"Toxocara cati", site:"Small intestine"},
+  {name:"Toxascaris leonina", site:"Small intestine"},
+  {name:"Ancylostoma caninum", site:"Small intestine"},
+  {name:"Ancylostoma ceylanicum", site:"Small intestine"},
+  {name:"Uncinaria stenocephala", site:"Small intestine"},
+  {name:"Strongyloides stercoralis", site:"Small intestine"},
+  {name:"Trichuris vulpis", site:"Large intestine (Caecum/Colon)"},
+  {name:"Thelazia callipaeda", site:"Eye (Conjunctival sac / Naso-lacrimal duct)"},
+  {name:"Aelurostrongylus abstrusus", site:"Respiratory (Small bronchiole / Lung parenchyma)"},
+  {name:"Dirofilaria immitis", site:"Cardiovascular (Right ventricle / Pulmonary artery)"},
+  {name:"Capillaria hepatica (Calodium hepaticum)", site:"Liver parenchyma"},
+  {name:"Onchocerca lupi", site:"Periocular/Subconjunctival tissue"}
+];
+
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
+
+/***********************
+ * MCQ / TF – ประกาศไว้เฉย ๆ (ยังไม่ทำ)
+ ***********************/
+const MCQ = [];
+const TF = [];
+
+/***********************
+ * UI – Tabs
+ ***********************/
+const tabsEl = document.getElementById('tabs');
+const views = [
+  {id:'mode-predict', title:'🔮 Prediction site'},
+  {id:'mode-mcq',      title:'🧩 MCQ'},
+  {id:'mode-tf',       title:'✅ True / False'}
+];
+let activeTab = views[0].id;
+
+function renderTabs(){
+  tabsEl.innerHTML = '';
+  views.forEach(v=>{
+    const b = document.createElement('button');
+    b.className = 'tab' + (v.id===activeTab ? ' active' : '');
+    b.textContent = v.title;
+    b.onclick = ()=>{ activeTab = v.id; updateView(); };
+    tabsEl.appendChild(b);
+  });
+}
+
+function updateView(){
+  views.forEach(v=>{
+    const s = document.getElementById(v.id);
+    if(v.id===activeTab){ s.classList.remove('hide'); }
+    else{ s.classList.add('hide'); }
+  });
+  renderTabs();
+}
+
+renderTabs();
+// อัปเดตชื่อแท็บตามจำนวนข้อ (ตอนนี้เป็น 0)
+views[1].title = `🧩 MCQ (${MCQ.length} ข้อ)`;
+views[2].title = `✅ True / False (${TF.length} ข้อ)`;
+renderTabs();
+updateView();
+
+/***********************
+ * Mode 1 – Prediction site (ไทย)
+ ***********************/
+(function(){
+  const host = document.getElementById('mode-predict');
+  const intro = document.createElement('div');
+  intro.innerHTML = `<div class="scorebox"><span class="badge">เลือกตำแหน่งอาศัยของแต่ละสปีชีส์</span><button class="secondary" id="btnShuffle">สุ่มรายชื่อ</button></div>`;
+  host.appendChild(intro);
+  const listDiv = document.createElement('div'); host.appendChild(listDiv);
+  const actions = document.createElement('div'); actions.style.display='flex'; actions.style.gap='10px'; actions.style.flexWrap='wrap'; actions.style.marginTop='10px';
+  actions.innerHTML = `<button id="btnCheck">ตรวจคำตอบ</button><button class="secondary" id="btnReset">รีเซ็ต</button>`;
+  host.appendChild(actions);
+  const result = document.createElement('div'); host.appendChild(result);
+
+  let choices = [];
+  function render(){
+    listDiv.innerHTML='';
+    const grid = document.createElement('div'); grid.className='grid';
+    choices.forEach((row,i)=>{
+      const card = document.createElement('div'); card.className='qcard siteGrid';
+      card.innerHTML = `
+        <div>
+          <h4>${i+1}. <span class="k">${row.name}</span></h4>
+          <div class="muted mini">เลือกหนึ่ง: ${SITES.join(' · ')}</div>
+        </div>
+        <div>
+          <select data-i="${i}">
+            <option value="">— เลือก site —</option>
+            ${SITES.map(s=>`<option>${s}</option>`).join('')}
+          </select>
+        </div>`;
+      grid.appendChild(card);
+    });
+    listDiv.appendChild(grid);
+    listDiv.querySelectorAll('select').forEach(sel=>{
+      sel.addEventListener('change',e=>{
+        const idx=+e.target.getAttribute('data-i');
+        choices[idx].pick = e.target.value;
+      })
+    })
+  }
+  function shuffleAll(){ choices = shuffle(PARASITES).map(p=>({name:p.name, ans:p.site, pick:''})); render(); result.innerHTML=''; }
+  document.getElementById('btnShuffle').onclick = shuffleAll;
+  document.getElementById('btnReset').onclick = shuffleAll;
+  document.getElementById('btnCheck').onclick = ()=>{
+    let correct=0; const total=choices.length;
+    const rows = choices.map((r,i)=>{
+      const ok = r.pick===r.ans; if(ok) correct++;
+      return `<div class="row"><span class="mini">${i+1}.</span> <b>${r.name}</b> → <span class="${ok?'ok':'ng'}">${r.pick||'ยังไม่เลือก'}</span> ${ok?'<span class="tag">ถูก</span>':`<span class="tag warn">ควรเป็น ${r.ans}</span>`}</div>`
+    }).join('');
+    result.innerHTML = `<div class="card"><div class="scorebox"><div class="badge">คะแนน: ${correct} / ${total}</div><div class="muted mini">กดสุ่มเพื่อฝึกซ้ำ</div></div>${rows}</div>`
+  }
+  shuffleAll();
+})();
+</script>
+</body>
+</html>
