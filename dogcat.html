@@ -267,7 +267,7 @@ const MCQ = [
   a:2,
   why:"ลูกแมวติดเชื้ออาจมีท้องบวม อาเจียน และพบพยาธิในอาเจียนได้"},
   
-  q:"ข้อใดถูกต้องที่สุดเกี่ยวกับการถ่ายทอดของ <i>Toxocara canis</i> และ <i>T. cati</i>?",
+  {q:"ข้อใดถูกต้องที่สุดเกี่ยวกับการถ่ายทอดของ <i>Toxocara canis</i> และ <i>T. cati</i>?",
   choices:[
     "<i>T. canis</i> และ <i>T. cati</i> มี transplacental เหมือนกัน",
     "<i>T. canis</i> ถ่ายทอดหลักทาง transplacental ส่วน <i>T. cati</i> ถ่ายทอดทาง transmammary",
@@ -386,7 +386,106 @@ const MCQ = [
     "การมี transplacental infection"
   ],
   a:2,
-  why:"<i>T. leonina</i> ไม่มี tracheal migration เว้นแต่ได้จาก paratenic host และไข่ผนังเรียบใส แตกต่างจาก <i>T. canis</i> ที่มี tracheal migration ชัดและไข่ผนังขรุขระ"}
+  why:"<i>T. leonina</i> ไม่มี tracheal migration เว้นแต่ได้จาก paratenic host และไข่ผนังเรียบใส แตกต่างจาก <i>T. canis</i> ที่มี tracheal migration ชัดและไข่ผนังขรุขระ"},
+
+  {q:"ตัวเต็มวัยของ <i>Strongyloides stercoralis</i> ที่เป็นพยาธิในร่างกายสัตว์คือระยะ/เพศใด และอยู่ที่ไหน?",
+  choices:[
+    "ตัวผู้ ในลำไส้เล็ก",
+    "ตัวผู้ ในปอด",
+    "ตัวเมีย (parasitic female) ในลำไส้เล็ก",
+    "ทั้งสองเพศ ในกระเพาะ",
+    "ตัวเมีย ในกระเพาะ"
+  ],
+  a:2,
+  why:"พบเฉพาะตัวเมียแบบพึ่งพาอาศัย (parasitic female) อาศัยในลำไส้เล็ก"},
+
+ {q:"โดยทั่วไป อุจจาระของผู้ติดเชื้อ <i>S. stercoralis</i> จะพบระยะใด?",
+  choices:[
+    "ไข่ที่ยังไม่ฟัก",
+    "ไข่มี operculum",
+    "L1 (rhabditiform larva)",
+    "L3 (filariform larva)",
+    "ตัวเต็มวัยขนาดเล็ก"
+  ],
+  a:2,
+  why:"มักพบ L1 (rhabditiform larva); ไข่ฟักเร็วภายในลำไส้"},
+
+ {q:"ลักษณะเด่นทางสัณฐานที่ใช้จำแนก <i>S. stercoralis</i> ระหว่างระยะ L1 และ L3 คืออะไร?",
+  choices:[
+    "L1 มี bursa; L3 ไม่มี",
+    "L1 มี spicule; L3 ไม่มี",
+    "L1 มี rhabditiform esophagus; L3 มี filariform esophagus",
+    "L1 มีหัวเป็นลูกโป่ง; L3 มี cutting plate",
+    "ทั้งสองระยะมี esophagus แบบเดียวกัน"
+  ],
+  a:2,
+  why:"L1 → rhabditiform esophagus / L3 → filariform esophagus"},
+
+ {q:"การติดเชื้อหลักของ <i>S. stercoralis</i> ในสุนัขและคนเกิดจากอะไร?",
+  choices:[
+    "การกินไข่ติดเชื้อ",
+    "การกินเนื้อที่มีตัวอ่อน",
+    "ตัวอ่อน L3 ไชผ่านผิวหนัง",
+    "การสูดฝุ่นที่มีไข่",
+    "แมลงดูดเลือดเป็นพาหะ"
+  ],
+  a:2,
+  why:"ระยะติดต่อคือ L3 (filariform) ไชผ่านผิวหนังเข้าสู่ร่างกาย"},
+
+ {q:"เส้นทางการอพยพของตัวอ่อน <i>S. stercoralis</i> หลังเข้าสู่ร่างกายที่ถูกต้องคือข้อใด?",
+  choices:[
+    "ผิวหนัง → กล้ามเนื้อ → ลำไส้",
+    "ปาก → กระเพาะ → ตับ",
+    "ผิวหนัง → ปอด → trachea → กลืนลงลำไส้เล็ก",
+    "ปาก → ต่อมน้ำเหลือง → ลำไส้ใหญ่",
+    "ไม่มีการอพยพ"
+  ],
+  a:2,
+  why:"คลาสสิก: skin → lungs → trachea → กลืน → small intestine"},
+
+ {q:"วงจรชีวิตของ <i>S. stercoralis</i> มีลักษณะอย่างไร?",
+  choices:[
+    "มีเฉพาะแบบ direct (parasitic) เท่านั้น",
+    "มีเฉพาะแบบ indirect ผ่าน arthropod",
+    "มีทั้งแบบ parasitic (homogonic) และแบบ free-living (heterogonic)",
+    "ต้องมี intermediate host เสมอ",
+    "เป็นวงจรน้ำ มี cercariae"
+  ],
+  a:2,
+  why:"มีทั้งวงจรในร่างกาย host และวงจรอิสระในสิ่งแวดล้อม"},
+
+ {q:"อาการทางคลินิกที่พบบ่อยในสัตว์ติด <i>S. stercoralis</i> คืออะไร?",
+  choices:[
+    "ดีซ่านเด่น",
+    "ชักบ่อย",
+    "ท้องเสียเรื้อรัง/มูก และผอมแห้ง โดยเฉพาะลูกสัตว์",
+    "บวมน้ำทั่วไป",
+    "เลือดออกจมูก"
+  ],
+  a:2,
+  why:"ทำให้ enteritis → ท้องเสีย (มูก/เลือดในรายรุนแรง), น้ำหนักลด โดยเฉพาะลูกสัตว์/ภูมิบกพร่อง"},
+
+ {q:"วิธีห้องปฏิบัติการที่เหมาะสมที่สุดในการตรวจหา <i>S. stercoralis</i> จากอุจจาระคือข้อใด?",
+  choices:[
+    "Direct smear",
+    "Sedimentation",
+    "Baermann technique",
+    "Modified Ziehl–Neelsen",
+    "Latex agglutination"
+  ],
+  a:2,
+  why:"Baermann เหมาะสำหรับแยกตัวอ่อนที่มีชีวิตออกจากสิ่งสกปรกในอุจจาระ"},
+
+ {q:"ความสำคัญทางสาธารณสุขของ <i>S. stercoralis</i> ข้อใดถูกต้องที่สุด?",
+  choices:[
+    "ไม่เป็นโรคในคน",
+    "เป็น zoonosis ตัวอ่อน L3 ไชผ่านผิวหนังมนุษย์ได้",
+    "เป็นโรคเฉพาะสัตว์เลี้ยงลูกด้วยนมขนาดเล็ก",
+    "ติดต่อเฉพาะทางอาหารเท่านั้น",
+    "เป็นพยาธิของปลา"
+  ],
+  a:1,
+  why:"เป็น zoonosis; L3 ไชผ่านผิวหนังมนุษย์ ทำให้เกิด strongyloidiasis ได้"}
 ];
 const TF = [];
 
