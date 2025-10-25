@@ -119,483 +119,251 @@ const PARASITES = [
 function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
 
 /***********************
- * MCQ / TF – ประกาศไว้เฉย ๆ (ยังไม่ทำ)
+ * MCQ / TF
  ***********************/
 const MCQ = [
- {q:"ตำแหน่งที่พบตัวเต็มวัยของ <i>Spirocerca lupi</i> ในสุนัขคือที่ใด?",
-  choices:["fundus ของกระเพาะ","ผนังกระเพาะและหลอดอาหารส่วนทรวงอก","ลำไส้ใหญ่","ปอด","ตับ"],
-  a:1,
-  why:"อยู่ที่ thoracic esophagus และผนังกระเพาะของสุนัข"},
+  /***********************
+ * Dog cat II
+ ***********************/  
+ {q:"ข้อใด ‘จับคู่อวัยวะกับปรสิต’ ได้ถูกต้องที่สุด (เลือกหนึ่งข้อ)?",
+   choices:[
+     "<i>Spirocerca lupi</i> → small intestine; <i>Trichuris vulpis</i> → stomach",
+     "<i>Strongyloides stercoralis</i> (parasitic female) → small intestine; <i>Trichuris vulpis</i> → cecum/colon",
+     "<i>Toxocara canis</i> → esophagus; <i>Uncinaria stenocephala</i> → colon",
+     "<i>S. lupi</i> → lung nodule; <i>T. canis</i> → bile duct",
+     "<i>Uncinaria stenocephala</i> → esophagus; <i>T. vulpis</i> → duodenum"
+   ],
+   a:1,
+   why:"Parasitic female ของ Strongyloides อยู่ที่ small intestine; Trichuris ตั้งถิ่นใน cecum/colon"},
 
- {q:"ลักษณะไข่ของ <i>S. lupi</i> ที่ใช้แยกชนิดได้เด่นที่สุดคืออะไร?",
-  choices:["มี operculum สีเหลือง","ผนังบางไม่ติดสี","ผนังหนาเรียบ ภายในมี L1 ขดอยู่","ผนังขรุขระมี polar plug","ใสและมี L2 ภายใน"],
-  a:2,
-  why:"เป็น embryonated egg ผนังหนาเรียบ มี L1 อยู่ภายใน"},
+  // ───────────────────────────────── EGGS / MORPHOLOGY INTEGRATION
+  {q:"คู่ลักษณะไข่-สปีชีส์ใด ‘ถูกต้อง’ มากที่สุด?",
+   choices:[
+     "เปลือกขรุขระสีน้ำตาลแบบ pitted, subglobular → <i>Toxascaris leonina</i>",
+     "ผนังหนา เรียบ ภายในมี L1 ขด (embryonated เมื่อขับถ่าย) → <i>Spirocerca lupi</i>",
+     "สองขั้วมี bipolar plugs หนา สีน้ำตาล → <i>Ancylostoma caninum</i>",
+     "ผนังเรียบใส spherical → <i>Toxocara canis</i>",
+     "thin-shelled morulated (ไข่บาง) → <i>Trichuris vulpis</i>"
+   ],
+   a:1,
+   why:"<i>S. lupi</i> ไข่ผนังหนาเรียบ มี L1 อยู่ภายใน; <i>Toxocara</i> = pitted; <i>T. leonina</i> = smooth; <i>Trichuris</i> = bipolar plugs; <i>Ancylostoma/Uncinaria</i> = thin-shelled morulated"},
 
- {q:"ลักษณะเด่นของตัวเต็มวัย <i>S. lupi</i> คือข้อใด",
-  choices:["หัวเป็นลูกโป่ง","ตัวสั้นแบน สีขาวขุ่น","สีแดง/ชมพูและขดเป็นเกลียว","มี cervical alae กว้าง","หางแฉก"],
-  a:2,
-  why:"ตัวหนา สีแดง/ชมพู และมักขดเป็นเกลียว (spiral)"},
+  // ───────────────────────────────── TOXOCARA: TRANSMISSION COMPARE
+  {q:"ข้อใดสรุป ‘การถ่ายทอดจากแม่’ ของ <i>Toxocara</i> ได้ถูกต้องที่สุด?",
+   choices:[
+     "<i>T. canis</i> เด่นที่ transmammary; <i>T. cati</i> เด่นที่ transplacental",
+     "<i>T. canis</i> เด่นที่ transplacental; <i>T. cati</i> เด่นที่ transmammary",
+     "ทั้ง <i>T. canis</i> และ <i>T. cati</i> เด่นที่ transplacental",
+     "ทั้งสองเด่นที่ transmammary และไม่มี paratenic host",
+     "<i>T. canis</i> และ <i>T. cati</i> ไม่มี vertical transmission"
+   ],
+   a:1,
+   why:"<i>T. canis</i> → transplacental; <i>T. cati</i> → transmammary (ไม่มี transplacental)"},
 
- {q:"ระยะติดต่อของ <i>S. lupi</i> คือข้อใด",
-  choices:["Egg","L1","L2","L3","Adult"],
-  a:3,
-  why:"สุนัขติดเชื้อจาก L3 ภายในตัวด้วงกินมูล (coprophagous beetle)"},
+  {q:"ข้อใดอธิบายการติดเชื้อของ <i>Toxascaris leonina</i> ได้ ‘ต่าง’ จาก <i>Toxocara</i> spp. ชัดเจนที่สุด?",
+   choices:[
+     "ต้องผ่านแมลงเท่านั้น",
+     "เด่นที่ transplacental",
+     "ไม่มี transplacental/transmammary; ติดจากกินไข่ติดเชื้อหรือ paratenic host",
+     "ต้องผ่านหอยน้ำจืด",
+     "อาศัยในกระเพาะอาหาร"
+   ],
+   a:2,
+   why:"<i>T. leonina</i> ติดจากการกินไข่หรือ paratenic host; ไม่มี vertical transmission"},
 
- {q:"โฮสต์กลางของ <i>S. lupi</i> คืออะไร",
-  choices:["Cockroach","Earthworm","House fly","Snail","Coprophagous beetle"],
-  a:4,
-  why:"ใช้ด้วงที่กินมูลเป็น intermediate host"},
+  {q:"รูปแบบ ‘larval migration’ ที่ถูกต้องในกลุ่ม Toxocarids คือข้อใด?",
+   choices:[
+     "<i>T. canis</i> tracheal ในสุนัขโต; <i>T. cati</i> somatic ในลูกแมว; <i>T. leonina</i> hepatic-tracheal",
+     "<i>T. canis</i> tracheal ในลูกสุนัข/ somatic ในสุนัขโต; <i>T. cati</i> tracheal เมื่อติดจาก paratenic host; <i>T. leonina</i> ไม่มี migration",
+     "ทุกชนิด tracheal migration ชัดเจน",
+     "<i>T. cati</i> ไม่มี migration; <i>T. canis</i>/<i>T. leonina</i> somatic เท่านั้น",
+     "<i>T. leonina</i> เท่านั้นที่ tracheal migration เด่น"
+   ],
+   a:1,
+   why:"pattern คลาสสิก: <i>T. canis</i> tracheal (young)/somatic (adult); <i>T. cati</i> tracheal เมื่อมาจาก paratenic host; <i>T. leonina</i> โดยทั่วไปไม่มี migration"},
 
- {q:"พยาธิสภาพเด่นที่สัมพันธ์กับ <i>S. lupi</i> ในสุนัขคือข้อใด",
-  choices:["Hemorrhagic enteritis","Pulmonary consolidation","Esophageal nodule และ aneurysm ของ aorta",
-           "Cystic nodule ในตับ","Melena"],
-  a:2,
-  why:"ทำให้เกิดก้อนที่หลอดอาหาร และอาจเกิด aortic nodule/aneurysm"},
+  // ───────────────────────────────── HOOKWORMS: MOUTHPARTS & HOST/ZOONOSIS
+  {q:"ข้อใด ‘จับคู่โครงสร้างปาก’ กับ hookworm ถูกต้องที่สุด?",
+   choices:[
+     "<i>A. caninum</i> → cutting plates; <i>U. stenocephala</i> → 3 คู่ฟัน",
+     "<i>A. caninum</i> → 3 คู่ฟัน; <i>A. ceylanicum</i> → 2 คู่ฟัน; <i>U. stenocephala</i> → cutting plates + buccal capsule รูปกรวย",
+     "<i>A. ceylanicum</i> → 3 คู่ฟัน; <i>U. stenocephala</i> → 2 คู่ฟัน",
+     "ทุกชนิดมี 3 คู่ฟันเหมือนกัน",
+     "<i>U. stenocephala</i> → ไม่มี buccal capsule"
+   ],
+   a:1,
+   why:"<i>A. caninum</i> ฟัน 3 คู่; <i>A. ceylanicum</i> ฟัน 2 คู่; <i>U. stenocephala</i> มี cutting plates และ buccal capsule ทรงกรวย"},
 
- {q:"การวินิจฉัยทางอุจจาระที่เหมาะสมสำหรับ <i>S. lupi</i> คือข้อใด",
-  choices:["Baermann technique","Sedimentation อย่างเดียว","Floatation ด้วยสารละลายความถ่วงจำเพาะสูง (~1.36)",
-           "Scotch tape test","ELISA สำหรับตัวเต็มวัย"],
-  a:2,
-  why:"ใช้ fecal floatation ด้วยสารละลาย SG สูงเพื่อลอยไข่ผนังหนา"},
+  {q:"เปรียบเทียบ zoonosis ในกลุ่ม hookworms: ข้อใดถูกต้องที่สุด?",
+   choices:[
+     "<i>A. caninum</i> ทำให้ intestinal infection หลักในคน; <i>A. ceylanicum</i> แค่ CLM",
+     "<i>A. caninum</i> → cutaneous larva migrans; <i>A. ceylanicum</i> → intestinal infection ในคนได้; <i>U. stenocephala</i> → CLM แบบอ่อน",
+     "ทุกชนิดก่อโรคในคนเฉพาะตา (ocular)",
+     "<i>U. stenocephala</i> ไม่มีความสำคัญทางสาธารณสุข",
+     "ทั้งหมดไม่ติดคน"
+   ],
+   a:1,
+   why:"<i>A. caninum</i> = CLM; <i>A. ceylanicum</i> โตเป็นตัวเต็มวัยในคนได้; <i>U. stenocephala</i> ทำ CLM ได้แต่มักอ่อนกว่า"},
 
- {q:"ข้อใดถูกต้องเกี่ยวกับการก่อโรคของ <i>S. lupi</i>",
-  choices:["ทำให้ papilloma ที่กระเพาะ","ทำให้ osteosarcoma/fibrosarcoma ที่หลอดอาหารได้",
-           "ทำให้ hepatocellular carcinoma","ทำให้ tracheitis รุนแรง","ทำให้ nephritis เฉียบพลัน"],
-  a:1,
-  why:"esophageal sarcoma (osteosarcoma/fibrosarcoma) เป็นภาวะแทรกซ้อนสำคัญ"},
+  {q:"เส้นทางติดเชื้อเด่นของ hookworms ต่อไปนี้ ‘ข้อใดสรุปได้ถูกต้อง’?",
+   choices:[
+     "<i>A. caninum</i> กิน L3 เท่านั้น; <i>U. stenocephala</i> ไชผิวหนังเด่นกว่า",
+     "<i>A. caninum</i> กิน L3 หรือ L3 ไชผิวหนัง; <i>U. stenocephala</i> ส่วนใหญ่ติดจากกิน L3 (skin penetration น้อยกว่า)",
+     "<i>U. stenocephala</i> ต้องผ่าน intermediate host",
+     "ทั้งสองชนิดติดจากไข่ที่มี L3 ภายในเท่านั้น",
+     "<i>A. caninum</i> ติดได้เฉพาะจาก paratenic host"
+   ],
+   a:1,
+   why:"<i>A. caninum</i> oral+percutaneous; <i>U. stenocephala</i> มัก oral (กิน L3) มากกว่าไชผิวหนัง"},
 
- {q:"ข้อใดต่อไปนี้เป็นชนิดพยาธิที่พบเฉพาะในสุนัข",
-  choices:["<i>Strongyloides stercoralis</i>","<i>Dirofilaria immitis</i>","<i>Thelazia callipaeda</i>",
-           "<i>Ancylostoma ceylanicum</i>","<i>Spirocerca lupi</i>"],
-  a:4,
-  why:"<i>S. lupi</i> รายงานในสุนัข (หลอดอาหาร/ผนังกระเพาะ); ตัวเลือกอื่นพบได้หลายชนิดสัตว์"},
-  
-  {q:"ตัวเต็มวัยของ <i>Toxocara canis</i> พบได้บริเวณใดของร่างกายสัตว์?",
-  choices:["กระเพาะอาหาร","ลำไส้เล็ก","ลำไส้ใหญ่","ปอด","ท่อน้ำดี"],
-  a:1,
-  why:"อาศัยอยู่ในลำไส้เล็กของสุนัข โดยเฉพาะลูกสุนัข บางครั้งพบในกระเพาะได้"},
+  {q:"vertical transmission ใน hookworms: ข้อใดถูกต้อง?",
+   choices:[
+     "<i>A. caninum</i> มี transmammary เด่น; <i>A. ceylanicum</i> ไม่มีรายงานเด่น",
+     "ทั้ง <i>A. caninum</i> และ <i>A. ceylanicum</i> เด่นที่ transplacental",
+     "<i>U. stenocephala</i> มี transplacental",
+     "ทุกชนิดไม่มี vertical transmission",
+     "<i>U. stenocephala</i> มี transmammary เด่น"
+   ],
+   a:0,
+   why:"Transmammary infection พบเด่นใน <i>A. caninum</i>; <i>A. ceylanicum</i>/<i>U. stenocephala</i> ไม่เด่น"},
 
- {q:"ลักษณะเด่นของ <i>T. canis</i> ที่ใช้จำแนกได้คือข้อใด?",
-  choices:["หัวมี ballonets","สามริมฝีปากและ cervical alae แบบ semilanceolate","ไม่มีริมฝีปาก","มี cutting plate","มี bursa ใหญ่"],
-  a:1,
-  why:"มีสามริมฝีปากเด่นและ cervical alae รูป semilanceolate พร้อม caudal appendage ที่หางเพศผู้"},
+  // ───────────────────────────────── STRONGYLOIDES: UNIQUE INTEGRATION
+  {q:"ข้อใดรวม ‘ลักษณะเฉพาะ’ ของ <i>Strongyloides stercoralis</i> ได้ครบที่สุด?",
+   choices:[
+     "ขับ ‘ไข่’ ในอุจจาระ, ไม่มีวงจรอิสระ, ไม่มี autoinfection",
+     "ขับ ‘L1’ ในอุจจาระ, มีวงจรอิสระ (free-living) และอาจเกิด autoinfection",
+     "ขับ ‘L3’ ในอุจจาระ, ต้องผ่าน arthropod",
+     "ขับ ‘adult’ ในอุจจาระ, วงจรน้ำ",
+     "ขับ ‘ไข่มี operculum’, ผ่านหอยน้ำจืด"
+   ],
+   a:1,
+   why:"เอกลักษณ์: L1 ในอุจจาระ, มี free-living cycle และมีโอกาส autoinfection"},
 
- {q:"ลักษณะของไข่ <i>T. canis</i> เป็นอย่างไร?",
-  choices:["ผนังเรียบบาง สีใส","ผนังหนา ผิวขรุขระคล้ายหลุม (pitted shell) สีน้ำตาล","มี operculum","มี bipolar plugs","มี L3 อยู่ภายใน"],
-  a:1,
-  why:"ไข่หนา ผิวขรุขระคล้ายหลุม (pitted shell) สีน้ำตาล ขนาดประมาณ 85×75 µm"},
+  {q:"เส้นทาง entry และ migration ที่ ‘เข้าคู่ถูกต้อง’ สำหรับ <i>S. stercoralis</i> คือข้อใด?",
+   choices:[
+     "กินไข่ → ตับ → ปอด → ลำไส้",
+     "L3 ไชผิวหนัง → ปอด → trachea → กลืนลงลำไส้เล็ก",
+     "L1 ไชผิวหนัง → หัวใจ → ตับ → สมอง",
+     "ไข่ฟักในดินเป็น cercariae → ผิวหนัง",
+     "กินเนื้อ paratenic host → กล้ามเนื้อ"
+   ],
+   a:1,
+   why:"L3 filariform ไชผิวหนัง → lungs → trachea → swallowed → small intestine"},
 
- {q:"เส้นทางการติดเชื้อหลักในลูกสุนัขของ <i>T. canis</i> คืออะไร?",
-  choices:["ผ่านผิวหนัง","กินไข่ติดเชื้อ","transplacental","transmammary","กิน paratenic host"],
-  a:2,
-  why:"ตัวอ่อนสามารถผ่านรกไปติดลูกในครรภ์ได้ เป็นเส้นทางหลักของการติดเชื้อในลูกสุนัข"},
+  // ───────────────────────────────── DIAGNOSIS: MATCHING
+  {q:"จับคู่ ‘วิธีการตรวจ’ กับ ‘ปรสิต’ ใดถูกต้องที่สุด?",
+   choices:[
+     "Baermann ↔ <i>Trichuris vulpis</i>",
+     "High-SG flotation (~1.36) ↔ <i>Spirocerca lupi</i>",
+     "Sugar flotation (เพราะไข่เบามาก) ↔ <i>T. vulpis</i>",
+     "Direct smear เท่านั้น ↔ <i>Toxocara canis</i>",
+     "Modified Knott ↔ hookworms"
+   ],
+   a:1,
+   why:"ไข่ <i>S. lupi</i> หนัก/ผนังหนา ใช้สารลอยถ่วงจำเพาะสูง; <i>Trichuris</i> ใช้ sugar flotation เพราะไข่หนัก (ไม่ใช่เบา)"},
 
- {q:"รูปแบบการ migration ของตัวอ่อนสัมพันธ์กับอายุสุนัขอย่างไร?",
-  choices:["ทุกวัยเป็น tracheal migration","< 6 เดือน tracheal / > 6 เดือน somatic","> 6 เดือน tracheal / < 6 เดือน somatic","ขึ้นกับเพศ","ไม่มีการ migration"],
-  a:1,
-  why:"ลูกสุนัขอายุน้อยมี tracheal migration ส่วนสุนัขโตมี somatic migration ไปอยู่ในเนื้อเยื่อ"},
+  {q:"ข้อใด ‘รวมภาพรวมการวินิจฉัยอุจจาระ’ ได้เหมาะสม?",
+   choices:[
+     "<i>S. stercoralis</i> → Baermann; <i>Trichuris</i> → sugar flotation; hookworms → flotation",
+     "<i>S. stercoralis</i> → flotation; <i>Trichuris</i> → Baermann; hookworms → sedimentation",
+     "ทุกชนิดใช้ direct smear เท่านั้น",
+     "<i>S. lupi</i> → Baermann; hookworms → Modified Knott",
+     "<i>Toxocara</i> ทั้งหมดต้องใช้ ELISA"
+   ],
+   a:0,
+   why:"L1 เคลื่อนไหวของ Strongyloides ใช้ Baermann; ไข่หนัก Trichuris ใช้ sugar flotation; hookworms ใช้ flotation ปกติ"},
 
- {q:"ข้อใดแตกต่างจาก <i>Toxocara cati</i> อย่างถูกต้อง?",
-  choices:["ทั้งคู่มี transplacental transmission","<i>T. canis</i> ไม่มี transmammary","<i>T. cati</i> มี transmammary แต่ไม่มี transplacental","<i>T. canis</i> ต้องการ intermediate host","ทั้งคู่ไม่มี cervical alae"],
-  a:2,
-  why:"<i>T. cati</i> ถ่ายทอดทาง transmammary เท่านั้น ส่วน <i>T. canis</i> ถ่ายทอดทาง transplacental"},
-  
-  {q:"ลักษณะทางสัณฐานที่ช่วยจำแนก <i>Toxocara cati</i> จาก <i>T. canis</i> คือข้อใด?",
-  choices:[
-    "ไม่มีริมฝีปาก",
-    "cervical alae กว้างเป็นรูปหัวลูกศร (arrowhead)",
-    "หัวเป็นปุ่มหนาม",
-    "มี cutting plate",
-    "หางมี bursa ใหญ่"
-  ],
-  a:1,
-  why:"<i>T. cati</i> มี cervical alae กว้างเด่นชัด ลักษณะเป็นรูปหัวลูกศร (arrowhead)"},
+  // ───────────────────────────────── PATHOLOGY / PUBLIC HEALTH
+  {q:"ข้อใด ‘จับคู่พยาธิสภาพเด่น’ ได้ถูกต้อง?",
+   choices:[
+     "<i>Spirocerca lupi</i> → esophageal nodules/aneurysm/osteosarcoma",
+     "<i>Ancylostoma caninum</i> → hepatic fibrosis",
+     "<i>Trichuris vulpis</i> → neuro signs เด่น",
+     "<i>Toxocara canis</i> → cholangitis เด่น",
+     "<i>U. stenocephala</i> → hydatidosis"
+   ],
+   a:0,
+   why:"<i>S. lupi</i> ทำก้อนหลอดอาหาร, aortic lesions, และ sarcoma"},
 
- {q:"ลักษณะของไข่ <i>T. cati</i> เป็นอย่างไร?",
-  choices:[
-    "ผิวเรียบ ผนังบาง",
-    "ผิวขรุขระคล้ายหลุม (pitted shell) ขนาดเล็กกว่า <i>T. canis</i>",
-    "มี operculum",
-    "มี bipolar plug",
-    "มี L3 อยู่ภายใน"
-  ],
-  a:1,
-  why:"ไข่มีเปลือกหนา ผิวขรุขระ (pitted) และขนาดเล็กกว่า <i>T. canis</i> ประมาณ 75×65 µm"},
+  {q:"สปีชีส์ใด ‘จำกัดโฮสต์’ แคบกว่าตัวอื่นในชุดนี้ (พบเฉพาะในสุนัขเป็นหลัก)?",
+   choices:[
+     "<i>Strongyloides stercoralis</i>",
+     "<i>Dirofilaria immitis</i>",
+     "<i>Thelazia callipaeda</i>",
+     "<i>Ancylostoma ceylanicum</i>",
+     "<i>Spirocerca lupi</i>"
+   ],
+   a:4,
+   why:"<i>S. lupi</i> รายงานหลักในสุนัข (esophagus/stomach wall)"},
 
- {q:"เส้นทางหลักในการติดเชื้อของลูกแมวคือข้อใด?",
-  choices:[
-    "transplacental",
-    "transmammary",
-    "ผิวหนัง",
-    "arthropod ingestion",
-    "respiratory"
-  ],
-  a:1,
-  why:"ลูกแมวติดเชื้อผ่านนมแม่ (transmammary transmission) ไม่มี transplacental"},
+  // ───────────────────────────────── HOOKWORM VS WHIPWORM / INTEGRATE
+  {q:"เมื่อเห็น ‘bipolar plugs’ บนไข่ในอุจจาระสุนัข ร่วมกับอาการ colitis เรื้อรัง มีมูกเลือด ควรนึกถึงตัวใดมากที่สุด?",
+   choices:[
+     "<i>Ancylostoma caninum</i>",
+     "<i>Uncinaria stenocephala</i>",
+     "<i>Trichuris vulpis</i>",
+     "<i>Toxocara canis</i>",
+     "<i>Spirocerca lupi</i>"
+   ],
+   a:2,
+   why:"ลักษณะไข่มี bipolar plugs เป็น hallmark ของ whipworm (<i>T. vulpis</i>)"},
 
- {q:"วงจรชีวิตของ <i>T. cati</i> แตกต่างจาก <i>T. canis</i> อย่างไร?",
-  choices:[
-    "ไม่มี paratenic host",
-    "มี transplacental เหมือนกัน",
-    "ไม่มี transplacental แต่มี transmammary และใช้ paratenic host ได้",
-    "ต้องผ่าน arthropod",
-    "ใช้ aquatic snail เป็น host"
-  ],
-  a:2,
-  why:"<i>T. cati</i> ไม่มี transplacental แต่มี transmammary และใช้ paratenic host เช่น rodent ได้"},
+  {q:"สถานการณ์ใด ‘สอดคล้อง’ กับการติด <i>Toxocara canis</i> แบบ transplacental ที่สุด?",
+   choices:[
+     "ลูกสุนัขอายุ 3 สัปดาห์ ถ่ายอุจจาระพบไข่ pitted shell สีน้ำตาล",
+     "แมวโต อาเจียนพยาธิ ตัวมี alae กว้างรูปหัวลูกศร",
+     "สุนัขโต สูดฝุ่นแล้วเกิด CLM",
+     "ลูกสุนัข 8 เดือน พบ somatic larvae สูง",
+     "สุนัขโต ไข่ smooth shell spherical"
+   ],
+   a:0,
+   why:"Transplacental ทำให้ลูกสุนัขอายุน้อยเริ่มปล่อยไข่เร็ว; ไข่ <i>Toxocara</i> มี pitted shell"},
 
- {q:"paratenic host ที่สำคัญของ <i>T. cati</i> คือข้อใด?",
-  choices:[
-    "cockroach",
-    "beetle",
-    "rodent",
-    "snail",
-    "lizard"
-  ],
-  a:2,
-  why:"หนู (rodent) เป็น paratenic host ที่สำคัญของ <i>T. cati</i>"},
+  // ───────────────────────────────── MOUTH & DIAGNOSTIC PEARLS
+  {q:"โครงสร้างปากแบบใด ‘ชี้เป้า’ ไปที่ <i>Uncinaria stenocephala</i> มากที่สุด?",
+   choices:[
+     "3 คู่ฟัน, buccal capsule เปิดกว้าง",
+     "ไม่มีฟัน มี cutting plates + buccal capsule ทรงกรวย (funnel-shaped)",
+     "2 คู่ฟัน แคบชิด",
+     "sucker plate + operculum",
+     "หัวมี balloon-like expansion"
+   ],
+   a:1,
+   why:"ลักษณะเด่นของ <i>U. stenocephala</i> คือ cutting plates และ funnel-shaped buccal capsule"},
 
- {q:"อาการสำคัญในลูกแมวที่ติดเชื้อ <i>T. cati</i> คือข้อใด?",
-  choices:[
-    "ผิวหนังคัน",
-    "โลหิตจางเฉียบพลัน",
-    "ท้องบวม อาเจียน และพบพยาธิในอาเจียน",
-    "ท้องเสียมีเลือด",
-    "ชัก"
-  ],
-  a:2,
-  why:"ลูกแมวติดเชื้ออาจมีท้องบวม อาเจียน และพบพยาธิในอาเจียนได้"},
-  
-  {q:"ข้อใดถูกต้องที่สุดเกี่ยวกับการถ่ายทอดของ <i>Toxocara canis</i> และ <i>T. cati</i>?",
-  choices:[
-    "<i>T. canis</i> และ <i>T. cati</i> มี transplacental เหมือนกัน",
-    "<i>T. canis</i> ถ่ายทอดหลักทาง transplacental ส่วน <i>T. cati</i> ถ่ายทอดทาง transmammary",
-    "ทั้งสองตัวติดได้เฉพาะจาก paratenic host",
-    "<i>T. canis</i> ไม่มีการถ่ายทอดผ่านรกหรือนม",
-    "ทั้งคู่ต้องการ intermediate host เสมอ"
-  ],
-  a:1,
-  why:"<i>T. canis</i> ถ่ายทอดหลักผ่านรก (transplacental) ขณะที่ <i>T. cati</i> ถ่ายทอดหลักผ่านนมแม่ (transmammary)"},
+  {q:"จับคู่ ‘common name’ ได้ถูกต้องที่สุด?",
+   choices:[
+     "<i>Ancylostoma caninum</i> → Northern hookworm",
+     "<i>Uncinaria stenocephala</i> → Dog hookworm",
+     "<i>Trichuris vulpis</i> → Dog whipworm",
+     "<i>Spirocerca lupi</i> → Threadworm",
+     "<i>Strongyloides stercoralis</i> → Eye worm"
+   ],
+   a:2,
+   why:"<i>T. vulpis</i> = Dog whipworm; <i>A. caninum</i> = Dog hookworm; <i>U. stenocephala</i> = Northern hookworm"},
 
- {q:"การเกิด tracheal migration พบได้เด่นในกรณีใดของ <i>Toxocara</i>?",
-  choices:[
-    "เฉพาะในแมวทุกวัย",
-    "เฉพาะในสุนัขอายุน้อยกว่า 6 เดือน (<i>T. canis</i>)",
-    "เฉพาะในสุนัขโต",
-    "เฉพาะใน paratenic host",
-    "ทุกสายพันธุ์เกิดได้เท่ากัน"
-  ],
-  a:1,
-  why:"<i>T. canis</i> ในลูกสุนัข (<6 เดือน) เกิด tracheal migration ส่วนสุนัขโตเป็น somatic migration"},
+  // ───────────────────────────────── ONE-LINER INTEGRATIONS
+  {q:"ข้อใดเป็น ‘การเลือกวิธีตรวจอุจจาระ’ ที่เหมาะสมตามชนิดไข่/ตัวอ่อน?",
+   choices:[
+     "ไข่ผนังหนาหนัก (เช่น <i>Trichuris</i>) → saline sedimentation",
+     "ไข่ผนังหนามี L1 ภายใน (<i>S. lupi</i>) → high-SG flotation; L1 เคลื่อนไหว (<i>S. stercoralis</i>) → Baermann",
+     "hookworm eggs ทั้งหมด → Modified Knott",
+     "ไข่ pitted shell ของ <i>Toxocara</i> → ต้อง ELISA เท่านั้น",
+     "ทุกชนิดใช้ direct smear เหมือนกัน"
+   ],
+   a:1,
+   why:"จับคู่หลัก: <i>S. lupi</i> ใช้สูง SG; <i>Strongyloides</i> ใช้ Baermann; <i>Trichuris</i> sugar flotation SG สูง"},
 
- {q:"ลักษณะไข่ของกลุ่ม <i>Toxocara</i> และ <i>Toxascaris</i> แตกต่างกันอย่างไร?",
-  choices:[
-    "ไข่ของ <i>Toxocara</i> ผิวเรียบ ส่วน <i>Toxascaris</i> ผิวขรุขระ",
-    "ไข่ของ <i>Toxocara</i> ผิวขรุขระ (pitted) รูป subglobular ส่วน <i>Toxascaris leonina</i> ผิวเรียบใส รูปกลมกว่า",
-    "ทั้งคู่มี operculum",
-    "ไข่ของ <i>T. leonina</i> มี bipolar plugs",
-    "ไข่ของทั้งสองมีรูปร่างเหมือนกัน"
-  ],
-  a:1,
-  why:"<i>Toxocara</i> มีไข่สีน้ำตาล ผิวขรุขระ (pitted shell) รูป subglobular; ส่วน <i>T. leonina</i> ผิวเรียบ ใส กลมกว่า"},
-
- {q:"เส้นทางการติดเชื้อหลักของ <i>Toxascaris leonina</i> ต่างจาก <i>T. canis</i> และ <i>T. cati</i> อย่างไร?",
-  choices:[
-    "มี transplacental เด่นกว่า",
-    "มี transmammary เด่นกว่า",
-    "ไม่มีทั้ง transplacental และ transmammary แต่ติดโดยกินไข่หรือตัวอ่อนใน paratenic host",
-    "ต้องผ่าน arthropod",
-    "ต้องผ่าน intermediate host เช่น snail"
-  ],
-  a:2,
-  why:"<i>T. leonina</i> ไม่มี transplacental หรือ transmammary; สัตว์ติดเชื้อจากการกินไข่ติดเชื้อหรือตัวอ่อนใน paratenic host"},
-
- {q:"สรุปถูกต้องที่สุดเกี่ยวกับรูปแบบการ migration ในกลุ่ม <i>Toxocara</i> และ <i>Toxascaris</i>",
-  choices:[
-    "ทุกชนิดมี tracheal migration เหมือนกัน",
-    "<i>T. canis</i> มี tracheal และ somatic migration ขึ้นกับอายุ แต่ <i>T. cati</i> มี tracheal เฉพาะติดจาก paratenic host และ <i>T. leonina</i> ไม่มี migration",
-    "<i>T. cati</i> มีเฉพาะ somatic migration",
-    "<i>T. leonina</i> มี hepatic-tracheal migration เด่นสุด",
-    "ทุกชนิดไม่มีการ migration"
-  ],
-  a:1,
-  why:"<i>T. canis</i>: tracheal (<6 เดือน) / somatic (>6 เดือน); <i>T. cati</i>: tracheal เมื่อได้จาก paratenic host; <i>T. leonina</i>: ไม่มี migration"},
-  
-  {q:"ลักษณะเด่นทางสัณฐานที่ช่วยแยก <i>Toxascaris leonina</i> จาก <i>Toxocara</i> spp. คือข้อใด?",
-  choices:[
-    "มี alae รูปหัวลูกศร (arrowhead)",
-    "ไม่มี alae",
-    "cervical alae เรียวยาว ปลายชี้ไปด้านหลัง (narrow, lanceolate)",
-    "ไม่มีริมฝีปาก",
-    "หางมี bursa ใหญ่"
-  ],
-  a:2,
-  why:"<i>T. leonina</i> มี cervical alae เรียวยาว ปลายชี้ไปด้านหลัง ต่างจาก <i>Toxocara</i> ที่ alae กว้างเป็นรูปหัวลูกศร"},
-
- {q:"ลักษณะของไข่ <i>Toxascaris leonina</i> เป็นอย่างไร?",
-  choices:[
-    "ผนังขรุขระคล้ายหลุม (pitted shell)",
-    "ผนังเรียบ ใส รูปเกือบกลม (spherical)",
-    "มี operculum",
-    "มี bipolar plug",
-    "ผนังหนา สีน้ำตาลเข้ม"
-  ],
-  a:1,
-  why:"ไข่ของ <i>T. leonina</i> ผนังเรียบ ใส รูปร่างค่อนข้างกลม ขนาดประมาณ 75×60 µm"},
-
- {q:"โฮสต์ของ <i>T. leonina</i> ได้แก่ข้อใด?",
-  choices:[
-    "สุนัขเท่านั้น",
-    "แมวเท่านั้น",
-    "สุนัขและแมว",
-    "หนูและแมว",
-    "เฉพาะสุนัขป่า"
-  ],
-  a:2,
-  why:"<i>T. leonina</i> พบได้ทั้งในสุนัขและแมว ซึ่งต่างจาก <i>T. canis</i> หรือ <i>T. cati</i> ที่เฉพาะเจาะจงกว่า"},
-
- {q:"เส้นทางการติดเชื้อของ <i>T. leonina</i> แตกต่างจาก <i>Toxocara</i> spp. อย่างไร?",
-  choices:[
-    "มี transplacental เด่นกว่า",
-    "มี transmammary เหมือนกัน",
-    "ไม่มี transplacental หรือ transmammary ติดจากการกินไข่หรือตัวอ่อนใน paratenic host",
-    "ต้องผ่าน arthropod",
-    "ต้องผ่าน aquatic snail"
-  ],
-  a:2,
-  why:"<i>T. leonina</i> ไม่มีการถ่ายทอดจากแม่ แต่ติดโดยการกินไข่หรือ paratenic host เช่น rodent"},
-
- {q:"<i>T. leonina</i> ต่างจาก <i>T. canis</i> และ <i>T. cati</i> อย่างไรในด้านการ migration?",
-  choices:[
-    "มี tracheal migration เด่นกว่า",
-    "ไม่มี tracheal migration ยกเว้นกรณีติดจากการกิร paratenic host",
-    "ตัวอ่อนไปที่ตับแล้วกลับ",
-    "migration เฉพาะสุนัขโต",
-    "ขึ้นกับฤดูกาล"
-  ],
-  a:1,
-  why:"โดยทั่วไป <i>T. leonina</i> ไม่มี tracheal migration แต่ถ้าติดจาก paratenic host เช่น rodent อาจเกิดการ migration สั้น ๆ ในทางเดินหายใจได้ก่อนลงลำไส้"},
-
- {q:"จุดเด่นที่ใช้แยก <i>T. leonina</i> ออกจาก <i>T. canis</i> ได้ดีที่สุดคือข้อใด?",
-  choices:[
-    "รูปร่างตัวเต็มวัย",
-    "การมี alae กว้าง",
-    "การไม่มี tracheal migration (ยกเว้นติดจากการกิน paratenic host) และไข่ผนังเรียบใส",
-    "ขนาดไข่ใหญ่กว่า",
-    "การมี transplacental infection"
-  ],
-  a:2,
-  why:"<i>T. leonina</i> ไม่มี tracheal migration เว้นแต่ได้จาก paratenic host และไข่ผนังเรียบใส แตกต่างจาก <i>T. canis</i> ที่มี tracheal migration ชัดและไข่ผนังขรุขระ"},
-
-  {q:"ตัวเต็มวัยของ <i>Strongyloides stercoralis</i> ที่เป็นพยาธิในร่างกายสัตว์คือระยะ/เพศใด และอยู่ที่ไหน?",
-  choices:[
-    "ตัวผู้ ในลำไส้เล็ก",
-    "ตัวผู้ ในปอด",
-    "ตัวเมีย (parasitic female) ในลำไส้เล็ก",
-    "ทั้งสองเพศ ในกระเพาะ",
-    "ตัวเมีย ในกระเพาะ"
-  ],
-  a:2,
-  why:"พบเฉพาะตัวเมียแบบพึ่งพาอาศัย (parasitic female) อาศัยในลำไส้เล็ก"},
-
- {q:"โดยทั่วไป อุจจาระของผู้ติดเชื้อ <i>S. stercoralis</i> จะพบระยะใด?",
-  choices:[
-    "ไข่ที่ยังไม่ฟัก",
-    "ไข่มี operculum",
-    "L1 (rhabditiform larva)",
-    "L3 (filariform larva)",
-    "ตัวเต็มวัยขนาดเล็ก"
-  ],
-  a:2,
-  why:"มักพบ L1 (rhabditiform larva); ไข่ฟักเร็วภายในลำไส้"},
-
- {q:"ลักษณะเด่นทางสัณฐานที่ใช้จำแนก <i>S. stercoralis</i> ระหว่างระยะ L1 และ L3 คืออะไร?",
-  choices:[
-    "L1 มี bursa; L3 ไม่มี",
-    "L1 มี spicule; L3 ไม่มี",
-    "L1 มี rhabditiform esophagus; L3 มี filariform esophagus",
-    "L1 มีหัวเป็นลูกโป่ง; L3 มี cutting plate",
-    "ทั้งสองระยะมี esophagus แบบเดียวกัน"
-  ],
-  a:2,
-  why:"L1 → rhabditiform esophagus / L3 → filariform esophagus"},
-
- {q:"การติดเชื้อหลักของ <i>S. stercoralis</i> ในสุนัขและคนเกิดจากอะไร?",
-  choices:[
-    "การกินไข่ติดเชื้อ",
-    "การกินเนื้อที่มีตัวอ่อน",
-    "ตัวอ่อน L3 ไชผ่านผิวหนัง",
-    "การสูดฝุ่นที่มีไข่",
-    "แมลงดูดเลือดเป็นพาหะ"
-  ],
-  a:2,
-  why:"ระยะติดต่อคือ L3 (filariform) ไชผ่านผิวหนังเข้าสู่ร่างกาย"},
-
- {q:"เส้นทางการอพยพของตัวอ่อน <i>S. stercoralis</i> หลังเข้าสู่ร่างกายที่ถูกต้องคือข้อใด?",
-  choices:[
-    "ผิวหนัง → กล้ามเนื้อ → ลำไส้",
-    "ปาก → กระเพาะ → ตับ",
-    "ผิวหนัง → ปอด → trachea → กลืนลงลำไส้เล็ก",
-    "ปาก → ต่อมน้ำเหลือง → ลำไส้ใหญ่",
-    "ไม่มีการอพยพ"
-  ],
-  a:2,
-  why:"คลาสสิก: skin → lungs → trachea → กลืน → small intestine"},
-
- {q:"วงจรชีวิตของ <i>S. stercoralis</i> มีลักษณะอย่างไร?",
-  choices:[
-    "มีเฉพาะแบบ direct (parasitic) เท่านั้น",
-    "มีเฉพาะแบบ indirect ผ่าน arthropod",
-    "มีทั้งแบบ parasitic (homogonic) และแบบ free-living (heterogonic)",
-    "ต้องมี intermediate host เสมอ",
-    "เป็นวงจรน้ำ มี cercariae"
-  ],
-  a:2,
-  why:"มีทั้งวงจรในร่างกาย host และวงจรอิสระในสิ่งแวดล้อม"},
-
- {q:"อาการทางคลินิกที่พบบ่อยในสัตว์ติด <i>S. stercoralis</i> คืออะไร?",
-  choices:[
-    "ดีซ่านเด่น",
-    "ชักบ่อย",
-    "ท้องเสียเรื้อรัง/มูก และผอมแห้ง โดยเฉพาะลูกสัตว์",
-    "บวมน้ำทั่วไป",
-    "เลือดออกจมูก"
-  ],
-  a:2,
-  why:"ทำให้ enteritis → ท้องเสีย (มูก/เลือดในรายรุนแรง), น้ำหนักลด โดยเฉพาะลูกสัตว์/ภูมิบกพร่อง"},
-
- {q:"วิธีห้องปฏิบัติการที่เหมาะสมที่สุดในการตรวจหา <i>S. stercoralis</i> จากอุจจาระคือข้อใด?",
-  choices:[
-    "Direct smear",
-    "Sedimentation",
-    "Baermann technique",
-    "Modified Ziehl–Neelsen",
-    "Latex agglutination"
-  ],
-  a:2,
-  why:"Baermann เหมาะสำหรับแยกตัวอ่อนที่มีชีวิตออกจากสิ่งสกปรกในอุจจาระ"},
-
- {q:"ความสำคัญทางสาธารณสุขของ <i>S. stercoralis</i> ข้อใดถูกต้องที่สุด?",
-  choices:[
-    "ไม่เป็นโรคในคน",
-    "เป็น zoonosis ตัวอ่อน L3 ไชผ่านผิวหนังมนุษย์ได้",
-    "เป็นโรคเฉพาะสัตว์เลี้ยงลูกด้วยนมขนาดเล็ก",
-    "ติดต่อเฉพาะทางอาหารเท่านั้น",
-    "เป็นพยาธิของปลา"
-  ],
-  a:1,
-  why:"เป็น zoonosis; L3 ไชผ่านผิวหนังมนุษย์ ทำให้เกิด strongyloidiasis ได้"},
-
-  {q:"<i>Ancylostoma caninum</i> มีชื่อสามัญว่าอะไร?",
-  choices:[
-    "Roundworm of dog",
-    "Dog hookworm",
-    "Threadworm",
-    "Whipworm",
-    "Eye worm"
-  ],
-  a:1,
-  why:"ชื่อสามัญคือ Dog hookworm หรือพยาธิดูดเลือดในลำไส้ของสุนัข"},
-
- {q:"ตัวเต็มวัยของ <i>A. caninum</i> พบได้ในอวัยวะใดของร่างกายสัตว์?",
-  choices:[
-    "ลำไส้ใหญ่",
-    "ลำไส้เล็ก",
-    "กระเพาะอาหาร",
-    "หลอดอาหาร",
-    "ปอด"
-  ],
-  a:1,
-  why:"อาศัยในลำไส้เล็กของสุนัข (small intestine)"},
-
- {q:"ลักษณะทางสัณฐานที่เด่นของ <i>A. caninum</i> คือข้อใด?",
-  choices:[
-    "ปากกลมมีริมฝีปาก 3 อัน",
-    "ปากมี cutting plates",
-    "ปากมีฟัน 3 คู่ (ventral teeth)",
-    "ไม่มีโครงสร้างปาก",
-    "หางเป็นเกลียว"
-  ],
-  a:2,
-  why:"มีฟัน 3 คู่ที่ขอบ ventral ใช้กัดและดูดเลือดจากผนังลำไส้"},
-
- {q:"ไข่ของ <i>A. caninum</i> มีลักษณะอย่างไร?",
-  choices:[
-    "มี operculum",
-    "ผนังเรียบบาง ภายในมี blastomere หลายเซลล์",
-    "ผนังหนา ผิวขรุขระ",
-    "มี bipolar plugs",
-    "มี L3 ภายใน"
-  ],
-  a:1,
-  why:"เป็น thin-shelled morulated egg พบในอุจจาระของสุนัขติดเชื้อ"},
-
- {q:"ระยะติดต่อ (infective stage) ของ <i>A. caninum</i> คือข้อใด?",
-  choices:[
-    "L1",
-    "L2",
-    "L3 (filariform larva)",
-    "L4",
-    "Adult"
-  ],
-  a:2,
-  why:"ระยะ L3 (filariform) เป็นระยะติดต่อของพยาธิตัวนี้"},
-
- {q:"เส้นทางการติดเชื้อหลักของ <i>A. caninum</i> ในสุนัขคือข้อใด?",
-  choices:[
-    "การกินไข่ติดเชื้อเท่านั้น",
-    "การกินตัวอ่อน L3 หรือ L3 ไชผ่านผิวหนัง",
-    "การกิน paratenic host เท่านั้น",
-    "การกิน arthropod",
-    "ต้องผ่านน้ำ"
-  ],
-  a:1,
-  why:"สุนัขติดเชื้อได้ทั้งจากการกิน L3 โดยตรงและจาก L3 ที่ไชผ่านผิวหนัง"},
-
- {q:"การถ่ายทอดของตัวอ่อน <i>A. caninum</i> จากแม่สู่ลูกเกิดขึ้นได้โดยวิธีใด?",
-  choices:[
-    "Transplacental",
-    "Transmammary",
-    "ทางผิวหนัง",
-    "ทางลมหายใจ",
-    "ทางไข่"
-  ],
-  a:1,
-  why:"ตัวอ่อนสามารถส่งต่อผ่านน้ำนม (transmammary infection)"},
-
- {q:"รูปแบบการ migration ของตัวอ่อน <i>A. caninum</i> คือข้อใด?",
-  choices:[
-    "เฉพาะ tracheal migration",
-    "เฉพาะ somatic migration",
-    "ทั้ง tracheal (ลูกสุนัข) และ somatic (สุนัขโต)",
-    "ไม่มี migration",
-    "เฉพาะ intestinal migration"
-  ],
-  a:2,
-  why:"ลูกสุนัขเกิด tracheal migration; สุนัขโตเป็น somatic migration เก็บตัวในกล้ามเนื้อ"},
-
- {q:"อาการทางคลินิกสำคัญในสุนัขติด <i>A. caninum</i> คือข้อใด?",
-  choices:[
-    "ปอดอักเสบเฉียบพลัน",
-    "ตับโต",
-    "โลหิตจางจากการดูดเลือด (anemia) และ melena",
-    "ผื่นคันทั่วตัว",
-    "ดีซ่านรุนแรง"
-  ],
-  a:2,
-  why:"พยาธิดูดเลือดในลำไส้ทำให้เกิด anemia, melena โดยเฉพาะในลูกสุนัข"},
-
- {q:"ความสำคัญทางสาธารณสุขของ <i>A. caninum</i> คือข้อใด?",
-  choices:[
-    "ไม่เป็น zoonosis",
-    "เป็น zoonosis ทำให้เกิด cutaneous larva migrans ในคน",
-    "ทำให้เกิด visceral larva migrans",
-    "ทำให้เกิด ocular larva migrans",
-    "ไม่ติดต่อสู่คน"
-  ],
-  a:1,
-  why:"ตัวอ่อน L3 ของ <i>A. caninum</i> ไชผ่านผิวหนังมนุษย์ ทำให้เกิด cutaneous larva migrans (creeping eruption)"}
+  {q:"ข้อใด ‘บูรณาการพยาธิสภาพ-สาเหตุ’ ได้ถูกต้องที่สุด?",
+   choices:[
+     "ลูกสุนัขซีดจัด+melena → <i>Uncinaria stenocephala</i>",
+     "ก้อนหลอดอาหาร + เสี่ยง aortic aneurysm → <i>Spirocerca lupi</i>",
+     "colitis เรื้อรัง + bipolar plugs → <i>Ancylostoma caninum</i>",
+     "cutaneous larva migrans ในคน → เฉพาะ <i>T. canis</i>",
+     "Visceral larva migrans → เฉพาะ <i>T. cati</i>"
+   ],
+   a:1,
+   why:"ภาพ esophageal nodule/aneurysm เป็น hallmark ของ <i>S. lupi</i>"}
 ];
 const TF = [];
 
