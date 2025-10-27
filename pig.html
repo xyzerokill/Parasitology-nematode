@@ -63,7 +63,7 @@
   <section id="mode-predict" class="card hide"></section>
   <section id="mode-mcq1" class="card hide"></section>
   <section id="mode-mcq2" class="card hide"></section>
-  <section id="mode-tf" class="card hide"></section>
+  <section id="mode-mcq3" class="card hide"></section>
   <section class="card">
     <details>
       <summary>📝 วิธีใช้</summary>
@@ -522,7 +522,7 @@ const mcq2 = [
 ];
 
 // True/False — horse Nematodes (Refined & Re-checked, 20 ข้อ)
-const TF = [
+const mcq3 = [
   {
     q:"ข้อใดผิดเกี่ยวกับพยาธิ Ascaris suum",
     choices:[
@@ -751,7 +751,7 @@ const views = [
   {id:'mode-predict', title:'🔮 Prediction site'},
   {id:'mode-mcq1',    title:`🧩 MCQ 1 (${mcq1.length} ข้อ)`},
   {id:'mode-mcq2',    title:`🧩 MCQ 2 (${mcq2.length} ข้อ)`},
-  {id:'mode-tf',      title:`✅ True / False (${TF.length} ข้อ)`}
+  {id:'mode-mcq3',      title:`🧩 MCQ 3 (${TF.length} ข้อ)`}
 ];
 let activeTab = views[0].id;
 
@@ -893,6 +893,7 @@ function buildMCQMode(hostId, DATA){
 /* ---------- สร้างโหมด MCQ1 + MCQ2 ---------- */
 buildMCQMode('mode-mcq1', mcq1);
 buildMCQMode('mode-mcq2', mcq2);
+buildMCQMode('mode-mcq3', mcq3);
 </script>
 </body>
 </html>
