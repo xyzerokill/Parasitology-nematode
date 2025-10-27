@@ -63,7 +63,7 @@
     <div class="tabs" id="tabs"></div>
   </div>
 </header>
-<main class="wrap">
+<!-- <main class="wrap">
   <section id="mode-predict" class="card hide"></section>
   <section id="mode-mcq" class="card hide"></section>
   <section id="mode-tf" class="card hide"></section>
@@ -76,7 +76,26 @@
       </ul>
     </details>
   </section>
+</main> -->
+<main class="wrap">
+  <section id="mode-predict" class="card hide"></section>
+
+  <!-- 🔹 แยก MCQ เป็นสองโหมด -->
+  <section id="mode-mcq1" class="card hide"></section>
+  <section id="mode-mcq2" class="card hide"></section>
+  
+  <section id="mode-tf" class="card hide"></section>
+  <section class="card">
+    <details>
+      <summary>📝 วิธีใช้</summary>
+      <ul>
+        <li><b>Prediction site</b>: เลือกตำแหน่งอาศัย (predilection site) ให้ครบ → กด <span class="inline-kbd">ตรวจคำตอบ</span> เพื่อดูคะแนนและเฉลย</li>
+        <li>คง <i>technical terms</i> ภาษาอังกฤษ (เช่น cervical alae, buccal capsule, stichosome, microfilaria เป็นต้น)</li>
+      </ul>
+    </details>
+  </section>
 </main>
+
 <footer class="muted">© 2025 – Vet Parasitology Drill • Morphology · Life cycle · Site · Lesions</footer>
 
 <script>
@@ -121,7 +140,455 @@ function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const 
 /***********************
  * MCQ / TF
  ***********************/
-const MCQ = [
+  const MCQ1 = [
+    {
+    q: "ข้อใดต่อไปนี้กล่าวไม่ถูกต้องเกี่ยวกับพยาธิ <i>Strongyloides stercoralis</i>",
+    choices: [
+      "พยาธิตัวเต็มวัยในลำไส้และแมวพบเฉพาะพยาธิเพศเมียเท่านั้น",
+      "ไข่พยาธิออกจากทางกายพยาธิเพศเมีย ตัวอ่อนพยาธิไม่ไข่จะฟักออกมาในทางเดินอาหารของสุนัข",
+      "พยาธิตัวเต็มวัยอาศัยเป็นอิสระอยู่ใน intestinal lumen",
+      "Strongyloidiasis เป็นการติดพยาธิที่ก่อความรุนแรงมากในลูกสุนัข",
+      "Heterogonic cycle คือวงจรชีวิตของพยาธิที่ดำเนินในสิ่งแวดล้อมรอบ ๆ ตัวสุนัข"
+    ],
+    a: 2,
+    why: "<i>Strongyloides stercoralis</i> ตัวเต็มวัยเพศเมียฝังอยู่ใน mucosa ของลำไส้เล็ก ไม่ได้อยู่ใน intestinal lumen"
+  },
+  {
+    q: "ข้อใดต่อไปนี้เป็นเหตุผลของการที่ไม่พบพยาธิ <i>Toxocara canis</i> ระยะตัวเต็มวัยในสุนัขที่มีอายุมากกว่า 1 ปี",
+    choices: [
+      "สุนัขที่มีฮอร์โมน prolactin",
+      "สุนัขที่มี somatic migration ในสุนัขโต",
+      "สุนัขที่มีฮอร์โมน progesterone",
+      "พยาธิ tracheal migration ในสุนัขโต",
+      "พยาธิ mucosal migration ในสุนัขโต"
+    ],
+    a: 1,
+    why: "ในสุนัขโตตัวอ่อนของ <i>Toxocara canis</i> จะเข้าสู่ภาวะ somatic migration และหยุดพัฒนา ทำให้ไม่พบตัวเต็มวัยในลำไส้"
+  },
+  {
+    q: "ข้อใดต่อไปนี้เป็นชนิดพยาธิที่พบเฉพาะในสุนัข",
+    choices: [
+      "Spirocerca lupi",
+      "Strongyloides stercoralis",
+      "Dirofilaria immitis",
+      "Thelazia callipaeda",
+      "Ancylostoma ceylanicum"
+    ],
+    a: 0,
+    why: "<i>Spirocerca lupi</i> พบเฉพาะในสุนัข เป็นพยาธิในหลอดอาหาร ทำให้เกิด granulomatous nodule และอาจพัฒนาเป็น sarcoma"
+  },
+  {
+    q: "ข้อใดไม่เป็นลักษณะของตัวอ่อนระยะ microfilaria ของพยาธิ <i>Dirofilaria immitis</i>",
+    choices: [
+      "Sheathed microfilaria, cephalic space with first nucleus",
+      "Sheathed microfilaria, two terminal nuclei at tail",
+      "Unsheathed microfilaria, cephalic space with first nucleus",
+      "Unsheathed microfilaria, bottom-hook tail",
+      "Unsheathed microfilaria, two nuclei in cephalic space"
+    ],
+    a: 2,
+    why: "<i>Dirofilaria immitis</i> มี sheathed microfilaria ไม่มี cephalic nucleus ชัดเจน และไม่มี terminal nuclei ที่ปลายหาง"
+  },
+  {
+    q: "ชื่อสามัญของพยาธิ <i>Gnathostoma spinigerum</i> คือข้อใด",
+    choices: [
+      "พยาธิหลอดอาหาร",
+      "พยาธิแส้ม้า",
+      "พยาธิตัวจี๊ด",
+      "พยาธิเส้นด้าย",
+      "พยาธิเข็มหมุด"
+    ],
+    a: 2,
+    why: "<i>Gnathostoma spinigerum</i> หรือพยาธิตัวจี๊ด เป็น zoonotic nematode พบในสุนัขและแมว ก่อโรคในคนได้เมื่อกินตัวอ่อน L3 จากปลาน้ำจืดดิบ"
+  },
+  {
+    q: "ทางหลักของการติดพยาธิ <i>Ancylostoma ceylanicum</i> คือข้อใด",
+    choices: [
+      "การกินพยาธิระยะ L3 ที่ปนในน้ำมน",
+      "การกินไข่พยาธิระยะติดต่อที่มี L3",
+      "การไชผ่านผิวหนังของพยาธิระยะ L3",
+      "การกินแมลงปีกแข็งที่มีพยาธิระยะ L3",
+      "การถ่ายอุจจาระพยาธิระยะ L2 ผ่านทางรก"
+    ],
+    a: 2,
+    why: "<i>Ancylostoma ceylanicum</i> เข้าสู่ร่างกายโดยการไชผ่านผิวหนัง ระยะติดเชื้อคือ L3 ทำให้เกิด cutaneous larva migrans ในคนได้"
+  },
+  {
+    q: "พยาธิ <i>Dirofilaria immitis</i> ระยะตัวเต็มวัยตามปกติอาศัยอยู่ที่ใด",
+    choices: [
+      "left ventricle",
+      "anterior vena cava",
+      "pulmonary vein",
+      "right ventricle",
+      "left atrium"
+    ],
+    a: 3,
+    why: "<i>Dirofilaria immitis</i> ตัวเต็มวัยอาศัยใน right ventricle และ pulmonary artery ทำให้เกิด pulmonary hypertension และ congestive heart failure"
+  },
+  {
+    q: "วิธีการตรวจอุจจาระชนิดใดที่เหมาะสมที่สุดในการตรวจวินิจฉัยการติดพยาธิ <i>Ancylostoma spp.</i> ในสุนัข",
+    choices: [
+      "Direct fecal smear",
+      "Simple floatation",
+      "Formalin-ethyl acetate sedimentation",
+      "Simple sedimentation",
+      "Stoll’s dilution method"
+    ],
+    a: 1,
+    why: "ไข่ของ <i>Ancylostoma spp.</i> เป็น strongylid type egg มีเปลือกบาง ลอยได้ดีในสารละลายความหนาแน่นสูง จึงใช้วิธี simple floatation ตรวจหาได้ดีที่สุด"
+  },
+  {
+    q: "กรณี visceral larva migration จากการติดพยาธิ <i>Toxocara canis</i> ในคน พฤติกรรมใดมีความเสี่ยงต่อการติดพยาธิมากที่สุด",
+    choices: [
+      "เด็กที่ได้รับการถ่ายพยาธิแล้วเมื่ออายุ 2 เดือน",
+      "ผู้ใหญ่เดินลุยในน้ำขังบนพื้นดิน",
+      "ชาวนาเดินเท้าเปล่าในนาข้าว",
+      "นักท่องเที่ยวบนชายหาด",
+      "เด็กเล่นกองทรายที่ใช้ก่อสร้างที่เคยมีอุจจาระของสุนัขปนอยู่"
+    ],
+    a: 4,
+    why: "เด็กมักกลืนไข่ของ <i>Toxocara canis</i> จากทรายหรือดินที่ปนเปื้อนอุจจาระสุนัข → ตัวอ่อน L2 จะ migrate ไปยังอวัยวะภายใน ก่อ visceral larva migrans"
+  },
+  {
+    q: "ลักษณะอุจจาระของสุนัขที่ติดพยาธิปากขอจำนวนมากเป็นแบบใด",
+    choices: [
+      "อุจจาระเหลวเป็นน้ำ",
+      "อุจจาระเหลวคล้ายน้ำมันมีสีดำ",
+      "อุจจาระปนเลือดสีแดงสด",
+      "อุจจาระปนมูก",
+      "อุจจาระปนพยาธิระยะตัวเต็มวัย"
+    ],
+    a: 1,
+    why: "การติด <i>Ancylostoma spp.</i> จำนวนมากทำให้เกิด melena (อุจจาระสีดำคล้ายน้ำมัน) จากการดูดเลือดในลำไส้เล็ก"
+  },
+  {
+    q: "จากการตรวจอุจจาระของแมว พบไข่พยาธิชนิด strongylid type egg สามารถวินิจฉัยว่าเป็นไข่ของพยาธิชนิดใด",
+    choices: [
+      "Roundworm",
+      "Esophageal worm",
+      "Hookworm",
+      "Threadworm",
+      "Whipworm"
+    ],
+    a: 2,
+    why: "ไข่แบบ strongylid type egg เป็นลักษณะจำเพาะของพยาธิปากขอ (<i>Ancylostoma spp.</i>) ในสุนัขและแมว"
+  },
+  {
+    q: "พยาธิ <i>Trichuris vulpis</i> ระยะตัวเต็มวัยอาศัยอยู่ที่ใด",
+    choices: [
+      "stomach",
+      "small intestine",
+      "thoracic esophagus",
+      "caecum",
+      "bronchi"
+    ],
+    a: 3,
+    why: "<i>Trichuris vulpis</i> หรือ whipworm ของสุนัข อาศัยอยู่ใน caecum และ colon ตัวเต็มวัยฝัง anterior end ในเยื่อบุลำไส้ ทำให้เกิดการอักเสบเรื้อรัง"
+  },
+  {
+    q: "Cutaneous larva migrans เป็นรอยโรคที่เกิดในคน โดยมีสาเหตุมาจากการติดพยาธิชนิดใด",
+    choices: [
+      "Necator americanus",
+      "Ancylostoma caninum",
+      "Gnathostoma spinigerum",
+      "Toxocara canis",
+      "Toxocara cati"
+    ],
+    a: 1,
+    why: "<i>Ancylostoma caninum</i> ระยะ L3 ไชผ่านผิวหนังของคนได้ ทำให้เกิดรอยแดงคดเคี้ยวใต้ผิวหนัง เรียกว่า cutaneous larva migrans"
+  },
+  {
+    q: "ทางหลักในการติดพยาธิ <i>Strongyloides stercoralis</i> ในสุนัขคือข้อใด",
+    choices: [
+      "Ingest infective larva",
+      "Ingest infective egg",
+      "Transmammary",
+      "Skin penetration",
+      "Paratenic host ingestion"
+    ],
+    a: 3,
+    why: "ตัวอ่อน L3 ของ <i>Strongyloides stercoralis</i> ไชผ่านผิวหนังเข้าสู่ circulation → lung → intestine พัฒนาเป็นตัวเต็มวัย"
+  },
+  {
+    q: "อาการของสุนัขที่ติดพยาธิ <i>Spirocerca lupi</i> จำนวนมากคือข้อใด",
+    choices: [
+      "สำรอกอาหาร",
+      "อาเจียนมีตัวพยาธิปนออกมา",
+      "ถ่ายเหลวมีเลือดปน",
+      "ท้องร่วง",
+      "เหนื่อยง่ายและไอเรื้อรัง"
+    ],
+    a: 0,
+    why: "พยาธิ <i>Spirocerca lupi</i> ในหลอดอาหารทำให้เกิด granulomatous nodule เมื่อมีจำนวนมากจะกดเบียดจนกลืนลำบากและสำรอกอาหาร"
+  },
+  {
+    q: "ข้อใดต่อไปนี้ไม่ใช่เหตุผลของการแนะนำให้ถ่ายพยาธิ <i>Toxocara canis</i> ในลูกสุนัขตั้งแต่อายุ 1 เดือน",
+    choices: [
+      "Prepatent period นาน 21–30 วัน",
+      "พยาธิมี tracheal migration",
+      "ติดพยาธิทางการกิน infective egg",
+      "ติดพยาธิทาง transplacenta",
+      "ติดพยาธิทาง lactogenic transmission"
+    ],
+    a: 2,
+    why: "ลูกสุนัขติดพยาธิจาก transplacental และ transmammary transmission มากกว่าทางการกินไข่"
+  },
+  {
+    q: "วิธีการตรวจวินิจฉัยแบบใดมีความเหมาะสมที่สุดสำหรับใช้ในการยืนยัน occult infection จากพยาธิ <i>Dirofilaria immitis</i>",
+    choices: [
+      "Filtration technique",
+      "Heartworm antigen test kit",
+      "Modified Knott’s technique",
+      "Capillary haematocrit technique",
+      "Thin blood smear staining with Giemsa"
+    ],
+    a: 1,
+    why: "การตรวจหา antigen ของตัวเต็มวัยเพศเมียด้วย heartworm antigen test kit ใช้ยืนยัน occult infection ได้ดีที่สุด"
+  },
+  {
+    q: "สุนัขที่ติดพยาธิ <i>Thelazia callipaeda</i> จำนวนมาก มักแสดงอาการข้อใด",
+    choices: [
+      "Chronic dry cough",
+      "Diarrhea",
+      "Exercise intolerance",
+      "Epiphora",
+      "Glaucoma"
+    ],
+    a: 3,
+    why: "<i>Thelazia callipaeda</i> อาศัยใน conjunctival sac และ lacrimal duct ทำให้เกิดน้ำตาไหล (epiphora) และ keratitis"
+  },
+  {
+    q: "ข้อใดต่อไปนี้เป็นลักษณะของตัวอ่อนระยะ microfilaria ของพยาธิ <i>Brugia spp.</i>",
+    choices: [
+      "Sheathed microfilaria, bottom-hook tail",
+      "Sheathed microfilaria, two terminal nuclei at tail",
+      "Sheathed microfilaria, two nuclei in cephalic space",
+      "Unsheathed microfilaria, cephalic space with first nucleus",
+      "Unsheathed microfilaria, two terminal nuclei at tail"
+    ],
+    a: 1,
+    why: "<i>Brugia spp.</i> มี sheathed microfilaria และมี two terminal nuclei ที่ปลายหาง ใช้แยกจาก <i>Wuchereria bancrofti</i>"
+  },
+  {
+    q: "พยาธิ <i>Toxocara canis</i> ระยะตัวเต็มวัยตามปกติอาศัยอยู่ในอวัยวะใดของสุนัข",
+    choices: ["หลอดอาหาร", "กระเพาะอาหาร", "ลำไส้เล็ก", "ลำไส้ใหญ่", "ข้อ ค. และ ง. ถูก"],
+    a: 2,
+    why: "<i>Toxocara canis</i> ตัวเต็มวัยอาศัยอยู่ในลำไส้เล็กของสุนัข ตัวอ่อนมีการอพยพ tracheal หรือ somatic migration"
+  },
+  {
+    q: "รอยโรคที่มีลักษณะเฉพาะในสุนัขที่ติดพยาธิ <i>Spirocerca lupi</i> คือข้อใด",
+    choices: ["Aortic nodule", "Periocular nodule", "Gastric nodule", "Esophageal nodule", "Aortic aneurysm"],
+    a: 3,
+    why: "<i>Spirocerca lupi</i> ทำให้เกิด granulomatous nodule ในหลอดอาหาร อาจพัฒนาเป็น fibrosarcoma ได้"
+  },
+  {
+    q: "พยาธิปากขอชนิดหลักที่พบเป็นปรสิตในแมวของประเทศไทยคือชนิดใด",
+    choices: [
+      "Ancylostoma tubaeforme",
+      "Ancylostoma duodenale",
+      "Ancylostoma caninum",
+      "Ancylostoma ceylanicum",
+      "Uncinaria stenocephala"
+    ],
+    a: 3,
+    why: "<i>Ancylostoma ceylanicum</i> เป็น hookworm หลักในแมวในประเทศไทย และเป็น zoonotic species ที่ติดในคนได้"
+  },
+  {
+    q: "ข้อใดต่อไปนี้กล่าวไม่ถูกต้องเกี่ยวกับพฤติกรรมของพยาธิปากขอในสุนัข",
+    choices: [
+      "พยาธิเพศเมียวางไข่หลังจากดูดกินเลือดในปริมาณมาก",
+      "การกัดของฟันในช่องปากของพยาธิช่วยส่งเสริมให้สุนัขมีการเสียเลือดมากขึ้น",
+      "พยาธิเพศผู้จะตายหลังจากผสมพันธุ์ เหลือแต่พยาธิเพศเมียอาศัยอยู่ในลำไส้",
+      "พยาธิปากขอมักย้ายตำแหน่งที่ดูดกินเลือดบ่อย ๆ",
+      "ภายในช่องปากของพยาธิมีลักษณะที่เหมาะสมต่อการยึดจับเยื่อบุลำไส้"
+    ],
+    a: 2,
+    why: "พยาธิปากขอทั้งเพศผู้และเพศเมียอาศัยในลำไส้ ไม่ได้ตายหลังผสมพันธุ์ มี buccal capsule ใช้กัดเยื่อบุและดูดเลือด"
+  },
+  {
+    q: "การติดพยาธิ <i>Toxocara cati</i> ทางใดที่ทำให้เกิด tracheal migration ตามมาในลูกแมว",
+    choices: [
+      "Transplacenta",
+      "Infective egg ingestion",
+      "Lactogenic transmission",
+      "Skin penetration",
+      "Paratenic host ingestion"
+    ],
+    a: 1,
+    why: "การกินไข่ที่มีตัวอ่อน L2 ของ <i>Toxocara cati</i> ทำให้เกิด tracheal migration ในลูกแมวหลังฟักในลำไส้"
+  },
+  {
+    q: "ลักษณะอุจจาระของสุนัขที่ติดพยาธิ <i>Trichuris vulpis</i> จำนวนมาก เป็นแบบใด",
+    choices: [
+      "อุจจาระเหลวเป็นน้ำ",
+      "อุจจาระเหลวคล้ายน้ำมันมีสีดำ",
+      "อุจจาระเหลวเป็นน้ำปนเลือด",
+      "อุจจาระปนมูกเลือด",
+      "อุจจาระปนพยาธิระยะตัวเต็มวัย"
+    ],
+    a: 2,
+    why: "<i>Trichuris vulpis</i> ทำให้เกิดการอักเสบของ caecum และ colon → ถ่ายเป็นน้ำปนเลือด (whipworm diarrhea)"
+  },
+  {
+    q: "พยาธิ <i>Aelurostrongylus abstrusus</i> ระยะตัวเต็มวัยอาศัยอยู่ในอวัยวะใด",
+    choices: [
+      "Small intestine",
+      "Caecum",
+      "Conjunctival sac",
+      "Subcutaneous tissue",
+      "Lung"
+    ],
+    a: 4,
+    why: "<i>Aelurostrongylus abstrusus</i> อาศัยใน alveoli และ bronchioles ของแมว ทำให้เกิด pneumonia และขับตัวอ่อน L1 ทางอุจจาระ"
+  },
+  {
+    q: "สถานการณ์ใดต่อไปนี้มีโอกาสเกิด occult infection น้อยที่สุดจากการติดพยาธิ <i>Dirofilaria immitis</i>",
+    choices: [
+      "แมวติดพยาธิจำนวน 1 ตัว",
+      "แมวติดพยาธิเพศผู้จำนวน 2 ตัว",
+      "สุนัขติดพยาธิเพศผู้จำนวน 8 ตัว",
+      "สุนัขติดพยาธิเพศเมียจำนวน 12 ตัว",
+      "สุนัขติดพยาธิทั้งเพศผู้และเมียจำนวน 2 ตัว"
+    ],
+    a: 4,
+    why: "เมื่อมีพยาธิทั้งเพศผู้และเพศเมียอยู่คู่กัน แม้เพียง 2 ตัว ก็สามารถผลิต microfilaria ได้ → โอกาสเกิด occult infection ต่ำ"
+  },
+  {
+    q: "Intermediate host ของพยาธิ <i>Thelazia callipaeda</i> คือข้อใด",
+    choices: [
+      "ยุงรำคาญ",
+      "แมลงวันบ้าน",
+      "หอยทาก",
+      "หมัด",
+      "แมลงปีกแข็ง"
+    ],
+    a: 1,
+    why: "<i>Thelazia callipaeda</i> ใช้แมลงวันบ้าน (<i>Musca domestica</i>) เป็น intermediate host ตัวอ่อนระยะ L3 ถูกปล่อยเข้าสู่ conjunctiva ของ host ใหม่"
+  },
+  {
+    q: "ในปัจจุบันมีรายงานการใช้ยากำจัดพยาธิชนิดหยดบนผิวหนัง โดยมีตัวยาชนิดใดที่ได้ผลดีในการลดจำนวนพยาธิ <i>Toxocara cati</i> ที่ถ่ายทอดจากแม่แมวสู่ลูกแมว",
+    choices: [
+      "Fipronil",
+      "Ivermectin",
+      "Emodepside",
+      "Pyrantel",
+      "Praziquantel"
+    ],
+    a: 3,
+    why: "<i>Pyrantel pamoate</i> มีฤทธิ์ดีต่อ <i>Toxocara cati</i> และปลอดภัย ใช้ควบคุมการติดพยาธิในลูกแมวที่ติดจากนมแม่ได้"
+  },
+  {
+    q: "Second intermediate host ของพยาธิ <i>Gnathostoma spinigerum</i> คือข้อใด",
+    choices: [
+      "ปลาไหลนา",
+      "ปูน้ำตก",
+      "ไรน้ำ",
+      "หอยโข่ง",
+      "แมลงปีกแข็ง"
+    ],
+    a: 0,
+    why: "<i>Gnathostoma spinigerum</i> มี 1st IH คือ Cyclops (copepod) และ 2nd IH คือ ปลา/ปลาไหล ซึ่งเป็นระยะติดต่อ L3 ที่ติดสู่คนได้เมื่อกินดิบ"
+  },
+  {
+    q: "พยาธิ <i>Spirocerca lupi</i> ใช้ intermediate host และ paratenic host ชนิดใดตามลำดับ",
+    choices: [
+      "หมัด, กบ",
+      "หมัด, ปูน้ำจืด",
+      "ด้วงมูลสัตว์, กบ",
+      "ด้วงมูลสัตว์, แมว",
+      "เห็บ, ปลา"
+    ],
+    a: 2,
+    why: "<i>Spirocerca lupi</i> ใช้ dung beetle เป็น intermediate host และ frog/lizard/chicken/mouse หรือแมวเป็น paratenic host"
+  },
+  {
+    q: "พยาธิชนิดใดที่อาศัยอยู่ใน subcutaneous tissue ของสุนัขและแมว",
+    choices: [
+      "Dirofilaria immitis",
+      "Thelazia callipaeda",
+      "Onchocerca lupi",
+      "Aelurostrongylus abstrusus",
+      "Ancylostoma caninum"
+    ],
+    a: 2,
+    why: "<i>Onchocerca lupi</i> เป็น filarial nematode ที่อาศัยใน subcutaneous tissue รอบตาและคอของสุนัขและแมว ทำให้เกิด granuloma ใต้ผิวหนัง"
+  },
+  {
+    q: "วิธีการตรวจวินิจฉัยพยาธิ <i>Strongyloides stercoralis</i> ที่ดีที่สุดคือข้อใด",
+    choices: [
+      "Direct smear",
+      "Sedimentation",
+      "Flotation",
+      "Baermann technique",
+      "Modified Knott’s test"
+    ],
+    a: 3,
+    why: "<i>Strongyloides stercoralis</i> ปล่อยตัวอ่อน L1 ในอุจจาระ ไม่ใช่ไข่ จึงใช้ Baermann technique ตรวจหาได้ดีที่สุด"
+  },
+  {
+    q: "การติดพยาธิ <i>Ancylostoma caninum</i> ทางใดที่ทำให้เกิดการติดพยาธิในลูกสุนัขตั้งแต่ยังไม่คลอด",
+    choices: [
+      "การกินไข่พยาธิ",
+      "การกิน paratenic host",
+      "การติดผ่านทางรก (transplacental)",
+      "การไชผ่านผิวหนัง",
+      "การกินน้ำนม"
+    ],
+    a: 2,
+    why: "พยาธิ <i>Ancylostoma caninum</i> สามารถถ่ายทอดทาง placenta หรือน้ำนม ตัวอ่อน L3 จากแม่จะ re-activate และเข้าสู่ลูกในครรภ์"
+  },
+  {
+    q: "พยาธิ <i>Trichuris vulpis</i> จัดเป็น blood sucker โดยพยาธิใช้อวัยวะใดที่สำคัญช่วยในการดูดกินเลือด",
+    choices: [
+      "teeth",
+      "buccal cavity",
+      "esophagus",
+      "pharynx",
+      "intestine"
+    ],
+    a: 2,
+    why: "<i>Trichuris vulpis</i> มี stichosome esophagus ที่ฝังในเยื่อบุลำไส้ใหญ่และใช้ดูดเลือดจาก host"
+  },
+  {
+    q: "หลอดอาหารแบบใดที่พบในพยาธิตัวอ่อนระยะติดต่อของ <i>Strongyloides stercoralis</i>",
+    choices: [
+      "Rhabditiform",
+      "Cylindrical form",
+      "Strongyliform",
+      "Filariform",
+      "Trichurid form"
+    ],
+    a: 3,
+    why: "ตัวอ่อนระยะติดต่อ (L3) ของ <i>Strongyloides stercoralis</i> มี filariform esophagus ส่วน L1–L2 เป็น rhabditiform"
+  },
+  {
+    q: "พยาธิ <i>Acanthocheilonema reconditum</i> ระยะตัวเต็มวัยตามปกติอาศัยอยู่ที่ใด",
+    choices: [
+      "dorsal aorta",
+      "lymphatic vessels",
+      "posterior vena cava",
+      "pulmonary artery",
+      "subcutaneous tissue"
+    ],
+    a: 4,
+    why: "<i>Acanthocheilonema reconditum</i> เป็น filarial worm ที่พบใน subcutaneous tissue ของสุนัข ตัวอ่อนพบในเลือด"
+  },
+  {
+    q: "กรณี heavy infection ของการติดพยาธิ <i>Toxocara canis</i> ในลูกสุนัข ข้อใดมีโอกาสเกิดขึ้นน้อยที่สุด",
+    choices: [
+      "ถ่ายเหลวหรือท้องเสีย",
+      "โลหิตจาง",
+      "พยาธิอุดตันลำไส้",
+      "ปอดบวม",
+      "อาเจียนมีตัวพยาธิออกมา"
+    ],
+    a: 1,
+    why: "พยาธิ <i>Toxocara canis</i> ทำให้เกิดอุดตันลำไส้และปอดอักเสบได้บ่อย แต่โลหิตจางพบได้น้อยเพราะไม่ดูดเลือดโดยตรง"
+  },
+  ];
+  
+  const MCQ2 = [
+
   /***********************
  * Dog cat II
  ***********************/  
@@ -370,215 +837,106 @@ const TF = [];
 /***********************
  * UI – Tabs
  ***********************/
+/* -------------------- TABS -------------------- */
 const tabsEl = document.getElementById('tabs');
 const views = [
   {id:'mode-predict', title:'🔮 Prediction site'},
-  {id:'mode-mcq',      title:'🧩 MCQ'},
-  {id:'mode-tf',       title:'✅ True / False'}
+  {id:'mode-mcq1',    title:`🧩 MCQ 1 (${mcq1.length} ข้อ)`},
+  {id:'mode-mcq2',    title:`🧩 MCQ 2 (${mcq2.length} ข้อ)`},
+  {id:'mode-tf',      title:`✅ True / False (${TF.length} ข้อ)`}
 ];
 let activeTab = views[0].id;
 
 function renderTabs(){
-  tabsEl.innerHTML = '';
+  tabsEl.innerHTML='';
   views.forEach(v=>{
-    const b = document.createElement('button');
-    b.className = 'tab' + (v.id===activeTab ? ' active' : '');
-    b.textContent = v.title;
-    b.onclick = ()=>{ activeTab = v.id; updateView(); };
+    const b=document.createElement('button');
+    b.className='tab'+(v.id===activeTab?' active':'');
+    b.textContent=v.title;
+    b.onclick=()=>{ activeTab=v.id; updateView(); };
     tabsEl.appendChild(b);
   });
 }
-
 function updateView(){
   views.forEach(v=>{
-    const s = document.getElementById(v.id);
-    if(v.id===activeTab){ s.classList.remove('hide'); }
-    else{ s.classList.add('hide'); }
+    const el=document.getElementById(v.id);
+    if(!el) return;
+    (v.id===activeTab)?el.classList.remove('hide'):el.classList.add('hide');
   });
   renderTabs();
 }
+renderTabs(); updateView();
 
-renderTabs();
-// อัปเดตชื่อแท็บตามจำนวนข้อ (ตอนนี้เป็น 0)
-views[1].title = `🧩 MCQ (${MCQ.length} ข้อ)`;
-views[2].title = `✅ True / False (${TF.length} ข้อ)`;
-renderTabs();
-updateView();
+/* -------------------- MCQ RENDERER (รีไซเคิลได้) -------------------- */
+function buildMCQMode(hostId, DATA){
+  const host=document.getElementById(hostId);
+  if(!host) return;
 
-/***********************
- * Mode 1 – Prediction site (ไทย)
- ***********************/
-(function(){
-  const host = document.getElementById('mode-predict');
-  const intro = document.createElement('div');
-  intro.innerHTML = `<div class="scorebox"><span class="badge">เลือกตำแหน่งอาศัยของแต่ละสปีชีส์</span><button class="secondary" id="btnShuffle">สุ่มรายชื่อ</button></div>`;
-  host.appendChild(intro);
-  const listDiv = document.createElement('div'); host.appendChild(listDiv);
-  const actions = document.createElement('div'); actions.style.display='flex'; actions.style.gap='10px'; actions.style.flexWrap='wrap'; actions.style.marginTop='10px';
-  actions.innerHTML = `<button id="btnCheck">ตรวจคำตอบ</button><button class="secondary" id="btnReset">รีเซ็ต</button>`;
-  host.appendChild(actions);
-  const result = document.createElement('div'); host.appendChild(result);
-
-  let choices = [];
-  function render(){
-    listDiv.innerHTML='';
-    const grid = document.createElement('div'); grid.className='grid';
-    choices.forEach((row,i)=>{
-      const card = document.createElement('div'); card.className='qcard siteGrid';
-      card.innerHTML = `
-        <div>
-          <h4>${i+1}. <span class="k">${row.name}</span></h4>
-          <div class="muted mini">เลือกหนึ่ง: ${SITES.join(' · ')}</div>
-        </div>
-        <div>
-          <select data-i="${i}">
-            <option value="">— เลือก site —</option>
-            ${SITES.map(s=>`<option>${s}</option>`).join('')}
-          </select>
-        </div>`;
-      grid.appendChild(card);
-    });
-    listDiv.appendChild(grid);
-    listDiv.querySelectorAll('select').forEach(sel=>{
-      sel.addEventListener('change',e=>{
-        const idx=+e.target.getAttribute('data-i');
-        choices[idx].pick = e.target.value;
-      })
-    })
+  if(!DATA || DATA.length===0){
+    host.innerHTML = `<div class="qcard muted">ยังไม่มีคำถามในชุดนี้ — ใส่ที่ตัวแปร <b>${hostId==='mode-mcq1'?'mcq1':'mcq2'}</b></div>`;
+    return;
   }
-  function shuffleAll(){ choices = shuffle(PARASITES).map(p=>({name:p.name, ans:p.site, pick:''})); render(); result.innerHTML=''; }
-  document.getElementById('btnShuffle').onclick = shuffleAll;
-  document.getElementById('btnReset').onclick = shuffleAll;
-  document.getElementById('btnCheck').onclick = ()=>{
-    let correct=0; const total=choices.length;
-    const rows = choices.map((r,i)=>{
-      const ok = r.pick===r.ans; if(ok) correct++;
-      return `<div class="row"><span class="mini">${i+1}.</span> <b>${r.name}</b> → <span class="${ok?'ok':'ng'}">${r.pick||'ยังไม่เลือก'}</span> ${ok?'<span class="tag">ถูก</span>':`<span class="tag warn">ควรเป็น ${r.ans}</span>`}</div>`
-    }).join('');
-    result.innerHTML = `<div class="card"><div class="scorebox"><div class="badge">คะแนน: ${correct} / ${total}</div><div class="muted mini">กดสุ่มเพื่อฝึกซ้ำ</div></div>${rows}</div>`
-  }
-  shuffleAll();
-})();
 
-/***********************
- * Mode 2 – MCQ (ไทย) — ทำทุกข้อที่มี
- ***********************/
- (function(){
-  const host=document.getElementById('mode-mcq');
-  // ใช้ทุกข้อที่มี (ไม่ slice)
-  let order = shuffle(MCQ.map((_,i)=>i));
-  let i=0, score=0;
-  const total = order.length;
+  let order = shuffle(DATA.map((_,i)=>i));
+  let i=0, score=0, total=order.length;
 
   const hud=document.createElement('div'); hud.className='scorebox';
-  hud.innerHTML = `<div class="badge" id="mcqProg">ข้อ 1 / ${total}</div>
-                   <div class="badge" id="mcqScore">คะแนน 0</div>
-                   <button class="secondary" id="mcqRestart">เริ่มใหม่/สุ่มใหม่</button>`;
+  hud.innerHTML = `<div class="badge" id="${hostId}-prog">ข้อ 1 / ${total}</div>
+                   <div class="badge" id="${hostId}-score">คะแนน 0</div>
+                   <button class="secondary" id="${hostId}-restart">เริ่มใหม่/สุ่มใหม่</button>`;
   host.appendChild(hud);
 
   const qc=document.createElement('div'); qc.className='qcard'; host.appendChild(qc);
 
   function renderQ(){
-    const item = MCQ[order[i]];
-    document.getElementById('mcqProg').textContent = `ข้อ ${i+1} / ${total}`;
+    const item = DATA[order[i]];
+    document.getElementById(`${hostId}-prog`).textContent = `ข้อ ${i+1} / ${total}`;
     qc.innerHTML = `<div><b>Q${i+1}.</b> ${item.q}</div>`;
     const box=document.createElement('div'); box.className='choices'; qc.appendChild(box);
-    const shuffledChoices = shuffle(item.choices.map((c,idx)=>({c,idx})));
+    const shuffled = shuffle(item.choices.map((c,idx)=>({c,idx})));
     let locked=false;
 
-    shuffledChoices.forEach(({c,idx})=>{
-      const div=document.createElement('div');
-      div.className='choice'; div.innerHTML=c; box.appendChild(div);
+    shuffled.forEach(({c,idx})=>{
+      const div=document.createElement('div'); div.className='choice'; div.innerHTML=c; box.appendChild(div);
       div.onclick=()=>{
         if(locked) return; locked=true;
-        const isCorrect = idx===item.a;
-        if(isCorrect){div.classList.add('correct'); score++;}
-        else{div.classList.add('wrong');}
-        // ไฮไลต์ตัวที่ถูก
+        const ok = idx===item.a;
+        div.classList.add(ok?'correct':'wrong');
+        if(ok) score++;
         [...box.children].forEach(el=>{
-          const originalIndex=item.choices.indexOf(el.innerHTML);
-          if(originalIndex===item.a) el.classList.add('correct');
+          const oi=item.choices.indexOf(el.innerHTML);
+          if(oi===item.a) el.classList.add('correct');
         });
-        // เฉลย
         const exp=document.createElement('div'); exp.className='answer';
-        exp.innerHTML = `<b>เฉลย:</b> ${item.choices[item.a]}<br><span class="muted">เหตุผล:</span> ${item.why}`;
+        exp.innerHTML=`<b>เฉลย:</b> ${item.choices[item.a]}<br><span class="muted">เหตุผล:</span> ${item.why}`;
         qc.appendChild(exp);
-        // ปุ่มถัดไป
         const nx=document.createElement('div'); nx.style.marginTop='10px';
-        nx.innerHTML = `<button id="btnNext">ถัดไป</button>`; qc.appendChild(nx);
-        document.getElementById('mcqScore').textContent = `คะแนน ${score}`;
-        document.getElementById('btnNext').onclick = ()=>{
+        nx.innerHTML=`<button id="${hostId}-next">ถัดไป</button>`; qc.appendChild(nx);
+        document.getElementById(`${hostId}-score`).textContent=`คะแนน ${score}`;
+        document.getElementById(`${hostId}-next`).onclick=()=>{
           i++; if(i>=total){
-            qc.innerHTML = `<div class="row"><div class="badge">จบชุด MCQ</div><div class="badge">คะแนนรวม: ${score} / ${total}</div></div>`;
+            qc.innerHTML=`<div class="row"><div class="badge">จบชุด MCQ</div><div class="badge">คะแนนรวม: ${score} / ${total}</div></div>`;
           } else { renderQ(); }
         };
       };
     });
   }
 
-  document.getElementById('mcqRestart').onclick=()=>{
-    order = shuffle(MCQ.map((_,i)=>i)); i=0; score=0;
-    document.getElementById('mcqScore').textContent='คะแนน 0';
+  document.getElementById(`${hostId}-restart`).onclick=()=>{
+    order = shuffle(DATA.map((_,i)=>i)); i=0; score=0;
+    document.getElementById(`${hostId}-score`).textContent='คะแนน 0';
     renderQ();
   };
 
   renderQ();
-})();
+}
 
-/***********************
- * Mode 3 – True / False (ไทย) — ทำทุกข้อที่มี
- ***********************/
- (function(){
-  const host=document.getElementById('mode-tf');
-  // ใช้ทุกข้อที่มี (ไม่ slice)
-  let order = shuffle(TF.map((_,i)=>i));
-  let i=0, score=0;
-  const total = order.length;
+/* -------------------- สร้างสองโหมด -------------------- */
+buildMCQMode('mode-mcq1', mcq1);
+buildMCQMode('mode-mcq2', mcq2);
 
-  const hud=document.createElement('div'); hud.className='scorebox';
-  hud.innerHTML = `<div class="badge" id="tfProg">ข้อ 1 / ${total}</div>
-                   <div class="badge" id="tfScore">คะแนน 0</div>
-                   <button class="secondary" id="tfRestart">เริ่มใหม่/สุ่มใหม่</button>`;
-  host.appendChild(hud);
-
-  const qc=document.createElement('div'); qc.className='qcard'; host.appendChild(qc);
-
-  function renderQ(){
-    const item=TF[order[i]];
-    document.getElementById('tfProg').textContent=`ข้อ ${i+1} / ${total}`;
-    qc.innerHTML = `<div><b>Q${i+1}.</b> ${item.q}</div>`;
-
-    const box=document.createElement('div'); box.className='choices'; qc.appendChild(box);
-    const btnT=document.createElement('button'); btnT.textContent='ถูก (True)';
-    const btnF=document.createElement('button'); btnF.textContent='ผิด (False)'; btnF.className='secondary';
-    const btnRow=document.createElement('div'); btnRow.style.display='flex'; btnRow.style.gap='8px'; btnRow.append(btnT,btnF); qc.appendChild(btnRow);
-
-    let locked=false;
-    function mark(ans){
-      if(locked) return; locked=true;
-      const cor = item.a===ans; if(cor) score++;
-      document.getElementById('tfScore').textContent=`คะแนน ${score}`;
-      const exp=document.createElement('div'); exp.className='answer';
-      exp.innerHTML=`<b>เฉลย:</b> ${item.a?'<span class="ok">True</span>':'<span class="ng">False</span>'} · <span class="muted">เหตุผล:</span> ${item.why}`;
-      qc.appendChild(exp);
-      const nx=document.createElement('div'); nx.style.marginTop='10px'; nx.innerHTML='<button id="tfNext">ถัดไป</button>'; qc.appendChild(nx);
-      document.getElementById('tfNext').onclick=()=>{
-        i++; if(i>=total){
-          qc.innerHTML = `<div class="row"><div class="badge">จบชุด True/False</div><div class="badge">คะแนนรวม: ${score} / ${total}</div></div>`;
-        } else { renderQ(); }
-      };
-    }
-    btnT.onclick=()=>mark(true); btnF.onclick=()=>mark(false);
-  }
-
-  document.getElementById('tfRestart').onclick=()=>{
-    order = shuffle(TF.map((_,i)=>i)); i=0; score=0;
-    document.getElementById('tfScore').textContent='คะแนน 0';
-    renderQ();
-  };
-
-  renderQ();
-})();
+/* -------------------- util เดิม -------------------- */
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
 </script>
 </body>
 </html>
