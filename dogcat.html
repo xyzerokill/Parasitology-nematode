@@ -50,47 +50,26 @@
 <body>
 <header>
   <div style="margin:10px 0;">
-  <a href="index.html" 
-     style="display:inline-block;padding:8px 14px;background:#0b2436;
-            border:1px solid #0ea5e9;border-radius:10px;
-            color:#7dd3fc;text-decoration:none;font-weight:600;">
-    🏠กลับไปหน้าแรก
-  </a>
-</div>
+    <a href="index.html" style="display:inline-block;padding:8px 14px;background:#0b2436;border:1px solid #0ea5e9;border-radius:10px;color:#7dd3fc;text-decoration:none;font-weight:600;">🏠กลับไปหน้าแรก</a>
+  </div>
   <div class="wrap">
     <h1>🐶🐱 พยาธิตัวกลมในสุนัขและแมว – ชุดแบบทดสอบ (ภาษาไทย)</h1>
-    <div class="muted">สามโหมดในหน้าเดียว: <span class="pill">Prediction site</span> · <span class="pill">MCQ</span> · <span class="pill">True/False</span></div>
+    <div class="muted">สี่โหมดในหน้าเดียว: <span class="pill">Prediction site</span> · <span class="pill">MCQ 1</span> · <span class="pill">MCQ 2</span> · <span class="pill">True/False</span></div>
     <div class="tabs" id="tabs"></div>
   </div>
 </header>
-<!-- <main class="wrap">
-  <section id="mode-predict" class="card hide"></section>
-  <section id="mode-mcq" class="card hide"></section>
-  <section id="mode-tf" class="card hide"></section>
-  <section class="card">
-    <details>
-      <summary>📝 วิธีใช้</summary>
-      <ul>
-        <li><b>Prediction site</b>: เลือกตำแหน่งอาศัย (predilection site) ให้ครบ → กด <span class="inline-kbd">ตรวจคำตอบ</span> เพื่อดูคะแนนและเฉลย</li>
-        <li>คง <i>technical terms</i> ภาษาอังกฤษ (เช่น cervical alae, buccal capsule, stichosome, microfilaria เป็นต้น)</li>
-      </ul>
-    </details>
-  </section>
-</main> -->
+
 <main class="wrap">
   <section id="mode-predict" class="card hide"></section>
-
-  <!-- 🔹 แยก MCQ เป็นสองโหมด -->
   <section id="mode-mcq1" class="card hide"></section>
   <section id="mode-mcq2" class="card hide"></section>
-  
   <section id="mode-tf" class="card hide"></section>
   <section class="card">
     <details>
       <summary>📝 วิธีใช้</summary>
       <ul>
-        <li><b>Prediction site</b>: เลือกตำแหน่งอาศัย (predilection site) ให้ครบ → กด <span class="inline-kbd">ตรวจคำตอบ</span> เพื่อดูคะแนนและเฉลย</li>
-        <li>คง <i>technical terms</i> ภาษาอังกฤษ (เช่น cervical alae, buccal capsule, stichosome, microfilaria เป็นต้น)</li>
+        <li><b>Prediction site</b>: เลือกตำแหน่งอาศัยให้ครบ → กด <span class="inline-kbd">ตรวจคำตอบ</span></li>
+        <li>MCQ แยกเป็นสองชุด: <b>MCQ 1</b> และ <b>MCQ 2</b></li>
       </ul>
     </details>
   </section>
@@ -98,24 +77,12 @@
 
 <footer class="muted">© 2025 – Vet Parasitology Drill • Morphology · Life cycle · Site · Lesions</footer>
 
-<script>
-/***********************
- * DATA – ตำแหน่งอาศัย (Dog & Cat)
- ***********************/
-const SITES = [
-  "Thoracic esophagus / Stomach wall",
-  "Stomach",
-  "Small intestine",
-  "Large intestine",
-  "Eye",
-  "Respiratory",
-  "Cardiovascular",
-  "Liver parenchyma",
-  "Periocular/Subconjunctival tissue",
-  "Lymphatic vessels"
-];
+<script defer>
+/* ---------- utils ---------- */
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
 
-// Mapping สำหรับโหมด Prediction Site (อ้างอิงไฟล์สุนัขและแมว)
+/* ---------- DATA: sites/prediction (ของเดิมคุณวางต่อได้เลย) ---------- */
+const SITES = ["Thoracic esophagus / Stomach wall","Stomach","Small intestine","Large intestine","Eye","Respiratory","Cardiovascular","Liver parenchyma","Periocular/Subconjunctival tissue","Lymphatic vessels"];
 const PARASITES = [
   {name:"Spirocerca lupi", site:"Thoracic esophagus / Stomach wall"},
   {name:"Gnathostoma spinigerum", site:"Stomach"},
@@ -135,12 +102,8 @@ const PARASITES = [
   {name:"Onchocerca lupi", site:"Periocular/Subconjunctival tissue"}
 ];
 
-function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
-
-/***********************
- * MCQ / TF
- ***********************/
-  const MCQ1 = [
+/* ---------- MCQ datasets: ใช้ชื่อ mcq1/mcq2 เท่านั้น ---------- */
+const MCQ1 = [
     {
     q: "ข้อใดต่อไปนี้กล่าวไม่ถูกต้องเกี่ยวกับพยาธิ <i>Strongyloides stercoralis</i>",
     choices: [
@@ -834,10 +797,7 @@ function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const 
 ];
 const TF = [];
 
-/***********************
- * UI – Tabs
- ***********************/
-/* -------------------- TABS -------------------- */
+/* ---------- Tabs ---------- */
 const tabsEl = document.getElementById('tabs');
 const views = [
   {id:'mode-predict', title:'🔮 Prediction site'},
@@ -867,18 +827,69 @@ function updateView(){
 }
 renderTabs(); updateView();
 
-/* -------------------- MCQ RENDERER (รีไซเคิลได้) -------------------- */
+/* ---------- Prediction mode (คง logic เดิมคุณ) ---------- */
+(function(){
+  const host = document.getElementById('mode-predict');
+  const intro = document.createElement('div');
+  intro.innerHTML = `<div class="scorebox"><span class="badge">เลือกตำแหน่งอาศัยของแต่ละสปีชีส์</span><button class="secondary" id="btnShuffle">สุ่มรายชื่อ</button></div>`;
+  host.appendChild(intro);
+  const listDiv = document.createElement('div'); host.appendChild(listDiv);
+  const actions = document.createElement('div'); actions.style.display='flex'; actions.style.gap='10px'; actions.style.flexWrap='wrap'; actions.style.marginTop='10px';
+  actions.innerHTML = `<button id="btnCheck">ตรวจคำตอบ</button><button class="secondary" id="btnReset">รีเซ็ต</button>`;
+  host.appendChild(actions);
+  const result = document.createElement('div'); host.appendChild(result);
+
+  let choices = [];
+  function render(){
+    listDiv.innerHTML='';
+    const grid = document.createElement('div'); grid.className='grid';
+    choices.forEach((row,i)=>{
+      const card = document.createElement('div'); card.className='qcard siteGrid';
+      card.innerHTML = `
+        <div>
+          <h4>${i+1}. <span class="k">${row.name}</span></h4>
+          <div class="muted mini">เลือกหนึ่ง: ${SITES.join(' · ')}</div>
+        </div>
+        <div>
+          <select data-i="${i}">
+            <option value="">— เลือก site —</option>
+            ${SITES.map(s=>`<option>${s}</option>`).join('')}
+          </select>
+        </div>`;
+      grid.appendChild(card);
+    });
+    listDiv.appendChild(grid);
+    listDiv.querySelectorAll('select').forEach(sel=>{
+      sel.addEventListener('change',e=>{
+        const idx=+e.target.getAttribute('data-i');
+        choices[idx].pick = e.target.value;
+      })
+    })
+  }
+  function shuffleAll(){ choices = shuffle(PARASITES).map(p=>({name:p.name, ans:p.site, pick:''})); render(); result.innerHTML=''; }
+  host.querySelector('#btnShuffle').onclick = shuffleAll;
+  host.querySelector('#btnReset').onclick = shuffleAll;
+  host.querySelector('#btnCheck').onclick = ()=>{
+    let correct=0; const total=choices.length;
+    const rows = choices.map((r,i)=>{
+      const ok = r.pick===r.ans; if(ok) correct++;
+      return `<div class="row"><span class="mini">${i+1}.</span> <b>${r.name}</b> → <span class="${ok?'ok':'ng'}">${r.pick||'ยังไม่เลือก'}</span> ${ok?'<span class="tag">ถูก</span>':`<span class="tag warn">ควรเป็น ${r.ans}</span>`}</div>`
+    }).join('');
+    result.innerHTML = `<div class="card"><div class="scorebox"><div class="badge">คะแนน: ${correct} / ${total}</div><div class="muted mini">กดสุ่มเพื่อฝึกซ้ำ</div></div>${rows}</div>`
+  }
+  shuffleAll();
+})();
+
+/* ---------- MCQ renderer (ใช้ซ้ำได้) ---------- */
 function buildMCQMode(hostId, DATA){
   const host=document.getElementById(hostId);
   if(!host) return;
-
   if(!DATA || DATA.length===0){
     host.innerHTML = `<div class="qcard muted">ยังไม่มีคำถามในชุดนี้ — ใส่ที่ตัวแปร <b>${hostId==='mode-mcq1'?'mcq1':'mcq2'}</b></div>`;
     return;
   }
-
   let order = shuffle(DATA.map((_,i)=>i));
-  let i=0, score=0, total=order.length;
+  let i=0, score=0; const total=order.length;
 
   const hud=document.createElement('div'); hud.className='scorebox';
   hud.innerHTML = `<div class="badge" id="${hostId}-prog">ข้อ 1 / ${total}</div>
@@ -931,12 +942,9 @@ function buildMCQMode(hostId, DATA){
   renderQ();
 }
 
-/* -------------------- สร้างสองโหมด -------------------- */
+/* ---------- สร้างโหมด MCQ1 + MCQ2 ---------- */
 buildMCQMode('mode-mcq1', mcq1);
 buildMCQMode('mode-mcq2', mcq2);
-
-/* -------------------- util เดิม -------------------- */
-function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
 </script>
 </body>
 </html>
