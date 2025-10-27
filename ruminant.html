@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>พยาธิตัวกลมในสัตว์เคี้ยวเอื้อง – ชุดแบบทดสอบ (TH)</title>
+<style>
+  :root{--bg:#0f172a;--card:#111827;--ink:#e5e7eb;--muted:#94a3b8;--accent:#22d3ee;--good:#22c55e;--bad:#ef4444;--warn:#f59e0b}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0e1526);color:var(--ink)}
+  header{position:sticky;top:0;background:#0b1220cc;backdrop-filter:blur(6px);border-bottom:1px solid #1f2937;z-index:10}
+  .wrap{max-width:1100px;margin:0 auto;padding:18px}
+  h1{font-size:clamp(20px,2.8vw,34px);margin:8px 0 2px}
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .tab{padding:10px 14px;border:1px solid #1f2937;border-radius:10px;background:#0b1324;color:#cbd5e1;cursor:pointer}
+  .tab.active{border-color:#0ea5e9;background:#0b2436;box-shadow:0 0 0 2px #0ea5e933 inset;color:#e2e8f0}
+  .card{background:var(--card);border:1px solid #1f2937;border-radius:14px;padding:18px;margin:16px 0;box-shadow:0 10px 30px #0004}
+  .grid{display:grid;gap:12px}
+  .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .muted{color:var(--muted)}
+  select,button,input[type="radio"]{accent-color:#06b6d4}
+  select{width:100%;padding:8px 10px;border-radius:10px;border:1px solid #334155;background:#0b1320;color:#e2e8f0}
+  button{background:#0ea5e9;border:none;padding:10px 14px;border-radius:10px;color:#001018;font-weight:700;cursor:pointer}
+  button.secondary{background:#0b1728;color:#e2e8f0;border:1px solid #1f2937}
+  .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid #1f2937;background:#0b1320;color:#a5b4fc;font-size:12px}
+  .row{display:flex;align-items:center;gap:8px}
+  .k{font-weight:700;color:#67e8f9}
+  .ok{color:var(--good)}
+  .ng{color:var(--bad)}
+  .warn{color:var(--warn)}
+  .qcard{border:1px dashed #334155;padding:14px;border-radius:12px}
+  .choices{display:grid;gap:8px;margin-top:10px}
+  .choice{padding:10px;border:1px solid #293241;border-radius:10px;cursor:pointer;background:#0a1120}
+  .choice.correct{border-color:#14532d;background:#052014}
+  .choice.wrong{border-color:#7f1d1d;background:#1a0b0b}
+  .hide{display:none}
+  .tag{font-size:11px;opacity:.9;color:#a5b4fc;margin-left:6px}
+  .answer{border-left:3px solid #334155;padding-left:10px;margin-top:8px;color:#cbd5e1}
+  .inline-kbd{display:inline-block;border:1px solid #334155;border-bottom-width:3px;padding:2px 6px;border-radius:6px;background:#0b1320;color:#e5e7eb;font:600 12px/1 system-ui}
+  .siteGrid{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;align-items:center}
+  .siteGrid h4{margin:0}
+  .scorebox{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .badge{padding:6px 10px;border-radius:10px;background:#062334;border:1px solid #0ea5e9;color:#7dd3fc}
+  .mini{font-size:12px}
+  footer{opacity:.7;text-align:center;padding:26px}
+  details{background:#0b1320;border:1px solid #1f2937;border-radius:10px;padding:8px}
+  summary{cursor:pointer;color:#7dd3fc}
+</style>
+</head>
+<body>
+<header>
+  <div style="margin:10px 0;">
+    <a href="index.html" style="display:inline-block;padding:8px 14px;background:#0b2436;border:1px solid #0ea5e9;border-radius:10px;color:#7dd3fc;text-decoration:none;font-weight:600;">🏠กลับไปหน้าแรก</a>
+  </div>
+  <div class="wrap">
+    <h1>🐄พยาธิตัวกลมในสัตว์เคี้ยวเอื้อง – ชุดแบบทดสอบ (ภาษาไทย)</h1>
+    <div class="muted">สี่โหมดในหน้าเดียว: <span class="pill">Prediction site</span> · <span class="pill">MCQ 1</span> · <span class="pill">MCQ 2</span> · <span class="pill">True/False</span></div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="mode-predict" class="card hide"></section>
+  <section id="mode-mcq1" class="card hide"></section>
+  <section id="mode-mcq2" class="card hide"></section>
+  <section id="mode-tf" class="card hide"></section>
+  <section class="card">
+    <details>
+      <summary>📝 วิธีใช้</summary>
+      <ul>
+        <li><b>Prediction site</b>: เลือกตำแหน่งอาศัยให้ครบ → กด <span class="inline-kbd">ตรวจคำตอบ</span></li>
+        <li>MCQ แยกเป็นสองชุด: <b>MCQ 1</b> และ <b>MCQ 2</b></li>
+      </ul>
+    </details>
+  </section>
+</main>
+
+<footer class="muted">© 2025 – Vet Parasitology Drill • Morphology · Life cycle · Site · Lesions</footer>
+
+<script defer>
+/* ---------- utils ---------- */
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
+
+/* ---------- DATA: sites/prediction (ของเดิมคุณวางต่อได้เลย) ---------- */
+const SITES = [
+  "Abomasum",
+  "Small intestine",
+  "Large intestine & Caecum",
+  "Trachea / Bronchi / Lungs",
+  "Esophagus / Rumen",
+  "Eyes",
+  "Skin / Subcutis & Connective tissue"
+];
+
+const PARASITES = [
+  // Abomasum
+  { name:"Haemonchus contortus", site:"Abomasum" },
+  { name:"Haemonchus placei", site:"Abomasum" },
+  { name:"Ostertagia ostertagi", site:"Abomasum" }, // cattle
+  { name:"Teladorsagia circumcincta", site:"Abomasum" }, // sheep/goat (formerly O. circumcincta)
+  { name:"Trichostrongylus axei", site:"Abomasum" },
+  { name:"Marshallagia marshalli", site:"Abomasum" },
+
+  // Small intestine
+  { name:"Trichostrongylus colubriformis", site:"Small intestine" },
+  { name:"Trichostrongylus vitrinus", site:"Small intestine" },
+  { name:"Cooperia oncophora", site:"Small intestine" },
+  { name:"Cooperia pectinata", site:"Small intestine" },
+  { name:"Nematodirus spathiger", site:"Small intestine" },
+  { name:"Nematodirus battus", site:"Small intestine" },
+  { name:"Bunostomum phlebotomum", site:"Small intestine" }, // cattle hookworm
+  { name:"Bunostomum trigonocephalum", site:"Small intestine" }, // sheep/goat hookworm
+  { name:"Strongyloides papillosus", site:"Small intestine" },
+  { name:"Toxocara vitulorum", site:"Small intestine" }, // calves
+
+  // Large intestine & Caecum
+  { name:"Oesophagostomum radiatum", site:"Large intestine & Caecum" }, // cattle nodular worm
+  { name:"Oesophagostomum columbianum", site:"Large intestine & Caecum" }, // sheep/goat
+  { name:"Chabertia ovina", site:"Large intestine & Caecum" }, // colon
+  { name:"Trichuris ovis", site:"Large intestine & Caecum" },
+  { name:"Trichuris discolor", site:"Large intestine & Caecum" },
+
+  // Respiratory (Trachea / Bronchi / Lungs)
+  { name:"Dictyocaulus viviparus", site:"Trachea / Bronchi / Lungs" }, // cattle lungworm
+  { name:"Dictyocaulus filaria", site:"Trachea / Bronchi / Lungs" },   // sheep/goat
+  { name:"Muellerius capillaris", site:"Trachea / Bronchi / Lungs" },  // alveoli (sheep/goat)
+  { name:"Protostrongylus rufescens", site:"Trachea / Bronchi / Lungs" }, // small bronchioles
+
+  // Esophagus / Rumen
+  { name:"Gongylonema spp.", site:"Esophagus / Rumen" },
+
+  // Eyes
+  { name:"Thelazia spp.", site:"Eyes" },
+
+  // Skin / Subcutis & Connective tissue (filarial)
+  { name:"Onchocerca spp.", site:"Skin / Subcutis & Connective tissue" }, // nuchal ligament (cattle)
+  { name:"Stephanofilaria stilesi", site:"Skin / Subcutis & Connective tissue" } // skin lesions (cattle)
+];
+
+
+/* ---------- MCQ datasets: ใช้ชื่อ mcq1/mcq2 เท่านั้น ---------- */
+const mcq1 = [
+    {
+    q:"ข้อใดกล่าวไม่ถูกต้องเกี่ยวกับลักษณะของพยาธิตัวกลม (Nematode)",
+    choices:[
+      "Complete alimentary canal",
+      "พยาธิตัวเมียมีขนาดใหญ่กว่าตัวผู้",
+      "ลำตัวแบ่งเป็นปล้องหรือ segments ชัดเจน",
+      "มี cuticle ห่อหุ้มร่างกาย"
+    ],
+    a:2,
+    why:"Nematodes ไม่มีการแบ่งเป็นปล้อง (unsegmented) ลำตัวทรงกระบอกเรียวยาว ปกคลุมด้วย cuticle แตกต่างจาก cestodes ที่เป็น segmented.",
+    ref:"Ruminants I – General morphology of nematodes"
+  },
+  {
+    q:"ข้อใดไม่จัดอยู่ในกลุ่ม blood-sucking stomach worms ของโคและแกะ",
+    choices:[
+      "Barber’s pole worm",
+      "Cooperia spp.",
+      "Mecistocirrus digitatus",
+      "Ostertagia ostertagi"
+    ],
+    a:1,
+    why:"Cooperia spp. เป็น intestinal nematode อาศัยใน small intestine ไม่ใช่ blood-sucking abomasal worm.",
+    ref:"Ruminants I – Haemonchus group vs Cooperia"
+  },
+  {
+    q:"พยาธิตัวกลมในสัตว์เลี้ยงลูกด้วยนมชนิดใดที่ก่อให้เกิดความสูญเสียสูงในลูกสัตว์ ยกเว้นข้อใด",
+    choices:[
+      "Toxocara canis",
+      "Oesophagostomum spp.",
+      "Toxocara vitulorum",
+      "Strongyloides papillosus"
+    ],
+    a:0,
+    why:"Toxocara canis พบในสุนัข ไม่ใช่ในโค ลูกโคที่ติดเชื้อรุนแรงมักเกิดจาก Toxocara vitulorum ที่ลำไส้เล็ก.",
+    ref:"Ruminants II – Toxocara vitulorum"
+  },
+  {
+    q:"พยาธิตัวกลมชนิดใดในแพะที่ก่อให้เกิดปัญหาท้องเสียอย่างร้ายแรงที่สุด",
+    choices:[
+      "Brown stomach worms",
+      "Barber’s pole worms",
+      "Bankrupt worms",
+      "Nodular worms"
+    ],
+    a:1,
+    why:"Barber’s pole worm (*Haemonchus contortus*) เป็น blood-sucking worm ใน abomasum ทำให้ anemia และท้องเสียรุนแรง.",
+    ref:"Ruminants I – Haemonchus contortus"
+  },
+  {
+    q:"ทุกข้อคือปัจจัยที่ทำให้การติดเชื้อของพยาธิ Haemonchus contortus ยาวนาน ยกเว้นข้อใด",
+    choices:[
+      "การใช้ยาถ่ายพยาธิชนิดเดียวซ้ำต่อเนื่องเป็นเวลานาน",
+      "พยาธิตัวเต็มวัยเพศเมียสามารถวางไข่เป็นจำนวนมาก",
+      "มีระยะ free-living phase นานขึ้น",
+      "ตัวอ่อนระยะ L3 สามารถปรับตัวในสภาพแวดล้อมได้ดี"
+    ],
+    a:1,
+    why:"การที่พยาธิตัวเมียวางไข่ได้มากกลับเป็นปัจจัยที่เพิ่มการแพร่ระบาด ไม่ใช่ยืดอายุการติดเชื้อในตัวสัตว์ (resistance และ hypobiosis ต่างหากที่ทำให้ติดยาว).",
+    ref:"Ruminants I – Haemonchus epidemiology"
+  },
+  {
+    q:"ข้อใดกล่าวไม่ถูกต้องเกี่ยวกับ Strongyloides papillosus",
+    choices:[
+      "พบมากในลูกโค",
+      "ตัวเต็มวัยเพศเมียจะมีขนาดใหญ่กว่าตัวผู้",
+      "มีระยะ free-living generation",
+      "ติดเชื้อโดยระยะ third-stage larva"
+    ],
+    a:1,
+    why:"Strongyloides papillosus มีเพียงเพศเมียที่เป็น parasitic form ในโฮสต์ ตัวผู้พบเฉพาะใน free-living stage.",
+    ref:"Ruminants I – Strongyloides papillosus life cycle"
+  },
+  {
+    q:"ข้อใดกล่าวได้ถูกต้องเกี่ยวกับ cattle eyeworm",
+    choices:[
+      "มีสาเหตุมาจาก Onchocerca volvulus",
+      "มี Simulium spp. เป็น intermediate host",
+      "microfilaria ไม่มี sheath",
+      "ตัวเต็มวัยจะมีลักษณะที่เรียกว่า transverse striations"
+    ],
+    a:3,
+    why:"Thelazia spp. (cattle eyeworm) มี transverse striations บน cuticle ตัวเต็มวัย พบใน conjunctival sac หรือ lacrimal duct.",
+    ref:"Ruminants II – Thelazia spp."
+  },
+  {
+    q:"ข้อใดกล่าวได้ถูกต้องเกี่ยวกับพยาธิ Elaeophora spp.",
+    choices:[
+      "Onchocercosis อาศัย House fly เป็น intermediate host",
+      "Elaeophora spp. อาศัย Tabanus spp. เป็น intermediate host",
+      "Onchocerca ใช้ Tabanus เป็น intermediate host",
+      "Elaeophora spp. อาศัย Black fly เป็น intermediate host"
+    ],
+    a:1,
+    why:"Elaeophora spp. ใช้แมลงดูดเลือดจำพวก horse fly (Tabanus spp.) เป็น intermediate host.",
+    ref:"Ruminants II – Elaeophora spp."
+  },
+  {
+    q:"Stichosome esophagus เป็นลักษณะที่สามารถพบในพยาธิตัวกลมชนิดใด ยกเว้นข้อใด",
+    choices:[
+      "Trichuris spp.",
+      "Capillaria spp.",
+      "Strongyloides papillosus",
+      "Trichinella spiralis"
+    ],
+    a:2,
+    why:"Strongyloides papillosus ไม่มี stichosome esophagus; ลักษณะนี้พบใน Trichinelloid nematodes เช่น Trichuris, Capillaria, Trichinella.",
+    ref:"Ruminants I – Morphology: Trichinelloid esophagus"
+  },
+  {
+    q:"ข้อใดกล่าวไม่ถูกต้องเกี่ยวกับพยาธิ Dictyocaulus spp.",
+    choices:[
+      "มี boot-shaped spicule",
+      "D. viviparus มักพบในปอดของโค",
+      "ทำให้เกิด alveolar collapse",
+      "พบระยะ L4 ในลำไส้ของสัตว์ที่ติดเชื้อ"
+    ],
+    a:3,
+    why:"L4 ของ Dictyocaulus จะอยู่ในปอด ไม่พบในลำไส้ การพบ L4 ในลำไส้ไม่ใช่ลักษณะของพยาธินี้.",
+    ref:"Ruminants II – Dictyocaulus spp. life cycle"
+  },
+  {
+    q:"ข้อใดกล่าวไม่ถูกต้องเกี่ยวกับวงจรชีวิตของ Strongyloides papillosus",
+    choices:[
+      "มี free-living stage",
+      "มี parasitic stage",
+      "สามารถสืบพันธุ์แบบ parthenogenetic",
+      "มีการถ่ายทอดแบบ vertical transmission"
+    ],
+    a:3,
+    why:"Strongyloides papillosus ไม่ถ่ายทอดแบบ vertical (แม่สู่ลูก); การติดเชื้อหลักคือ percutaneous หรือ oral infection จาก L3.",
+    ref:"Ruminants I – Strongyloides papillosus transmission"
+  },
+  {
+    q:"ข้อใดไม่จัดอยู่ในกลุ่ม vector-borne filarial nematodes",
+    choices:[
+      "Elaeophora spp.",
+      "Thelazia rhodesii",
+      "Setaria labiatopapillosa",
+      "Onchocerca volvulus"
+    ],
+    a:1,
+    why:"Thelazia rhodesii เป็น eye worm ใช้ Musca spp. (face fly) เป็น intermediate host แต่ไม่ใช่ filarial worm ในกลุ่ม vector-borne (Onchocercidae).",
+    ref:"Ruminants II – Filarial nematodes classification"
+  }
+  ];
+  
+const mcq2 = [
+  
+  ];
+
+// True/False — Poultry Nematodes (Refined & Re-checked, 20 ข้อ)
+const TF = [
+  
+];
+
+/* ---------- Tabs ---------- */
+const tabsEl = document.getElementById('tabs');
+const views = [
+  {id:'mode-predict', title:'🔮 Prediction site'},
+  {id:'mode-mcq1',    title:`🧩 MCQ 1 (${mcq1.length} ข้อ)`},
+  {id:'mode-mcq2',    title:`🧩 MCQ 2 (${mcq2.length} ข้อ)`},
+  {id:'mode-tf',      title:`✅ True / False (${TF.length} ข้อ)`}
+];
+let activeTab = views[0].id;
+
+function renderTabs(){
+  tabsEl.innerHTML='';
+  views.forEach(v=>{
+    const b=document.createElement('button');
+    b.className='tab'+(v.id===activeTab?' active':'');
+    b.textContent=v.title;
+    b.onclick=()=>{ activeTab=v.id; updateView(); };
+    tabsEl.appendChild(b);
+  });
+}
+function updateView(){
+  views.forEach(v=>{
+    const el=document.getElementById(v.id);
+    if(!el) return;
+    (v.id===activeTab)?el.classList.remove('hide'):el.classList.add('hide');
+  });
+  renderTabs();
+}
+renderTabs(); updateView();
+
+/* ---------- Prediction mode (คง logic เดิมคุณ) ---------- */
+(function(){
+  const host = document.getElementById('mode-predict');
+  const intro = document.createElement('div');
+  intro.innerHTML = `<div class="scorebox"><span class="badge">เลือกตำแหน่งอาศัยของแต่ละสปีชีส์</span><button class="secondary" id="btnShuffle">สุ่มรายชื่อ</button></div>`;
+  host.appendChild(intro);
+  const listDiv = document.createElement('div'); host.appendChild(listDiv);
+  const actions = document.createElement('div'); actions.style.display='flex'; actions.style.gap='10px'; actions.style.flexWrap='wrap'; actions.style.marginTop='10px';
+  actions.innerHTML = `<button id="btnCheck">ตรวจคำตอบ</button><button class="secondary" id="btnReset">รีเซ็ต</button>`;
+  host.appendChild(actions);
+  const result = document.createElement('div'); host.appendChild(result);
+
+  let choices = [];
+  function render(){
+    listDiv.innerHTML='';
+    const grid = document.createElement('div'); grid.className='grid';
+    choices.forEach((row,i)=>{
+      const card = document.createElement('div'); card.className='qcard siteGrid';
+      card.innerHTML = `
+        <div>
+          <h4>${i+1}. <span class="k">${row.name}</span></h4>
+          <div class="muted mini">เลือกหนึ่ง: ${SITES.join(' · ')}</div>
+        </div>
+        <div>
+          <select data-i="${i}">
+            <option value="">— เลือก site —</option>
+            ${SITES.map(s=>`<option>${s}</option>`).join('')}
+          </select>
+        </div>`;
+      grid.appendChild(card);
+    });
+    listDiv.appendChild(grid);
+    listDiv.querySelectorAll('select').forEach(sel=>{
+      sel.addEventListener('change',e=>{
+        const idx=+e.target.getAttribute('data-i');
+        choices[idx].pick = e.target.value;
+      })
+    })
+  }
+  function shuffleAll(){ choices = shuffle(PARASITES).map(p=>({name:p.name, ans:p.site, pick:''})); render(); result.innerHTML=''; }
+  host.querySelector('#btnShuffle').onclick = shuffleAll;
+  host.querySelector('#btnReset').onclick = shuffleAll;
+  host.querySelector('#btnCheck').onclick = ()=>{
+    let correct=0; const total=choices.length;
+    const rows = choices.map((r,i)=>{
+      const ok = r.pick===r.ans; if(ok) correct++;
+      return `<div class="row"><span class="mini">${i+1}.</span> <b>${r.name}</b> → <span class="${ok?'ok':'ng'}">${r.pick||'ยังไม่เลือก'}</span> ${ok?'<span class="tag">ถูก</span>':`<span class="tag warn">ควรเป็น ${r.ans}</span>`}</div>`
+    }).join('');
+    result.innerHTML = `<div class="card"><div class="scorebox"><div class="badge">คะแนน: ${correct} / ${total}</div><div class="muted mini">กดสุ่มเพื่อฝึกซ้ำ</div></div>${rows}</div>`
+  }
+  shuffleAll();
+})();
+
+/* ---------- MCQ renderer (ใช้ซ้ำได้) ---------- */
+function buildMCQMode(hostId, DATA){
+  const host=document.getElementById(hostId);
+  if(!host) return;
+  if(!DATA || DATA.length===0){
+    host.innerHTML = `<div class="qcard muted">ยังไม่มีคำถามในชุดนี้ — ใส่ที่ตัวแปร <b>${hostId==='mode-mcq1'?'mcq1':'mcq2'}</b></div>`;
+    return;
+  }
+  let order = shuffle(DATA.map((_,i)=>i));
+  let i=0, score=0; const total=order.length;
+
+  const hud=document.createElement('div'); hud.className='scorebox';
+  hud.innerHTML = `<div class="badge" id="${hostId}-prog">ข้อ 1 / ${total}</div>
+                   <div class="badge" id="${hostId}-score">คะแนน 0</div>
+                   <button class="secondary" id="${hostId}-restart">เริ่มใหม่/สุ่มใหม่</button>`;
+  host.appendChild(hud);
+
+  const qc=document.createElement('div'); qc.className='qcard'; host.appendChild(qc);
+
+  function renderQ(){
+    const item = DATA[order[i]];
+    document.getElementById(`${hostId}-prog`).textContent = `ข้อ ${i+1} / ${total}`;
+    qc.innerHTML = `<div><b>Q${i+1}.</b> ${item.q}</div>`;
+    const box=document.createElement('div'); box.className='choices'; qc.appendChild(box);
+    const shuffled = shuffle(item.choices.map((c,idx)=>({c,idx})));
+    let locked=false;
+
+    shuffled.forEach(({c,idx})=>{
+      const div=document.createElement('div'); div.className='choice'; div.innerHTML=c; box.appendChild(div);
+      div.onclick=()=>{
+        if(locked) return; locked=true;
+        const ok = idx===item.a;
+        div.classList.add(ok?'correct':'wrong');
+        if(ok) score++;
+        [...box.children].forEach(el=>{
+          const oi=item.choices.indexOf(el.innerHTML);
+          if(oi===item.a) el.classList.add('correct');
+        });
+        const exp=document.createElement('div'); exp.className='answer';
+        exp.innerHTML=`<b>เฉลย:</b> ${item.choices[item.a]}<br><span class="muted">เหตุผล:</span> ${item.why}`;
+        qc.appendChild(exp);
+        const nx=document.createElement('div'); nx.style.marginTop='10px';
+        nx.innerHTML=`<button id="${hostId}-next">ถัดไป</button>`; qc.appendChild(nx);
+        document.getElementById(`${hostId}-score`).textContent=`คะแนน ${score}`;
+        document.getElementById(`${hostId}-next`).onclick=()=>{
+          i++; if(i>=total){
+            qc.innerHTML=`<div class="row"><div class="badge">จบชุด MCQ</div><div class="badge">คะแนนรวม: ${score} / ${total}</div></div>`;
+          } else { renderQ(); }
+        };
+      };
+    });
+  }
+
+  document.getElementById(`${hostId}-restart`).onclick=()=>{
+    order = shuffle(DATA.map((_,i)=>i)); i=0; score=0;
+    document.getElementById(`${hostId}-score`).textContent='คะแนน 0';
+    renderQ();
+  };
+
+  renderQ();
+}
+
+/* ---------- สร้างโหมด MCQ1 + MCQ2 ---------- */
+buildMCQMode('mode-mcq1', mcq1);
+buildMCQMode('mode-mcq2', mcq2);
+</script>
+</body>
+</html>
