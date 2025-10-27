@@ -115,6 +115,246 @@ function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const 
  * MCQ (ภาษาไทย 40 ข้อ)
  ***********************/
  const MCQ = [
+   {
+    q: "สัตว์ปีกสามารถติดพยาธิตัวกลม <i>Ascaridia galli</i> ได้ทางใด",
+    choices: [
+      "กินตัวอ่อนที่มีตัวอ่อนระยะติดต่อ",
+      "กินไส้เดือนที่มีตัวอ่อนระยะติดต่อ",
+      "กินหอยทากที่มีตัวอ่อนระยะติดต่อ",
+      "กินแมลงสาบที่มีตัวอ่อนระยะติดต่อ"
+    ],
+    a: 1,
+    why: "<i>Ascaridia galli</i> มีวงจรชีวิตแบบ direct (L3 ในไข่เป็นระยะติดต่อ) แต่สามารถใช้ earthworm เป็น paratenic/transport host ได้ เมื่อสัตว์ปีกกินไส้เดือนจะติดเชื้อได้"
+  },
+  {
+    q: "ในวงจรชีวิตของพยาธิตัวกลมชนิดใด ไม่มี intermediate host แต่มี transport host ที่สามารถนำตัวอ่อนระยะติดต่อไปสู่สัตว์ปีกได้",
+    choices: [
+      "Dispharynx spiralis",
+      "Oxyspria mansoni",
+      "Heterakis gallinarum",
+      "Tetrameres americana",
+      "Gongylonema ingluvicola"
+    ],
+    a: 2,
+    why: "<i>Heterakis gallinarum</i> เป็นพยาธิใน cecum ของสัตว์ปีก วงจรชีวิตแบบ direct ไม่มี intermediate host แต่ใช้ earthworm เป็น transport host ได้"
+  }
+  {
+    q: "พยาธิตัวกลมในสัตว์ปีกชนิดใดในวงจรชีวิตจะมี intermediate host หรือไม่มี intermediate host ก็ได้",
+    choices: [
+      "Ascaridia galli",
+      "Capillaria annulata",
+      "Capillaria contorta",
+      "Syngamus trachea",
+      "Heterakis gallinarum"
+    ],
+    a: 2,
+    why: "<i>Capillaria contorta</i> อาศัยใน esophagus และ crop ของสัตว์ปีก วงจรชีวิตได้ทั้งแบบ direct และ indirect โดย earthworm เป็น intermediate host เมื่อกินไข่ที่มี L3 หรือตัวอ่อนในไส้เดือนจะติดเชื้อได้"
+  },
+  {
+    q: "พยาธิตัวกลมในสัตว์ปีกชนิดใดสามารถติดต่อเข้าสู่โฮสต์ได้ 3 ทาง คือ กินไข่ที่มีตัวอ่อนระยะติดต่อ (L3), กินตัวอ่อนระยะติดต่อ (L3), และกิน transport host ที่มีตัวอ่อนระยะติดต่อ (L3)",
+    choices: [
+      "Capillaria annulata",
+      "Syngamus trachea",
+      "Dispharynx spiralis",
+      "Tetrameres fissispina",
+      "Gongylonema ingluvicola"
+    ],
+    a: 1,
+    why: "<i>Syngamus trachea</i> มีการติดเชื้อได้ 3 ทาง คือ กินไข่ที่มี L3, กินตัวอ่อนอิสระ L3, หรือกิน transport host เช่น earthworm, slug หรือ snail ที่มี L3 ตัวอ่อนจะไปที่ trachea ทำให้เกิดอาการหายใจลำบาก (gapeworm)"
+  }
+
+  {
+    q: "พยาธิตัวกลมในสัตว์ปีกชนิดใด ตัวเต็มวัยมีสีแดง ตัวผู้และตัวเมียอยู่ใกล้ชิดขณะเกาะกันตลอดเวลาเป็นรูปตัว Y",
+    choices: [
+      "Capillaria annulata",
+      "Syngamus trachea",
+      "Dispharynx spiralis",
+      "Oxyspirura mansoni",
+      "Gongylonema ingluvicola"
+    ],
+    a: 1,
+    why: "<i>Syngamus trachea</i> หรือ red gapeworm อาศัยใน trachea ของสัตว์ปีก ตัวเต็มวัยสีแดงจากการดูดเลือด ตัวผู้และตัวเมียจับคู่ถาวรเป็นรูปตัว Y มี buccal capsule คล้ายถ้วยและมีฟัน 6–10 ซี่"
+  },
+  {
+    q: "พยาธิตัวกลม <i>Dispharynx spiralis</i> ในสัตว์ปีก ข้อใดผิด",
+    choices: [
+      "ไข่พยาธิมีตัวอ่อนเจริญอยู่ภายใน",
+      "ตัวผู้มี boat-shaped right spicule",
+      "ผิวหนังด้านหน้าของตัวเต็มวัยมี cordon",
+      "ตัวผู้มี precloacal papillae และ postcloacal papillae",
+      "ตัวผู้มี precloacal sucker"
+    ],
+    a: 4,
+    why: "<i>Dispharynx spiralis</i> ไม่มี precloacal sucker ตัวผู้มี precloacal และ postcloacal papillae ส่วน anterior มี cordon 4 เส้น ใช้ arthropod เช่น cockroach เป็น intermediate host"
+  }
+  {
+    q: "พยาธิตัวกลมในสัตว์ปีกชนิดใดจะพบตัวอ่อนเจริญอยู่ภายในไข่ในขณะเมื่อปนออกมากับอุจจาระ",
+    choices: [
+      "Ascaridia galli",
+      "Capillaria annulata",
+      "Syngamus trachea",
+      "Heterakis gallinarum",
+      "Gongylonema ingluvicola"
+    ],
+    a: 4,
+    why: "<i>Gongylonema ingluvicola</i> เป็นพยาธิใน esophagus และ crop ของสัตว์ปีก ไข่ที่ออกมากับอุจจาระเป็นแบบ embryonated (มีตัวอ่อนเจริญแล้ว) ต่างจากชนิดอื่นที่ยังไม่เจริญเต็มที่"
+  },
+  {
+    q: "ไข่พยาธิตัวกลมในสัตว์ปีกชนิดใดมีลักษณะคล้ายกับไข่ของพยาธิตัวกลม <i>Heterakis gallinarum</i>",
+    choices: [
+      "Ascaridia galli",
+      "Capillaria annulata",
+      "Dispharynx spiralis",
+      "Syngamus trachea",
+      "Oxyspirura mansoni"
+    ],
+    a: 0,
+    why: "ไข่ของ <i>Ascaridia galli</i> มีลักษณะคล้ายกับ <i>Heterakis gallinarum</i> คือเปลือกเรียบ หนา สีน้ำตาลอ่อน รูปร่างรี ต่างกันเพียงเล็กน้อยที่ขนาด (A. galli: 75–80×45–50 µm; H. gallinarum: 65–80×35–46 µm)"
+  }
+  {
+    q: "พยาธิตัวกลมในสัตว์ปีกชนิดใดที่ตัวเมียจะฝังตัวอยู่ในผนังของ proventriculus มองเห็นเป็นจุดสีแดงเข้มหรือดำจากผนังด้านนอก",
+    choices: [
+      "Capillaria annulata",
+      "Capillaria contorta",
+      "Dispharynx spiralis",
+      "Tetrameres fissispina",
+      "Gongylonema ingluvicola"
+    ],
+    a: 3,
+    why: "<i>Tetrameres fissispina</i> พบใน proventriculus ของสัตว์ปีก ตัวเมียฝังในผนังจนเห็นเป็นจุดสีแดงเข้มหรือดำจากภายนอก ทำให้เกิด proventriculitis และรบกวนการย่อยอาหาร"
+  },
+  {
+    q: "สัตว์ปีกแสดงอาการทางคลินิก โดยใช้เท้าเกาหรือเช็ดที่ตา หนังตาที่สามบวม และเกิดโรคตาอักเสบ เกิดจากพยาธิตัวกลมชนิดใด",
+    choices: [
+      "Capillaria annulata",
+      "Syngamus trachea",
+      "Dispharynx spiralis",
+      "Oxyspirura mansoni",
+      "Gongylonema ingluvicola"
+    ],
+    a: 3,
+    why: "<i>Oxyspirura mansoni</i> หรือ eyeworm อาศัยใต้ conjunctiva และ nictitating membrane ของตา ทำให้เกิดการอักเสบ บวม น้ำตาไหล และตาบอดได้ ใช้ cockroach เป็น intermediate host"
+  }
+  {
+    q: "สัตว์ปีกแสดงอาการทางคลินิก โดยการสะบัดหัวและไอ หายใจลำบาก เนื่องจากมีมูกไปอุดตันทางเดินอากาศ เกิดจากพยาธิตัวกลมชนิดใด",
+    choices: [
+      "Capillaria annulata",
+      "Syngamus trachea",
+      "Dispharynx spiralis",
+      "Oxyspirura mansoni",
+      "Gongylonema ingluvicola"
+    ],
+    a: 1,
+    why: "<i>Syngamus trachea</i> หรือ red gapeworm อาศัยใน trachea ของสัตว์ปีก ทำให้เกิดการอุดกั้นทางเดินหายใจ สัตว์จะสะบัดหัว อ้าปากหายใจ และมีเสียงหายใจดัง (gaping)"
+  },
+  {
+    q: "ในสัตว์ปีกพบรอยการไชของตัวอ่อนพยาธิที่เยื่อบุลำไส้เล็ก ทำให้เกิดการอักเสบและเลือดออก และพบตัวเต็มวัยอยู่ในลำไส้เล็กจากพยาธิตัวกลมชนิดใด",
+    choices: [
+      "Ascaridia galli",
+      "Capillaria annulata",
+      "Oxyspirura mansoni",
+      "Heterakis gallinarum",
+      "Tetrameres fissispina"
+    ],
+    a: 0,
+    why: "<i>Ascaridia galli</i> เป็นพยาธิในลำไส้เล็กของสัตว์ปีก ตัวอ่อนจะไชเข้าเยื่อบุลำไส้ก่อให้เกิดการอักเสบและเลือดออก พบมากในลูกไก่ และการติดเชื้อรุนแรงอาจทำให้ลำไส้อุดตันได้"
+  }
+  {
+    q: "ไข่ของพยาธิตัวกลมในสัตว์ปีกชนิดใดเป็นพาหะนำเชื้อโปรโตซัว <i>Histomonas meleagridis</i> มาสู่ไก่งวง",
+    choices: [
+      "Ascaridia galli",
+      "Dispharynx spiralis",
+      "Oxyspirura mansoni",
+      "Heterakis gallinarum",
+      "Gongylonema ingluvicola"
+    ],
+    a: 3,
+    why: "ไข่ของ <i>Heterakis gallinarum</i> สามารถนำพาโปรโตซัว <i>Histomonas meleagridis</i> ซึ่งก่อโรค blackhead disease (histomoniasis) ในไก่งวงเข้าสู่ร่างกายได้"
+  },
+  {
+    q: "พยาธิตัวกลมในสัตว์ปีกชนิดใดมีแมลงสาบเป็น intermediate host",
+    choices: [
+      "Ascaridia galli",
+      "Capillaria annulata",
+      "Capillaria contorta",
+      "Heterakis gallinarum",
+      "Oxyspirura mansoni"
+    ],
+    a: 4,
+    why: "<i>Oxyspirura mansoni</i> หรือ eyeworm ใช้ cockroach (<i>Pycnoscelus surinamensis</i>) เป็น intermediate host ระยะติดต่อคือ L3 เมื่อสัตว์ปีกกินแมลงสาบเข้าไปจะติดเชื้อและพยาธิจะไปอยู่ที่เยื่อบุตา"
+  }
+  {
+    q: "พยาธิตัวกลม <i>Capillaria annulata</i> ในสัตว์ปีก ข้อใดถูก",
+    choices: [
+      "ตัวผู้มี caudal alae",
+      "ตัวผู้มี spicules 2 อัน",
+      "ตัวเต็มวัยมี strongyliform oesophagus",
+      "ไข่พยาธิมี transparent plug อยู่ขั้วด้านเดียว",
+      "ตัวเต็มวัยมี cuticle ที่ด้านหลังของหัวมีลักษณะโป่งนูน"
+    ],
+    a: 4,
+    why: "<i>Capillaria annulata</i> เป็นพยาธิใน crop หรือ esophagus ของสัตว์ปีก ตัวเต็มวัยมีลักษณะ filamentous และมี cuticle ที่ด้านหลังของหัวโป่งนูน ใช้แยกจาก <i>C. contorta</i>"
+  },
+  {
+    q: "ไข่ของพยาธิตัวกลมในสัตว์ปีกชนิดใดมี operculum หรือ transparent plugs อยู่ที่ขั้วทั้งสองด้าน",
+    choices: [
+      "Dispharynx spiralis",
+      "Oxyspirura mansoni",
+      "Tetrameres americana",
+      "Gongylonema ingluvicola",
+      "Syngamus trachea"
+    ],
+    a: 4,
+    why: "ไข่ของ <i>Syngamus trachea</i> มี operculum หนาอยู่ที่ขั้วทั้งสองด้าน ภายในมี blastomere 8–16 เซลล์เมื่อออกจากร่างกาย เป็นลักษณะจำเพาะของไข่ชนิดนี้"
+  }
+  {
+    q: "พยาธิตัวกลมในสัตว์ปีกชนิดใด ตัวเต็มวัยมี cuticle ทางด้านหน้าของลำตัวมีลักษณะเป็นปุ่มกลมหรือรี และเรียงเป็นแถวตามยาว",
+    choices: [
+      "Ascaridia galli",
+      "Capillaria contorta",
+      "Dispharynx spiralis",
+      "Oxyspirura mansoni",
+      "Gongylonema ingluvicola"
+    ],
+    a: 4,
+    why: "<i>Gongylonema ingluvicola</i> มี cuticular plates รูปกลมหรือรี เรียงเป็นแนวยาวบริเวณด้านหน้าของลำตัว เป็นลักษณะเด่นจำเพาะ พบใน esophagus และ crop ของสัตว์ปีก"
+  },
+  {
+    q: "พยาธิตัวกลมในสัตว์ปีกชนิดใดที่ตัวผู้กับตัวเมียมี sexual dimorphism",
+    choices: [
+      "Ascaridia galli",
+      "Capillaria annulata",
+      "Oxyspirura mansoni",
+      "Heterakis gallinarum",
+      "Tetrameres americana"
+    ],
+    a: 4,
+    why: "<i>Tetrameres americana</i> มี sexual dimorphism เด่น ตัวเมียสีแดงเข้ม รูปร่างกลมเกือบทรงกลม ส่วนตัวผู้เรียวยาว สีซีดกว่า อาศัยใน proventriculus ของสัตว์ปีก"
+  }
+  {
+    q: "พยาธิตัวกลมชนิดใดที่สัตว์ปีกสามารถติดพยาธิได้จากการกินไข่พยาธิที่มีตัวอ่อนระยะที่ 2 เจริญอยู่ภายใน หรือกิน transport host ที่มีตัวอ่อนระยะติดต่อ",
+    choices: [
+      "Ascaridia galli",
+      "Capillaria contorta",
+      "Capillaria annulata",
+      "Heterakis gallinarum",
+      "Tetrameres americana"
+    ],
+    a: 3,
+    why: "<i>Heterakis gallinarum</i> มีวงจรชีวิตแบบ direct ไม่มี intermediate host แต่ใช้ earthworm เป็น transport host ระยะติดต่อคือ L2 ภายในไข่หรือในไส้เดือน"
+  },
+  {
+    q: "พยาธิตัวกลม <i>Ascaridia galli</i> ในสัตว์ปีก ข้อใดผิด",
+    choices: [
+      "ตัวผู้มี spicules 2 อัน",
+      "ตัวผู้มี precloacal sucker",
+      "ตัวผู้มี asymmetrical caudal alae",
+      "ตัวเต็มวัยมี strongyliform oesophagus",
+      "ตัวผู้มี precloacal papillae และ postcloacal papillae"
+    ],
+    a: 2,
+    why: "<i>Ascaridia galli</i> ตัวผู้มี small caudal alae แบบ symmetrical, มี precloacal sucker หนึ่งอัน และ 10 คู่ของ cloacal papillae"
+  },
   {q:"พยาธิตัวใดมีรูปร่างเรียวยาว ปลายหัวโป่งเล็กน้อย และมี stichosome esophagus ชัดเจน?",
    choices:["Capillaria annulata","Ascaridia galli","Syngamus trachea","Gongylonema ingluvicola","Dispharynx spiralis"],
    a:0,
@@ -481,7 +721,6 @@ function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const 
    ],
    a:2,
    why:"Tetrameres americana ใช้ cockroach/beetle เป็น IH ไม่ใช่ earthworm"}
-
 ];
 
 // True/False — Poultry Nematodes (Refined & Re-checked, 20 ข้อ)
