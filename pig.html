@@ -83,44 +83,45 @@ function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const 
 
 /* ---------- DATA: sites/prediction (ของเดิมคุณวางต่อได้เลย) ---------- */
 const SITES = [
-  "Stomach",
-  "Small intestine",
-  "Large intestine & Caecum",
-  "Lungs / Trachea / Bronchi",
-  "Peritoneal cavity",
-  "Subcutaneous / Skin",
-  "Eye / Wound (Summer sore)"
+  "Stomach (กระเพาะ)",
+  "Small intestine (ลำไส้เล็ก)",
+  "Large intestine & Caecum (ลำไส้ใหญ่ & ไส้ตัน)",
+  "Lungs / Bronchi (ปอด/หลอดลม)",
+  "Kidney / Perirenal tissues & Ureters (ไต/รอบไต/ท่อไต)",
+  "Esophagus (หลอดอาหาร)",
+  "Striated muscle (กล้ามเนื้อลาย)"
 ];
 
 const PARASITES = [
   // Stomach
-  { name:"Draschia megastoma", site:"Stomach" },
-  { name:"Habronema muscae", site:"Stomach" },
-  { name:"Habronema microstoma", site:"Stomach" },
-  { name:"Trichostrongylus axei", site:"Stomach" },
+  { name:"Hyostrongylus rubidus (red stomach worm)", site:"Stomach (กระเพาะ)" },
+  { name:"Trichostrongylus axei",                    site:"Stomach (กระเพาะ)" },
+  { name:"Physocephalus sexalatus",                  site:"Stomach (กระเพาะ)" },
+  { name:"Ascarops strongylina",                     site:"Stomach (กระเพาะ)" },
 
   // Small intestine
-  { name:"Strongyloides westeri", site:"Small intestine" },
-  { name:"Parascaris equorum", site:"Small intestine"" },
-  { name:"Strongylus edentatus", site:"Small intestine" },
-  { name:"Strongylus equinus", site:"Small intestine" },
-  { name:"Cyathostomum spp. (small strongyles)", site:"Small intestine" },
+  { name:"Ascaris suum",                             site:"Small intestine (ลำไส้เล็ก)" },
+  { name:"Strongyloides ransomi",                    site:"Small intestine (ลำไส้เล็ก)" },
+  { name:"Globocephalus urosubulatus (hookworm)",    site:"Small intestine (ลำไส้เล็ก)" },
+  { name:"Capillaria (Aonchotheca) suis",            site:"Small intestine (ลำไส้เล็ก)" },
 
   // Large intestine & Caecum
-  { name:"Oxyuris equi", site:"Large intestine & Caecum" },
+  { name:"Trichuris suis",                           site:"Large intestine & Caecum (ลำไส้ใหญ่ & ไส้ตัน)" },
+  { name:"Oesophagostomum dentatum",                 site:"Large intestine & Caecum (ลำไส้ใหญ่ & ไส้ตัน)" },
+  { name:"Oesophagostomum quadrispinulatum",         site:"Large intestine & Caecum (ลำไส้ใหญ่ & ไส้ตัน)" },
 
-  // Lungs / Trachea / Bronchi
-  { name:"Dictyocaulus arnfieldi", site:"Lungs / Trachea / Bronchi" },
+  // Lungs / Bronchi
+  { name:"Metastrongylus apri (syn. M. elongatus)",  site:"Lungs / Bronchi (ปอด/หลอดลม)" },
+  { name:"Metastrongylus pudendotectus",             site:"Lungs / Bronchi (ปอด/หลอดลม)" },
 
-  // Peritoneal cavity
-  { name:"Setaria equina", site:"Peritoneal cavity" },
+  // Kidney / Perirenal tissues & Ureters
+  { name:"Stephanurus dentatus (kidney worm)",       site:"Kidney / Perirenal tissues & Ureters (ไต/รอบไต/ท่อไต)" },
 
-  // Subcutaneous / Skin
-  { name:"Onchocerca cervicalis", site:"Subcutaneous / Skin" },
+  // Esophagus
+  { name:"Gongylonema pulchrum",                     site:"Esophagus (หลอดอาหาร)" },
 
-  // Eye / Wound (Summer sore)
-  { name:"Habronema spp. (larval migration)", site:"Eye / Wound (Summer sore)" },
-  { name:"Draschia megastoma (larval migration)", site:"Eye / Wound (Summer sore)" }
+  // Striated muscle
+  { name:"Trichinella spiralis",                     site:"Striated muscle (กล้ามเนื้อลาย)" }
 ];
 
 
