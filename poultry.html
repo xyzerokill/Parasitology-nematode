@@ -49,53 +49,45 @@
 </head>
 <body>
 <header>
-  <!-- ปุ่มกลับหน้าแรก (วางไว้ใต้ <header> หรือบนสุดของ <main>) -->
-<div style="margin:10px 0;">
-  <a href="index.html" 
-     style="display:inline-block;padding:8px 14px;background:#0b2436;
-            border:1px solid #0ea5e9;border-radius:10px;
-            color:#7dd3fc;text-decoration:none;font-weight:600;">
-    🏠กลับไปหน้าแรก
-  </a>
-</div>
-
+  <div style="margin:10px 0;">
+    <a href="index.html" style="display:inline-block;padding:8px 14px;background:#0b2436;border:1px solid #0ea5e9;border-radius:10px;color:#7dd3fc;text-decoration:none;font-weight:600;">🏠กลับไปหน้าแรก</a>
+  </div>
   <div class="wrap">
-    <h1>🐔 พยาธิตัวกลมในสัตว์ปีก – ชุดแบบทดสอบ (ภาษาไทย)</h1>
-    <div class="muted">สามโหมดในหน้าเดียว: <span class="pill">Prediction site</span> · <span class="pill">MCQ</span> · <span class="pill">True/False</span></div>
+    <h1>🐔พยาธิตัวกลมในสัตว์ปีก – ชุดแบบทดสอบ (ภาษาไทย)</h1>
+    <div class="muted">สี่โหมดในหน้าเดียว: <span class="pill">Prediction site</span> · <span class="pill">MCQ 1</span> · <span class="pill">MCQ 2</span> · <span class="pill">True/False</span></div>
     <div class="tabs" id="tabs"></div>
   </div>
 </header>
+
 <main class="wrap">
   <section id="mode-predict" class="card hide"></section>
-  <section id="mode-mcq" class="card hide"></section>
+  <section id="mode-mcq1" class="card hide"></section>
+  <section id="mode-mcq2" class="card hide"></section>
   <section id="mode-tf" class="card hide"></section>
   <section class="card">
     <details>
       <summary>📝 วิธีใช้</summary>
       <ul>
-        <li><b>Prediction site</b>: เลือกตำแหน่งอาศัย (predilection site) ให้ครบ → กด <span class="inline-kbd">ตรวจคำตอบ</span> เพื่อดูคะแนนและเฉลย</li>
-        <li><b>MCQ</b>: ตอบทีละข้อ สุ่มลำดับทุกครั้ง ต้องคลิกคำตอบก่อน จึงเห็นเฉลยและไปข้อถัดไป</li>
-        <li><b>True/False</b>: แนวเดียวกับ MCQ</li>
-        <li>คง <i>technical terms</i> ภาษาอังกฤษ (เช่น stichosome, precloacal sucker, cuticular cordon, intermediate/transport host ฯลฯ)</li>
+        <li><b>Prediction site</b>: เลือกตำแหน่งอาศัยให้ครบ → กด <span class="inline-kbd">ตรวจคำตอบ</span></li>
+        <li>MCQ แยกเป็นสองชุด: <b>MCQ 1</b> และ <b>MCQ 2</b></li>
       </ul>
     </details>
   </section>
 </main>
+
 <footer class="muted">© 2025 – Vet Parasitology Drill • Morphology · Life cycle · Site · Lesions</footer>
-<script>
-/***********************
- * DATA – ตำแหน่งอาศัย
- ***********************/
-const SITES = [
-  "Oesophagus & Crop (หลอดอาหาร/กระเพาะพัก)",
+
+<script defer>
+/* ---------- utils ---------- */
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
+
+/* ---------- DATA: sites/prediction (ของเดิมคุณวางต่อได้เลย) ---------- */
+const SITES = ["Oesophagus & Crop (หลอดอาหาร/กระเพาะพัก)",
   "Proventriculus (กระเพาะจริง)",
   "Small intestine (ลำไส้เล็ก)",
   "Caecum (ไส้ตัน)",
   "Eyes (ตา)",
-  "Trachea (หลอดลม)",
-];
-
-// Mapping สำหรับโหมด Prediction Site
+  "Trachea (หลอดลม)"];
 const PARASITES = [
   {name:"Capillaria annulata", site:"Oesophagus & Crop (หลอดอาหาร/กระเพาะพัก)"},
   {name:"Capillaria contorta", site:"Oesophagus & Crop (หลอดอาหาร/กระเพาะพัก)"},
@@ -109,13 +101,9 @@ const PARASITES = [
   {name:"Syngamus trachea", site:"Trachea (หลอดลม)"},
 ];
 
-function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
-
-/***********************
- * MCQ (ภาษาไทย 40 ข้อ)
- ***********************/
- const MCQ = [
-   {
+/* ---------- MCQ datasets: ใช้ชื่อ mcq1/mcq2 เท่านั้น ---------- */
+const mcq1 = [
+    {
     q: "สัตว์ปีกสามารถติดพยาธิตัวกลม <i>Ascaridia galli</i> ได้ทางใด",
     choices: [
       "กินตัวอ่อนที่มีตัวอ่อนระยะติดต่อ",
@@ -355,7 +343,9 @@ function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const 
     a: 2,
     why: "<i>Ascaridia galli</i> ตัวผู้มี small caudal alae แบบ symmetrical, มี precloacal sucker หนึ่งอัน และ 10 คู่ของ cloacal papillae"
   },
-  {q:"พยาธิตัวใดมีรูปร่างเรียวยาว ปลายหัวโป่งเล็กน้อย และมี stichosome esophagus ชัดเจน?",
+  ];
+  
+  const mcq2 = [{q:"พยาธิตัวใดมีรูปร่างเรียวยาว ปลายหัวโป่งเล็กน้อย และมี stichosome esophagus ชัดเจน?",
    choices:["Capillaria annulata","Ascaridia galli","Syngamus trachea","Gongylonema ingluvicola","Dispharynx spiralis"],
    a:0,
    why:"หัวบวมเล็กน้อย + stichosome เป็นลักษณะเด่นของ Capillaria โดยเฉพาะ C. annulata ใน oesophagus/crop."},
@@ -827,49 +817,37 @@ const TF = [
   }
 ];
 
-
-/***********************
- * UI – Tabs
- ***********************/
- const tabsEl = document.getElementById('tabs');
+/* ---------- Tabs ---------- */
+const tabsEl = document.getElementById('tabs');
 const views = [
   {id:'mode-predict', title:'🔮 Prediction site'},
-  {id:'mode-mcq',      title:'🧩 MCQ'},
-  {id:'mode-tf',       title:'✅ True / False'}
+  {id:'mode-mcq1',    title:`🧩 MCQ 1 (${mcq1.length} ข้อ)`},
+  {id:'mode-mcq2',    title:`🧩 MCQ 2 (${mcq2.length} ข้อ)`},
+  {id:'mode-tf',      title:`✅ True / False (${TF.length} ข้อ)`}
 ];
 let activeTab = views[0].id;
 
 function renderTabs(){
-  tabsEl.innerHTML = '';
+  tabsEl.innerHTML='';
   views.forEach(v=>{
-    const b = document.createElement('button');
-    b.className = 'tab' + (v.id===activeTab ? ' active' : '');
-    b.textContent = v.title;
-    b.onclick = ()=>{ activeTab = v.id; updateView(); };
+    const b=document.createElement('button');
+    b.className='tab'+(v.id===activeTab?' active':'');
+    b.textContent=v.title;
+    b.onclick=()=>{ activeTab=v.id; updateView(); };
     tabsEl.appendChild(b);
   });
 }
-
 function updateView(){
   views.forEach(v=>{
-    const s = document.getElementById(v.id);
-    if(v.id===activeTab){ s.classList.remove('hide'); }
-    else{ s.classList.add('hide'); }
+    const el=document.getElementById(v.id);
+    if(!el) return;
+    (v.id===activeTab)?el.classList.remove('hide'):el.classList.add('hide');
   });
   renderTabs();
 }
+renderTabs(); updateView();
 
-renderTabs();
-
-// ⬇️ อัปเดตชื่อแท็บตามจำนวนข้อจริง (ทำหลังประกาศ views เท่านั้น)
-views[1].title = `🧩 MCQ (${MCQ.length} ข้อ)`;
-views[2].title = `✅ True / False (${TF.length} ข้อ)`;
-renderTabs();   // ให้หัวแท็บรีเฟรชเป็นข้อความใหม่
-updateView();   // โชว์แท็บแรกทันที
-
-/***********************
- * Mode 1 – Prediction site (ไทย)
- ***********************/
+/* ---------- Prediction mode (คง logic เดิมคุณ) ---------- */
 (function(){
   const host = document.getElementById('mode-predict');
   const intro = document.createElement('div');
@@ -877,7 +855,7 @@ updateView();   // โชว์แท็บแรกทันที
   host.appendChild(intro);
   const listDiv = document.createElement('div'); host.appendChild(listDiv);
   const actions = document.createElement('div'); actions.style.display='flex'; actions.style.gap='10px'; actions.style.flexWrap='wrap'; actions.style.marginTop='10px';
-  actions.innerHTML = `<button id=\"btnCheck\">ตรวจคำตอบ</button><button class=\"secondary\" id=\"btnReset\">รีเซ็ต</button>`;
+  actions.innerHTML = `<button id="btnCheck">ตรวจคำตอบ</button><button class="secondary" id="btnReset">รีเซ็ต</button>`;
   host.appendChild(actions);
   const result = document.createElement('div'); host.appendChild(result);
 
@@ -890,7 +868,7 @@ updateView();   // โชว์แท็บแรกทันที
       card.innerHTML = `
         <div>
           <h4>${i+1}. <span class="k">${row.name}</span></h4>
-          <div class="muted mini">เลือก: Oesophagus & Crop · Proventriculus · Small intestine · Caecum · Eyes · Trachea</div>
+          <div class="muted mini">เลือกหนึ่ง: ${SITES.join(' · ')}</div>
         </div>
         <div>
           <select data-i="${i}">
@@ -909,9 +887,9 @@ updateView();   // โชว์แท็บแรกทันที
     })
   }
   function shuffleAll(){ choices = shuffle(PARASITES).map(p=>({name:p.name, ans:p.site, pick:''})); render(); result.innerHTML=''; }
-  document.getElementById('btnShuffle').onclick = shuffleAll;
-  document.getElementById('btnReset').onclick = shuffleAll;
-  document.getElementById('btnCheck').onclick = ()=>{
+  host.querySelector('#btnShuffle').onclick = shuffleAll;
+  host.querySelector('#btnReset').onclick = shuffleAll;
+  host.querySelector('#btnCheck').onclick = ()=>{
     let correct=0; const total=choices.length;
     const rows = choices.map((r,i)=>{
       const ok = r.pick===r.ans; if(ok) correct++;
@@ -922,126 +900,71 @@ updateView();   // โชว์แท็บแรกทันที
   shuffleAll();
 })();
 
-/***********************
- * Mode 2 – MCQ (ไทย) — ทำทุกข้อที่มี
- ***********************/
- (function(){
-  const host=document.getElementById('mode-mcq');
-  // ใช้ทุกข้อที่มี (ไม่ slice)
-  let order = shuffle(MCQ.map((_,i)=>i));
-  let i=0, score=0;
-  const total = order.length;
+/* ---------- MCQ renderer (ใช้ซ้ำได้) ---------- */
+function buildMCQMode(hostId, DATA){
+  const host=document.getElementById(hostId);
+  if(!host) return;
+  if(!DATA || DATA.length===0){
+    host.innerHTML = `<div class="qcard muted">ยังไม่มีคำถามในชุดนี้ — ใส่ที่ตัวแปร <b>${hostId==='mode-mcq1'?'mcq1':'mcq2'}</b></div>`;
+    return;
+  }
+  let order = shuffle(DATA.map((_,i)=>i));
+  let i=0, score=0; const total=order.length;
 
   const hud=document.createElement('div'); hud.className='scorebox';
-  hud.innerHTML = `<div class="badge" id="mcqProg">ข้อ 1 / ${total}</div>
-                   <div class="badge" id="mcqScore">คะแนน 0</div>
-                   <button class="secondary" id="mcqRestart">เริ่มใหม่/สุ่มใหม่</button>`;
+  hud.innerHTML = `<div class="badge" id="${hostId}-prog">ข้อ 1 / ${total}</div>
+                   <div class="badge" id="${hostId}-score">คะแนน 0</div>
+                   <button class="secondary" id="${hostId}-restart">เริ่มใหม่/สุ่มใหม่</button>`;
   host.appendChild(hud);
 
   const qc=document.createElement('div'); qc.className='qcard'; host.appendChild(qc);
 
   function renderQ(){
-    const item = MCQ[order[i]];
-    document.getElementById('mcqProg').textContent = `ข้อ ${i+1} / ${total}`;
+    const item = DATA[order[i]];
+    document.getElementById(`${hostId}-prog`).textContent = `ข้อ ${i+1} / ${total}`;
     qc.innerHTML = `<div><b>Q${i+1}.</b> ${item.q}</div>`;
     const box=document.createElement('div'); box.className='choices'; qc.appendChild(box);
-    const shuffledChoices = shuffle(item.choices.map((c,idx)=>({c,idx})));
+    const shuffled = shuffle(item.choices.map((c,idx)=>({c,idx})));
     let locked=false;
 
-    shuffledChoices.forEach(({c,idx})=>{
-      const div=document.createElement('div');
-      div.className='choice'; div.innerHTML=c; box.appendChild(div);
+    shuffled.forEach(({c,idx})=>{
+      const div=document.createElement('div'); div.className='choice'; div.innerHTML=c; box.appendChild(div);
       div.onclick=()=>{
         if(locked) return; locked=true;
-        const isCorrect = idx===item.a;
-        if(isCorrect){div.classList.add('correct'); score++;}
-        else{div.classList.add('wrong');}
-        // ไฮไลต์ตัวที่ถูก
+        const ok = idx===item.a;
+        div.classList.add(ok?'correct':'wrong');
+        if(ok) score++;
         [...box.children].forEach(el=>{
-          const originalIndex=item.choices.indexOf(el.innerHTML);
-          if(originalIndex===item.a) el.classList.add('correct');
+          const oi=item.choices.indexOf(el.innerHTML);
+          if(oi===item.a) el.classList.add('correct');
         });
-        // เฉลย
         const exp=document.createElement('div'); exp.className='answer';
-        exp.innerHTML = `<b>เฉลย:</b> ${item.choices[item.a]}<br><span class="muted">เหตุผล:</span> ${item.why}`;
+        exp.innerHTML=`<b>เฉลย:</b> ${item.choices[item.a]}<br><span class="muted">เหตุผล:</span> ${item.why}`;
         qc.appendChild(exp);
-        // ปุ่มถัดไป
         const nx=document.createElement('div'); nx.style.marginTop='10px';
-        nx.innerHTML = `<button id="btnNext">ถัดไป</button>`; qc.appendChild(nx);
-        document.getElementById('mcqScore').textContent = `คะแนน ${score}`;
-        document.getElementById('btnNext').onclick = ()=>{
+        nx.innerHTML=`<button id="${hostId}-next">ถัดไป</button>`; qc.appendChild(nx);
+        document.getElementById(`${hostId}-score`).textContent=`คะแนน ${score}`;
+        document.getElementById(`${hostId}-next`).onclick=()=>{
           i++; if(i>=total){
-            qc.innerHTML = `<div class="row"><div class="badge">จบชุด MCQ</div><div class="badge">คะแนนรวม: ${score} / ${total}</div></div>`;
+            qc.innerHTML=`<div class="row"><div class="badge">จบชุด MCQ</div><div class="badge">คะแนนรวม: ${score} / ${total}</div></div>`;
           } else { renderQ(); }
         };
       };
     });
   }
 
-  document.getElementById('mcqRestart').onclick=()=>{
-    order = shuffle(MCQ.map((_,i)=>i)); i=0; score=0;
-    document.getElementById('mcqScore').textContent='คะแนน 0';
+  document.getElementById(`${hostId}-restart`).onclick=()=>{
+    order = shuffle(DATA.map((_,i)=>i)); i=0; score=0;
+    document.getElementById(`${hostId}-score`).textContent='คะแนน 0';
     renderQ();
   };
 
   renderQ();
-})();
+}
 
-/***********************
- * Mode 3 – True / False (ไทย) — ทำทุกข้อที่มี
- ***********************/
- (function(){
-  const host=document.getElementById('mode-tf');
-  // ใช้ทุกข้อที่มี (ไม่ slice)
-  let order = shuffle(TF.map((_,i)=>i));
-  let i=0, score=0;
-  const total = order.length;
-
-  const hud=document.createElement('div'); hud.className='scorebox';
-  hud.innerHTML = `<div class="badge" id="tfProg">ข้อ 1 / ${total}</div>
-                   <div class="badge" id="tfScore">คะแนน 0</div>
-                   <button class="secondary" id="tfRestart">เริ่มใหม่/สุ่มใหม่</button>`;
-  host.appendChild(hud);
-
-  const qc=document.createElement('div'); qc.className='qcard'; host.appendChild(qc);
-
-  function renderQ(){
-    const item=TF[order[i]];
-    document.getElementById('tfProg').textContent=`ข้อ ${i+1} / ${total}`;
-    qc.innerHTML = `<div><b>Q${i+1}.</b> ${item.q}</div>`;
-
-    const box=document.createElement('div'); box.className='choices'; qc.appendChild(box);
-    const btnT=document.createElement('button'); btnT.textContent='ถูก (True)';
-    const btnF=document.createElement('button'); btnF.textContent='ผิด (False)'; btnF.className='secondary';
-    const btnRow=document.createElement('div'); btnRow.style.display='flex'; btnRow.style.gap='8px'; btnRow.append(btnT,btnF); qc.appendChild(btnRow);
-
-    let locked=false;
-    function mark(ans){
-      if(locked) return; locked=true;
-      const cor = item.a===ans; if(cor) score++;
-      document.getElementById('tfScore').textContent=`คะแนน ${score}`;
-      const exp=document.createElement('div'); exp.className='answer';
-      exp.innerHTML=`<b>เฉลย:</b> ${item.a?'<span class="ok">True</span>':'<span class="ng">False</span>'} · <span class="muted">เหตุผล:</span> ${item.why}`;
-      qc.appendChild(exp);
-      const nx=document.createElement('div'); nx.style.marginTop='10px'; nx.innerHTML='<button id="tfNext">ถัดไป</button>'; qc.appendChild(nx);
-      document.getElementById('tfNext').onclick=()=>{
-        i++; if(i>=total){
-          qc.innerHTML = `<div class="row"><div class="badge">จบชุด True/False</div><div class="badge">คะแนนรวม: ${score} / ${total}</div></div>`;
-        } else { renderQ(); }
-      };
-    }
-    btnT.onclick=()=>mark(true); btnF.onclick=()=>mark(false);
-  }
-
-  document.getElementById('tfRestart').onclick=()=>{
-    order = shuffle(TF.map((_,i)=>i)); i=0; score=0;
-    document.getElementById('tfScore').textContent='คะแนน 0';
-    renderQ();
-  };
-
-  renderQ();
-})();
-
+/* ---------- สร้างโหมด MCQ1 + MCQ2 ---------- */
+buildMCQMode('mode-mcq1', mcq1);
+buildMCQMode('mode-mcq2', mcq2);
 </script>
 </body>
 </html>
