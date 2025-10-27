@@ -152,9 +152,13 @@ const HOST_CHOICES = uniqHosts().sort((a,b)=>a.localeCompare(b));
 let state = { correct:0, total:0 };
 function resetScore(){ state.correct=0; state.total=0; }
 function setScoreDisplay(){
-  $('.score')?.textContent = state.correct;
-  $('.total')?.textContent = state.total;
+  const s = $('.score');
+  if (s) s.textContent = state.correct;
+
+  const t = $('.total');
+  if (t) t.textContent = state.total;
 }
+
 
 /* ---------- Router ---------- */
 function setActiveNav(){
