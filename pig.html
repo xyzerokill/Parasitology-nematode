@@ -127,12 +127,400 @@ const PARASITES = [
 
 /* ---------- MCQ datasets: ใช้ชื่อ mcq1/mcq2 เท่านั้น ---------- */
 const mcq1 = [
-    
-  ];
+  {
+    q:"1. พยาธิชนิดใดมีชื่อสามัญว่า Swine round worm",
+    choices:[
+      "Single spiral-coil thickening",
+      "Swine Threadworm",
+      "Swine thorny headed worm",
+      "internal leaf crown at buccal capsule",
+      "Swine round worm",
+      "Swine kidney worm",
+      "Triple spiral-coil thickening",
+      "Swine nodular worm",
+      "Swine whipworm",
+      "Encysted larvae in muscle"
+    ],
+    a:4,
+    why:"Ascaris suum เป็น Swine roundworm พบในลำไส้เล็กของสุกร ทำให้เกิด white spot liver"
+  },
+  {
+    q:"2. พยาธิชนิดใดมีชื่อสามัญว่า Swine Threadworm",
+    choices:[
+      "Single spiral-coil thickening",
+      "Swine Threadworm",
+      "Swine thorny headed worm",
+      "internal leaf crown at buccal capsule",
+      "Swine round worm",
+      "Swine kidney worm",
+      "Triple spiral-coil thickening",
+      "Swine nodular worm",
+      "Swine whipworm",
+      "Encysted larvae in muscle"
+    ],
+    a:1,
+    why:"Strongyloides ransomi เรียกว่า Swine threadworm ติดต่อผ่านน้ำนมและทำให้ลูกสุกรท้องเสียเฉียบพลัน"
+  },
+  {
+    q:"3. พยาธิชนิดใดมีลักษณะ triple spiral-coil thickening ที่ปลายตัวผู้",
+    choices:[
+      "Single spiral-coil thickening",
+      "Swine Threadworm",
+      "Swine thorny headed worm",
+      "internal leaf crown at buccal capsule",
+      "Swine round worm",
+      "Swine kidney worm",
+      "Triple spiral-coil thickening",
+      "Swine nodular worm",
+      "Swine whipworm",
+      "Encysted larvae in muscle"
+    ],
+    a:6,
+    why:"Ascarops strongylina มีลักษณะ triple spiral-coil thickening รอบ buccal capsule เป็นจุดจำแนกสำคัญ"
+  },
+  {
+    q:"4. พยาธิชนิดใดมีลักษณะ single spiral-coil thickening ที่ปลายตัวผู้",
+    choices:[
+      "Single spiral-coil thickening",
+      "Swine Threadworm",
+      "Swine thorny headed worm",
+      "internal leaf crown at buccal capsule",
+      "Swine round worm",
+      "Swine kidney worm",
+      "Triple spiral-coil thickening",
+      "Swine nodular worm",
+      "Swine whipworm",
+      "Encysted larvae in muscle"
+    ],
+    a:0,
+    why:"Physocephalus sexalatus มี single spiral-coil thickening รอบปาก ใช้หมัดเป็น intermediate host"
+  },
+  {
+    q:"5. พยาธิชนิดใดมีชื่อสามัญว่า Swine nodular worm",
+    choices:[
+      "Single spiral-coil thickening",
+      "Swine Threadworm",
+      "Swine thorny headed worm",
+      "internal leaf crown at buccal capsule",
+      "Swine round worm",
+      "Swine kidney worm",
+      "Triple spiral-coil thickening",
+      "Swine nodular worm",
+      "Swine whipworm",
+      "Encysted larvae in muscle"
+    ],
+    a:7,
+    why:"Gnathostoma hispidum เป็นพยาธิที่สร้างก้อน nodules ในผนังลำไส้สุกร เรียกว่า Swine nodular worm"
+  },
+  {
+    q:"6. พยาธิชนิดใดพบระยะ encysted larvae ในกล้ามเนื้อของสุกร",
+    choices:[
+      "Single spiral-coil thickening",
+      "Swine Threadworm",
+      "Swine thorny headed worm",
+      "internal leaf crown at buccal capsule",
+      "Swine round worm",
+      "Swine kidney worm",
+      "Triple spiral-coil thickening",
+      "Swine nodular worm",
+      "Swine whipworm",
+      "Encysted larvae in muscle"
+    ],
+    a:9,
+    why:"Trichinella spiralis มีระยะตัวอ่อน encysted ในกล้ามเนื้อลาย เป็น zoonotic disease สำคัญ"
+  },
+  {
+    q:"7. พยาธิชนิดใดมีชื่อสามัญว่า Swine whipworm",
+    choices:[
+      "Single spiral-coil thickening",
+      "Swine Threadworm",
+      "Swine thorny headed worm",
+      "internal leaf crown at buccal capsule",
+      "Swine round worm",
+      "Swine kidney worm",
+      "Triple spiral-coil thickening",
+      "Swine nodular worm",
+      "Swine whipworm",
+      "Encysted larvae in muscle"
+    ],
+    a:8,
+    why:"Trichuris suis เป็น Swine whipworm ตัวเรียวยาวเหมือนแส้ อาศัยใน cecum และ colon"
+  },
+  {
+    q:"8. พยาธิชนิดใดมีลักษณะ internal leaf crown ที่ buccal capsule",
+    choices:[
+      "Single spiral-coil thickening",
+      "Swine Threadworm",
+      "Swine thorny headed worm",
+      "internal leaf crown at buccal capsule",
+      "Swine round worm",
+      "Swine kidney worm",
+      "Triple spiral-coil thickening",
+      "Swine nodular worm",
+      "Swine whipworm",
+      "Encysted larvae in muscle"
+    ],
+    a:3,
+    why:"Oesophagostomum dentatum มี leaf crown ภายใน buccal capsule และทำให้เกิด nodules ในลำไส้ใหญ่"
+  },
+  {
+    q:"9. พยาธิชนิดใดมีชื่อสามัญว่า Swine thorny headed worm",
+    choices:[
+      "Single spiral-coil thickening",
+      "Swine Threadworm",
+      "Swine thorny headed worm",
+      "internal leaf crown at buccal capsule",
+      "Swine round worm",
+      "Swine kidney worm",
+      "Triple spiral-coil thickening",
+      "Swine nodular worm",
+      "Swine whipworm",
+      "Encysted larvae in muscle"
+    ],
+    a:2,
+    why:"Macracanthorhynchus hirudinaceus มี proboscis มีหนาม (thorny head) ใช้ด้วง dung beetle เป็น intermediate host"
+  },
+  {
+    q:"10. พยาธิชนิดใดมีชื่อสามัญว่า Swine kidney worm",
+    choices:[
+      "Single spiral-coil thickening",
+      "Swine Threadworm",
+      "Swine thorny headed worm",
+      "internal leaf crown at buccal capsule",
+      "Swine round worm",
+      "Swine kidney worm",
+      "Triple spiral-coil thickening",
+      "Swine nodular worm",
+      "Swine whipworm",
+      "Encysted larvae in muscle"
+    ],
+    a:5,
+    why:"Stephanurus dentatus เป็น Swine kidney worm พบที่รอบไตและท่อไตของสุกร ตัวอ่อน migrate ผ่านตับ"
+  }
+];
   
 const mcq2 = [
-    
-  ];
+  {
+    q:"ข้อใดผิดเกี่ยวกับพยาธิ Ascaris suum",
+    choices:[
+      "เพศผู้ยาว 15-25 ซม. กว้าง 3-4 มม. ส่วนหางมี caudal alae และมี precloacal papillae จำนวนมาก",
+      "เพศเมียยาว 20-40 ซม. กว้าง 5-6 มม. โดย vulva จะเปิดที่ประมาณ 1/3 ของความยาวลำตัวจากปลายทางด้านหน้า",
+      "ไข่พยาธิขนาด 50-75 ไมครอน มีสีน้ำตาล โดยสามารถพบได้ 3 แบบคือ Fertilized eggs, Unfertilized eggs และ Decorticated eggs",
+      "พยาธิลูกอ่อนที่เกิดจากพยาธิตัวอ่อนมักจะทำให้เกิดความเสียหายเนื่องจากการเคลื่อนที่ของตัวอ่อนไปตามอวัยวะต่างๆ เช่น ตับและปอด เป็นต้น"
+    ],
+    a:0,
+    why:"ข้อ ก ผิด — ลักษณะนี้เป็นของเพศผู้ nematode ทั่วไป ไม่ใช่ลักษณะผิดเฉพาะของ Ascaris suum"
+  },
+  {
+    q:"ข้อใดถูกต้องเกี่ยวกับพยาธิ Strongyloides ransoni",
+    choices:[
+      "พยาธิเพศเมียสามารถออกไข่เองได้เองโดยไม่ต้องผสมพันธุ์เรียกว่า parthenogenetic female ซึ่งภายในไม่มีตัวอ่อนระยะที่ 3",
+      "พยาธิฝังตัวในผนังลำไส้เล็ก บริเวณ intestinal mucosa โดยเฉพาะลำไส้ส่วน duodenum และ jejunum",
+      "พยาธินี้มักก่อโรคไม่รุนแรง แต่ในกรณีที่มีการติดพยาธิจำนวนมาก (heavy infection) โดยมักจะพบได้ในสุกรโตเต็มวัย",
+      "การวินิจฉัยเป็นการนำอุจจาระสุกรที่ถ่ายแล้วตรวจหาพยาธิเพศเมียที่ฝังอยู่ใน intestinal mucosa โดยเฉพาะลำไส้"
+    ],
+    a:1,
+    why:"Strongyloides ransomi ฝังตัวใน intestinal mucosa ของ duodenum และ jejunum ทำให้ลูกสุกรท้องเสียเฉียบพลัน โดยเฉพาะสุกรอายุน้อย"
+  },
+  {
+    q:"ไข่พยาธิชนิดใดที่พบมี mucoid plug ทั้งสองด้านของขั้ว",
+    choices:[
+      "Gnathostoma spinigerum",
+      "Gnathostoma hispidum",
+      "Gnathostoma doloresi",
+      "Gnathostoma nipponicum"
+    ],
+    a:2,
+    why:"ไข่ของ Gnathostoma doloresi มี mucoid plug ทั้งสองขั้ว เป็นลักษณะจำแนกสำคัญ"
+  },
+  {
+    q:"ข้อใดผิดเกี่ยวกับพยาธิ Gnathostoma",
+    choices:[
+      "Gnathostoma hispidum จะมีหนามเล็กๆ ปกคลุมตลอดลำตัว และที่ head bulb มีแถวของ spine ตามขวางมากกว่า 10 แถวขึ้นไป",
+      "Gnathostoma doloresi จะมีหนามเล็กๆ ปกคลุมตลอดลำตัว และที่ head bulb มีแถวของ spine ตามขวางมากกว่า 15 แถว",
+      "เป็นพยาธิ indirect life cycle โดยมีโฮสต์กึ่งกลางที่ 1 และปลากินจืดเป็นโฮสต์กึ่งกลางที่ 2",
+      "สามารถก่อให้เกิดโรค visceral larva migration ในคนได้ โดยพบว่า G. hispidum เป็นสาเหตุได้มากกว่า G. doloresi"
+    ],
+    a:1,
+    why:"Gnathostoma doloresi มีแถว spine ที่ head bulb มากกว่า 15 แถว เป็นลักษณะเฉพาะ ข้ออื่นถูก"
+  },
+  {
+    q:"ข้อใดผิดเกี่ยวกับพยาธิ Physocephalus sexalatus",
+    choices:[
+      "ผนังของ pharynx มีรูปร่างเป็น triple spiral-coil thickening โดยที่ cuticle ของลำตัวบริเวณหลังสองข้างของ pharynx จะขยายออกเรียกว่า cervical inflation",
+      "ชีพจักรเป็นแบบ indirect life cycle โดยมีโฮสต์กึ่งกลางคือแมลงปีกแข็ง (coprophagus beetle) ซึ่งกินไข่พยาธิที่มีตัวอ่อนระยะที่ 1 (L1) เข้าไป",
+      "พยาธิชนิดนี้ทำให้เกิดลักษณะของกระเพาะอาหารอักเสบ (gastritis) และอาจมีแผลหลุมในกระเพาะอาหาร (ulcer) ร่วมด้วย",
+      "การวินิจฉัยเป็นการนำอุจจาระตรวจหาไข่พยาธิหรือจากการชำแหละกระเพาะอาหารเพื่อตรวจหาพยาธิเพศเมียที่อาศัยอยู่ใน intestinal mucosa ของลำไส้เล็กส่วนต้น"
+    ],
+    a:0,
+    why:"Physocephalus sexalatus มี single spiral coil thickening ไม่ใช่ triple spiral; triple spiral เป็นของ Ascarops strongylina"
+  },
+  {
+    q:"ข้อใดผิดเกี่ยวกับพยาธิ Trichinella spiralis",
+    choices:[
+      "พยาธิเพศผู้จะไม่มี spicule แต่มี caudal appendage ขนาดเล็กจำนวน 2 อัน ซึ่งจะใช้ในระหว่างการผสมพันธุ์",
+      "หลอดอาหารจะประกอบด้วย corpus, isthmus และ bulb ซึ่งเจริญดีและจะแคบลงที่ตอนกลาง โดย bulb จะไม่ยื่นออกมามาก",
+      "ตัวอ่อนระยะที่ 1 พบได้ในกล้ามเนื้อลายใบและจะฝังตัวและตัวอ่อนระยะที่ 2-5 พบในลำไส้เล็ก",
+      "การปรุงเนื้อหมูควรให้สุกเต็มที่ที่อุณหภูมิต่ำกว่า 60°C เพื่อป้องกันการติดเชื้อจากตัวอ่อนในกล้ามเนื้อ"
+    ],
+    a:1,
+    why:"หลอดอาหารของ Trichinella spiralis เป็นแบบ stichosome esophagus ไม่ใช่ corpus-isthmus-bulb"
+  },
+  {
+    q:"ข้อใดถูกต้องเกี่ยวกับพยาธิ Oesophagostomum dentatum",
+    choices:[
+      "เป็นพยาธิตัวกลมที่มีขนาดใหญ่ ลำตัวทางด้านข้างมักโค้งงอคล้ายพยาธิไส้เดือน",
+      "ไข่ของพยาธิชนิดนี้เป็นแบบ Strongyloid ที่มีตัวอ่อนอยู่ภายใน",
+      "ระยะติดต่อ (infective stage) ของพยาธิชนิดนี้คือ ตัวอ่อนระยะที่ 4 (L4)",
+      "มักพบมีการก่อตัวของ nodule ที่ผนังลำไส้ และอาจเกิด catarrhal enteritis ได้"
+    ],
+    a:3,
+    why:"Oesophagostomum dentatum ทำให้เกิด nodules ที่ผนังลำไส้ใหญ่และเกิด catarrhal enteritis ได้"
+  },
+  {
+    q:"ข้อใดผิดเกี่ยวกับพยาธิ Metastrongylus elongatus",
+    choices:[
+      "พยาธิตัวผู้เพศมักมีขนาดเล็ก anterolateral ray มีขนาดใหญ่และปลาย ray จะรวมใหญ่ mediolateral และ posterolateral ray จะรวมกัน",
+      "พยาธิตัวเมียตอนปลายลำตัวมี prevulval swelling ซึ่งแยกออกจากลำตัวชัดเจนทาง dorsal side",
+      "ตัวอ่อนของพยาธิอาจมีความสามารถนำเชื้อไวรัสที่ทำให้เกิดไข้หวัดสุกร (swine influenza) รวมทั้งเป็น reservoir ของไวรัสที่ทำให้เกิดโรคต่อทางเดินหายใจด้วย",
+      "การป้องกันโดยการเลี้ยงสุกรที่ไม่ติดพยาธิและสุกรขนาดเล็กในพื้นที่สะอาดและควรทำการจัดการสิ่งแวดล้อมไม่ให้สุกรกินไข่พยาธิได้โดยพยาธิมีระยะติดต่อของพยาธิอยู่"
+    ],
+    a:1,
+    why:"Metastrongylus elongatus มี prevulval swelling ด้าน ventral ไม่ใช่ dorsal"
+  },
+  {
+    q:"พยาธิตัวกลมในสุกรชนิดใดที่ตัวเต็มวัยอาศัยอยู่ในกระเพาะอาหารและติดต่อสู่คนได้",
+    choices:[
+      "Ascarops strongylina",
+      "Gnathostoma hispidum",
+      "Gnathostoma doloresi",
+      "Physocephalus sexalatus"
+    ],
+    a:1,
+    why:"Gnathostoma hispidum พบในกระเพาะสุกรและเป็น zoonotic species ที่คนติดได้จากเนื้อหมูดิบ"
+  },
+  {
+    q:"ข้อใดถูกต้องเกี่ยวกับพยาธิ Macracanthorhynchus hirudinaceus",
+    choices:[
+      "ทางตอนหน้าของพยาธิลักษณะเป็นรอยย่นตามขวาง (Transverse wrinkle) ซึ่งเรียกว่า pseudosegment",
+      "ไข่พยาธิรูปร่าง oval shape ลักษณะคล้ายลูกกุ้งกักอยู่ในไข่มีตัวอ่อนระยะที่ 1 และเปลือกไข่มีสีน้ำตาลเข้ม",
+      "บริเวณ anterior end มี proboscis ที่มี hook อยู่ 2 แถว โดยแต่ละแถวมี hook 4 อัน proboscis สามารถยืดหดได้",
+      "พยาธิ hirudinaceus สามารถติดต่อสู่คนได้โดยในประเทศไทยยังไม่รายงานการพบพยาธิชนิดนี้"
+    ],
+    a:2,
+    why:"Macracanthorhynchus hirudinaceus มี proboscis ที่มี hook 2 แถว แถวละ 4 อัน ใช้ยึดผนังลำไส้สุกร"
+  },
+  {
+    q:"พยาธิใดที่ไข่มีลักษณะเปลือกหนา รูปทรงคล้ายถัง (barrel-shaped) และมี bipolar plugs",
+    choices:[
+      "Trichuris suis",
+      "Ascaris suum",
+      "Oesophagostomum dentatum",
+      "Strongyloides ransomi"
+    ],
+    a:0,
+    why:"Trichuris suis มีไข่ barrel-shaped มี bipolar plugs"
+  },
+  {
+    q:"พยาธิใดที่ใช้ earthworm เป็นโฮสต์กึ่งกลาง (intermediate host) และอาศัยในปอดสุกร",
+    choices:[
+      "Metastrongylus elongatus (apri)",
+      "Oesophagostomum quadrispinulatum",
+      "Hyostrongylus rubidus",
+      "Ascarops strongylina"
+    ],
+    a:0,
+    why:"Metastrongylus spp. เป็น lungworm ของสุกร ใช้ไส้เดือนดินเป็น intermediate host"
+  },
+  {
+    q:"พยาธิใดที่ตัวเต็มวัยอยู่บริเวณรอบไต/ท่อไต และไข่ออกทางปัสสาวะ",
+    choices:[
+      "Stephanurus dentatus",
+      "Setaria equina",
+      "Gongylonema pulchrum",
+      "Globocephalus urosubulatus"
+    ],
+    a:0,
+    why:"Stephanurus dentatus อาศัยบริเวณรอบไตและท่อไต ไข่พบในปัสสาวะ"
+  },
+  {
+    q:"พยาธิในกระเพาะสุกรที่เรียก Red stomach worm คือ",
+    choices:[
+      "Hyostrongylus rubidus",
+      "Trichostrongylus axei",
+      "Physocephalus sexalatus",
+      "Ascarops strongylina"
+    ],
+    a:0,
+    why:"Hyostrongylus rubidus มีสีแดง อาศัยในกระเพาะสุกร เรียก red stomach worm"
+  },
+  {
+    q:"พยาธิใดที่ทำให้เกิด nodules ที่ผนังลำไส้ใหญ่ของสุกรมากที่สุด",
+    choices:[
+      "Oesophagostomum dentatum",
+      "Trichuris suis",
+      "Ascaris suum",
+      "Capillaria (Aonchotheca) suis"
+    ],
+    a:0,
+    why:"Oesophagostomum spp. (nodule worm) ก่อ nodules ที่ผนังลำไส้ใหญ่และไส้ตัน"
+  },
+  {
+    q:"พยาธิใดของสุกรที่การติดเชื้อในลูกสุกรเกิดได้บ่อยทางน้ำนม (transmammary) และทำให้ท้องเสียเฉียบพลัน",
+    choices:[
+      "Strongyloides ransomi",
+      "Ascaris suum",
+      "Globocephalus urosubulatus",
+      "Trichuris suis"
+    ],
+    a:0,
+    why:"Strongyloides ransomi ถ่ายทอดทางน้ำนมได้ โดยเฉพาะลูกสุกรอายุน้อย → ท้องเสียเฉียบพลัน"
+  },
+  {
+    q:"พยาธิกระเพาะสุกรใดมีลักษณะ single spiral-coil thickening ที่ buccal capsule",
+    choices:[
+      "Physocephalus sexalatus",
+      "Ascarops strongylina",
+      "Hyostrongylus rubidus",
+      "Trichostrongylus axei"
+    ],
+    a:0,
+    why:"Physocephalus sexalatus มี single spiral-coil thickening ต่างจาก Ascarops ที่เป็น triple spiral-coil"
+  },
+  {
+    q:"พยาธิใดมีระยะตัวอ่อนฝังตัวในกล้ามเนื้อลายของสุกรและเป็นโรคติดต่อสู่คน (zoonosis) สำคัญ",
+    choices:[
+      "Trichinella spiralis",
+      "Gnathostoma hispidum",
+      "Stephanurus dentatus",
+      "Macracanthorhynchus hirudinaceus"
+    ],
+    a:0,
+    why:"Trichinella spiralis มี encysted larvae ในกล้ามเนื้อ คนติดจากเนื้อหมูสุกไม่พอ"
+  },
+  {
+    q:"พยาธิใดเป็น hookworm ของสุกรที่มักเข้าทางผิวหนังและอาศัยในลำไส้เล็ก",
+    choices:[
+      "Globocephalus urosubulatus",
+      "Oesophagostomum quadrispinulatum",
+      "Capillaria (Aonchotheca) suis",
+      "Gongylonema pulchrum"
+    ],
+    a:0,
+    why:"Globocephalus เป็น hookworm ของสุกร ระยะ L3 สามารถไชผ่านผิวหนังเข้าสู่ร่างกายได้"
+  },
+  {
+    q:"พยาธิใดอาศัยตามเยื่อบุหลอดอาหารสุกรเป็นลายคดเคี้ยว (zig-zag) และใช้แมลงเป็น intermediate host",
+    choices:[
+      "Gongylonema pulchrum",
+      "Ascarops strongylina",
+      "Physocephalus sexalatus",
+      "Gnathostoma hispidum"
+    ],
+    a:0,
+    why:"Gongylonema pulchrum พบเป็นทางคดเคี้ยวในเยื่อบุหลอดอาหารของสุกร ใช้แมลงกินมูลเป็น intermediate host"
+  }
+];
 
 // True/False — horse Nematodes (Refined & Re-checked, 20 ข้อ)
 const TF = [
