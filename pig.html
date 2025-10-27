@@ -54,7 +54,7 @@
   </div>
   <div class="wrap">
     <h1>🐷พยาธิตัวกลมในหมู – ชุดแบบทดสอบ (ภาษาไทย)</h1>
-    <div class="muted">สี่โหมดในหน้าเดียว: <span class="pill">Prediction site</span> · <span class="pill">MCQ 1</span> · <span class="pill">MCQ 2</span> · <span class="pill">True/False</span></div>
+    <div class="muted">สี่โหมดในหน้าเดียว: <span class="pill">Prediction site</span> · <span class="pill">MCQ 1</span> · <span class="pill">MCQ 2</span> · <span class="pill">MCQ 3</span></div>
     <div class="tabs" id="tabs"></div>
   </div>
 </header>
@@ -69,7 +69,7 @@
       <summary>📝 วิธีใช้</summary>
       <ul>
         <li><b>Prediction site</b>: เลือกตำแหน่งอาศัยให้ครบ → กด <span class="inline-kbd">ตรวจคำตอบ</span></li>
-        <li>MCQ แยกเป็นสองชุด: <b>MCQ 1</b> และ <b>MCQ 2</b></li>
+        <li>MCQ แยกเป็นสามชุด: <b>MCQ 1</b> และ <b>MCQ 2</b></li><b>MCQ 3</b></li>
       </ul>
     </details>
   </section>
@@ -751,7 +751,7 @@ const views = [
   {id:'mode-predict', title:'🔮 Prediction site'},
   {id:'mode-mcq1',    title:`🧩 MCQ 1 (${mcq1.length} ข้อ)`},
   {id:'mode-mcq2',    title:`🧩 MCQ 2 (${mcq2.length} ข้อ)`},
-  {id:'mode-mcq3',      title:`🧩 MCQ 3 (${TF.length} ข้อ)`}
+  {id:'mode-mcq3',      title:`🧩 MCQ 3 (${mcq3.length} ข้อ)`}
 ];
 let activeTab = views[0].id;
 
@@ -833,7 +833,7 @@ function buildMCQMode(hostId, DATA){
   const host=document.getElementById(hostId);
   if(!host) return;
   if(!DATA || DATA.length===0){
-    host.innerHTML = `<div class="qcard muted">ยังไม่มีคำถามในชุดนี้ — ใส่ที่ตัวแปร <b>${hostId==='mode-mcq1'?'mcq1':'mcq2'}</b></div>`;
+   host.innerHTML = `<div class="qcard muted">ยังไม่มีคำถามในชุดนี้ — ใส่ที่ตัวแปรของโหมดนี้</div>`;
     return;
   }
   let order = shuffle(DATA.map((_,i)=>i));
