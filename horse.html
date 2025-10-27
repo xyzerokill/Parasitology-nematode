@@ -83,297 +83,57 @@ function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const 
 
 /* ---------- DATA: sites/prediction (ของเดิมคุณวางต่อได้เลย) ---------- */
 const SITES = [
-  "Abomasum",
+  "Stomach",
   "Small intestine",
   "Large intestine & Caecum",
-  "Trachea / Bronchi / Lungs",
-  "Esophagus / Rumen",
-  "Eyes",
-  "Skin / Subcutis & Connective tissue"
+  "Lungs / Trachea / Bronchi",
+  "Peritoneal cavity",
+  "Subcutaneous / Skin",
+  "Eye / Wound (Summer sore)"
 ];
 
 const PARASITES = [
-  // Abomasum
-  { name:"Haemonchus contortus", site:"Abomasum" },
-  { name:"Haemonchus placei", site:"Abomasum" },
-  { name:"Ostertagia ostertagi", site:"Abomasum" }, // cattle
-  { name:"Teladorsagia circumcincta", site:"Abomasum" }, // sheep/goat (formerly O. circumcincta)
-  { name:"Trichostrongylus axei", site:"Abomasum" },
-  { name:"Marshallagia marshalli", site:"Abomasum" },
+  // Stomach
+  { name:"Draschia megastoma", site:"Stomach" },
+  { name:"Habronema muscae", site:"Stomach" },
+  { name:"Habronema microstoma", site:"Stomach" },
+  { name:"Trichostrongylus axei", site:"Stomach" },
 
   // Small intestine
-  { name:"Trichostrongylus colubriformis", site:"Small intestine" },
-  { name:"Trichostrongylus vitrinus", site:"Small intestine" },
-  { name:"Cooperia oncophora", site:"Small intestine" },
-  { name:"Cooperia pectinata", site:"Small intestine" },
-  { name:"Nematodirus spathiger", site:"Small intestine" },
-  { name:"Nematodirus battus", site:"Small intestine" },
-  { name:"Bunostomum phlebotomum", site:"Small intestine" }, // cattle hookworm
-  { name:"Bunostomum trigonocephalum", site:"Small intestine" }, // sheep/goat hookworm
-  { name:"Strongyloides papillosus", site:"Small intestine" },
-  { name:"Toxocara vitulorum", site:"Small intestine" }, // calves
+  { name:"Strongyloides westeri", site:"Small intestine" },
+  { name:"Parascaris equorum", site:"Small intestine"" },
+  { name:"Strongylus edentatus", site:"Small intestine" },
+  { name:"Strongylus equinus", site:"Small intestine" },
+  { name:"Cyathostomum spp. (small strongyles)", site:"Small intestine" },
 
   // Large intestine & Caecum
-  { name:"Oesophagostomum radiatum", site:"Large intestine & Caecum" }, // cattle nodular worm
-  { name:"Oesophagostomum columbianum", site:"Large intestine & Caecum" }, // sheep/goat
-  { name:"Chabertia ovina", site:"Large intestine & Caecum" }, // colon
-  { name:"Trichuris ovis", site:"Large intestine & Caecum" },
-  { name:"Trichuris discolor", site:"Large intestine & Caecum" },
+  { name:"Oxyuris equi", site:"Large intestine & Caecum" },
 
-  // Respiratory (Trachea / Bronchi / Lungs)
-  { name:"Dictyocaulus viviparus", site:"Trachea / Bronchi / Lungs" }, // cattle lungworm
-  { name:"Dictyocaulus filaria", site:"Trachea / Bronchi / Lungs" },   // sheep/goat
-  { name:"Muellerius capillaris", site:"Trachea / Bronchi / Lungs" },  // alveoli (sheep/goat)
-  { name:"Protostrongylus rufescens", site:"Trachea / Bronchi / Lungs" }, // small bronchioles
+  // Lungs / Trachea / Bronchi
+  { name:"Dictyocaulus arnfieldi", site:"Lungs / Trachea / Bronchi" },
 
-  // Esophagus / Rumen
-  { name:"Gongylonema spp.", site:"Esophagus / Rumen" },
+  // Peritoneal cavity
+  { name:"Setaria equina", site:"Peritoneal cavity" },
 
-  // Eyes
-  { name:"Thelazia spp.", site:"Eyes" },
+  // Subcutaneous / Skin
+  { name:"Onchocerca cervicalis", site:"Subcutaneous / Skin" },
 
-  // Skin / Subcutis & Connective tissue (filarial)
-  { name:"Onchocerca spp.", site:"Skin / Subcutis & Connective tissue" }, // nuchal ligament (cattle)
-  { name:"Stephanofilaria stilesi", site:"Skin / Subcutis & Connective tissue" } // skin lesions (cattle)
+  // Eye / Wound (Summer sore)
+  { name:"Habronema spp. (larval migration)", site:"Eye / Wound (Summer sore)" },
+  { name:"Draschia megastoma (larval migration)", site:"Eye / Wound (Summer sore)" }
 ];
 
 
 /* ---------- MCQ datasets: ใช้ชื่อ mcq1/mcq2 เท่านั้น ---------- */
 const mcq1 = [
-    {
-    q:"ข้อใดกล่าวไม่ถูกต้องเกี่ยวกับลักษณะของพยาธิตัวกลม (Nematode)",
-    choices:[
-      "Complete alimentary canal",
-      "พยาธิตัวเมียมีขนาดใหญ่กว่าตัวผู้",
-      "ลำตัวแบ่งเป็นปล้องหรือ segments ชัดเจน",
-      "มี cuticle ห่อหุ้มร่างกาย"
-    ],
-    a:2,
-    why:"Nematodes ไม่มีการแบ่งเป็นปล้อง (unsegmented) ลำตัวทรงกระบอกเรียวยาว ปกคลุมด้วย cuticle แตกต่างจาก cestodes ที่เป็น segmented.",
-    ref:"Ruminants I – General morphology of nematodes"
-  },
-  {
-    q:"ข้อใดไม่จัดอยู่ในกลุ่ม blood-sucking stomach worms ของโคและแกะ",
-    choices:[
-      "Barber’s pole worm",
-      "Cooperia spp.",
-      "Mecistocirrus digitatus",
-      "Ostertagia ostertagi"
-    ],
-    a:1,
-    why:"Cooperia spp. เป็น intestinal nematode อาศัยใน small intestine ไม่ใช่ blood-sucking abomasal worm.",
-    ref:"Ruminants I – Haemonchus group vs Cooperia"
-  },
-  {
-    q:"พยาธิตัวกลมในสัตว์เลี้ยงลูกด้วยนมชนิดใดที่ก่อให้เกิดความสูญเสียสูงในลูกสัตว์ ยกเว้นข้อใด",
-    choices:[
-      "Toxocara canis",
-      "Oesophagostomum spp.",
-      "Toxocara vitulorum",
-      "Strongyloides papillosus"
-    ],
-    a:0,
-    why:"Toxocara canis พบในสุนัข ไม่ใช่ในโค ลูกโคที่ติดเชื้อรุนแรงมักเกิดจาก Toxocara vitulorum ที่ลำไส้เล็ก.",
-    ref:"Ruminants II – Toxocara vitulorum"
-  },
-  {
-    q:"พยาธิตัวกลมชนิดใดในแพะที่ก่อให้เกิดปัญหาท้องเสียอย่างร้ายแรงที่สุด",
-    choices:[
-      "Brown stomach worms",
-      "Barber’s pole worms",
-      "Bankrupt worms",
-      "Nodular worms"
-    ],
-    a:1,
-    why:"Barber’s pole worm (*Haemonchus contortus*) เป็น blood-sucking worm ใน abomasum ทำให้ anemia และท้องเสียรุนแรง.",
-    ref:"Ruminants I – Haemonchus contortus"
-  },
-  {
-    q:"ทุกข้อคือปัจจัยที่ทำให้การติดเชื้อของพยาธิ Haemonchus contortus ยาวนาน ยกเว้นข้อใด",
-    choices:[
-      "การใช้ยาถ่ายพยาธิชนิดเดียวซ้ำต่อเนื่องเป็นเวลานาน",
-      "พยาธิตัวเต็มวัยเพศเมียสามารถวางไข่เป็นจำนวนมาก",
-      "มีระยะ free-living phase นานขึ้น",
-      "ตัวอ่อนระยะ L3 สามารถปรับตัวในสภาพแวดล้อมได้ดี"
-    ],
-    a:1,
-    why:"การที่พยาธิตัวเมียวางไข่ได้มากกลับเป็นปัจจัยที่เพิ่มการแพร่ระบาด ไม่ใช่ยืดอายุการติดเชื้อในตัวสัตว์ (resistance และ hypobiosis ต่างหากที่ทำให้ติดยาว).",
-    ref:"Ruminants I – Haemonchus epidemiology"
-  },
-  {
-    q:"ข้อใดกล่าวไม่ถูกต้องเกี่ยวกับ Strongyloides papillosus",
-    choices:[
-      "พบมากในลูกโค",
-      "ตัวเต็มวัยเพศเมียจะมีขนาดใหญ่กว่าตัวผู้",
-      "มีระยะ free-living generation",
-      "ติดเชื้อโดยระยะ third-stage larva"
-    ],
-    a:1,
-    why:"Strongyloides papillosus มีเพียงเพศเมียที่เป็น parasitic form ในโฮสต์ ตัวผู้พบเฉพาะใน free-living stage.",
-    ref:"Ruminants I – Strongyloides papillosus life cycle"
-  },
-  {
-    q:"ข้อใดกล่าวได้ถูกต้องเกี่ยวกับ cattle eyeworm",
-    choices:[
-      "มีสาเหตุมาจาก Onchocerca volvulus",
-      "มี Simulium spp. เป็น intermediate host",
-      "microfilaria ไม่มี sheath",
-      "ตัวเต็มวัยจะมีลักษณะที่เรียกว่า transverse striations"
-    ],
-    a:3,
-    why:"Thelazia spp. (cattle eyeworm) มี transverse striations บน cuticle ตัวเต็มวัย พบใน conjunctival sac หรือ lacrimal duct.",
-    ref:"Ruminants II – Thelazia spp."
-  },
-  {
-    q:"ข้อใดกล่าวได้ถูกต้องเกี่ยวกับพยาธิ Elaeophora spp.",
-    choices:[
-      "Onchocercosis อาศัย House fly เป็น intermediate host",
-      "Elaeophora spp. อาศัย Tabanus spp. เป็น intermediate host",
-      "Onchocerca ใช้ Tabanus เป็น intermediate host",
-      "Elaeophora spp. อาศัย Black fly เป็น intermediate host"
-    ],
-    a:1,
-    why:"Elaeophora spp. ใช้แมลงดูดเลือดจำพวก horse fly (Tabanus spp.) เป็น intermediate host.",
-    ref:"Ruminants II – Elaeophora spp."
-  },
-  {
-    q:"Stichosome esophagus เป็นลักษณะที่สามารถพบในพยาธิตัวกลมชนิดใด ยกเว้นข้อใด",
-    choices:[
-      "Trichuris spp.",
-      "Capillaria spp.",
-      "Strongyloides papillosus",
-      "Trichinella spiralis"
-    ],
-    a:2,
-    why:"Strongyloides papillosus ไม่มี stichosome esophagus; ลักษณะนี้พบใน Trichinelloid nematodes เช่น Trichuris, Capillaria, Trichinella.",
-    ref:"Ruminants I – Morphology: Trichinelloid esophagus"
-  },
-  {
-    q:"ข้อใดกล่าวไม่ถูกต้องเกี่ยวกับพยาธิ Dictyocaulus spp.",
-    choices:[
-      "มี boot-shaped spicule",
-      "D. viviparus มักพบในปอดของโค",
-      "ทำให้เกิด alveolar collapse",
-      "พบระยะ L4 ในลำไส้ของสัตว์ที่ติดเชื้อ"
-    ],
-    a:3,
-    why:"L4 ของ Dictyocaulus จะอยู่ในปอด ไม่พบในลำไส้ การพบ L4 ในลำไส้ไม่ใช่ลักษณะของพยาธินี้.",
-    ref:"Ruminants II – Dictyocaulus spp. life cycle"
-  },
-  {
-    q:"ข้อใดกล่าวไม่ถูกต้องเกี่ยวกับวงจรชีวิตของ Strongyloides papillosus",
-    choices:[
-      "มี free-living stage",
-      "มี parasitic stage",
-      "สามารถสืบพันธุ์แบบ parthenogenetic",
-      "มีการถ่ายทอดแบบ vertical transmission"
-    ],
-    a:3,
-    why:"Strongyloides papillosus ไม่ถ่ายทอดแบบ vertical (แม่สู่ลูก); การติดเชื้อหลักคือ percutaneous หรือ oral infection จาก L3.",
-    ref:"Ruminants I – Strongyloides papillosus transmission"
-  },
-  {
-    q:"ข้อใดไม่จัดอยู่ในกลุ่ม vector-borne filarial nematodes",
-    choices:[
-      "Elaeophora spp.",
-      "Thelazia rhodesii",
-      "Setaria labiatopapillosa",
-      "Onchocerca volvulus"
-    ],
-    a:1,
-    why:"Thelazia rhodesii เป็น eye worm ใช้ Musca spp. (face fly) เป็น intermediate host แต่ไม่ใช่ filarial worm ในกลุ่ม vector-borne (Onchocercidae).",
-    ref:"Ruminants II – Filarial nematodes classification"
-  }
+    
   ];
   
 const mcq2 = [
-    {
-    q:"Simulium spp. เป็น intermediate host ของพยาธิใด",
-    choices:["Onchocerca volvulus","Setaria labiatopapillosa","Elaeophora spp.","Haemonchus contortus"],
-    a:0,
-    why:"Simulium (black fly) เป็นพาหะของ Onchocerca spp. ซึ่งเป็น filarial nematode ทำให้เกิด onchocerciasis ในโคและคน.",
-    ref:"Ruminants II – Filarial nematodes"
-  },
-  {
-    q:"พยาธิที่มี microfilaria with sheath คือชนิดใด",
-    choices:["Onchocerca volvulus","Setaria labiatopapillosa","Elaeophora spp.","Dictyocaulus filaria"],
-    a:1,
-    why:"Setaria labiatopapillosa มี microfilaria ที่มี sheath พบในเลือดของโค เป็น non-pathogenic filarial worm.",
-    ref:"Ruminants II – Setaria spp."
-  },
-  {
-    q:"microfilaria ที่ไม่มี sheath (unsheathed) พบในพยาธิชนิดใด",
-    choices:["Onchocerca volvulus","Elaeophora spp.","Setaria labiatopapillosa","Trichuris spp."],
-    a:1,
-    why:"Elaeophora spp. มี microfilaria ที่ไม่มี sheath แตกต่างจาก Setaria spp. ที่มี sheath.",
-    ref:"Ruminants II – Elaeophora spp."
-  },
-  {
-    q:"พยาธิที่มีไข่ลักษณะ barrel shape คือชนิดใด",
-    choices:["Trichuris spp.","Capillaria philippinensis","Haemonchus contortus","Strongyloides papillosus"],
-    a:0,
-    why:"Trichuris spp. มีไข่รูปร่างคล้ายถัง (barrel-shape) มี bipolar plugs ที่ขั้วทั้งสองด้าน.",
-    ref:"Ruminants I – Trichuris spp."
-  },
-  {
-    q:"Sheep lungworm คือพยาธิชนิดใด",
-    choices:["Dictyocaulus filaria","Haemonchus contortus","Strongyloides papillosus","Ostertagia ostertagi"],
-    a:0,
-    why:"Dictyocaulus filaria เป็น lungworm ของแกะและแพะ ทำให้เกิดอาการไอและ bronchitis.",
-    ref:"Ruminants II – Dictyocaulus spp."
-  },
-  {
-    q:"Human intestinal capillariasis เกิดจากพยาธิชนิดใด",
-    choices:["Capillaria philippinensis","Trichuris spp.","Strongyloides papillosus","Toxocara vitulorum"],
-    a:0,
-    why:"Capillaria philippinensis พบในคน ทำให้เกิด intestinal capillariasis; มีไข่คล้าย Trichuris แต่ขนาดเล็กกว่า.",
-    ref:"Ruminants I – Capillaria spp."
-  },
-  {
-    q:"พยาธิที่มี stichosome esophagus คือชนิดใด",
-    choices:["Trichuris spp.","Capillaria spp.","Strongyloides papillosus","Elaeophora spp."],
-    a:1,
-    why:"Capillaria spp. มี stichosome esophagus ซึ่งเป็นลักษณะเฉพาะของกลุ่ม Trichinelloid nematodes.",
-    ref:"Ruminants I – Morphology of Trichinelloidea"
-  },
-  {
-    q:"พยาธิที่มี filariform esophagus คือชนิดใด",
-    choices:["Strongyloides papillosus","Trichuris spp.","Haemonchus contortus","Ostertagia ostertagi"],
-    a:0,
-    why:"Strongyloides papillosus มี esophagus แบบ filariform พบในระยะ L3 และตัวเต็มวัยเพศเมียใน host.",
-    ref:"Ruminants I – Strongyloides papillosus"
-  },
-  {
-    q:"พยาธิที่พบในหลอดเลือดแดง carotid artery ของโคคือชนิดใด",
-    choices:["Elaeophora spp.","Onchocerca volvulus","Setaria labiatopapillosa","Haemonchus contortus"],
-    a:0,
-    why:"Elaeophora schneideri อาศัยอยู่ใน carotid artery ของโคและกวาง เรียกว่า arterial worm.",
-    ref:"Ruminants II – Elaeophora schneideri"
-  },
-  {
-    q:"Barber’s pole worm คือชื่อสามัญของพยาธิชนิดใด",
-    choices:["Haemonchus contortus","Ostertagia ostertagi","Trichuris spp.","Strongyloides papillosus"],
-    a:0,
-    why:"Haemonchus contortus มีรูปร่างยาวเรียวและมีลายขาวแดงคล้าย barber’s pole พบใน abomasum.",
-    ref:"Ruminants I – Haemonchus contortus"
-  },
-  {
-    q:"พยาธิที่มักก่อโรคในลูกโคอายุยังน้อยคือชนิดใด",
-    choices:["Toxocara vitulorum","Ostertagia ostertagi","Oesophagostomum spp.","Strongyloides papillosus"],
-    a:0,
-    why:"Toxocara vitulorum พบในลูกโคแรกเกิดจากการติดเชื้อผ่านน้ำนม ทำให้ท้องอืดและอุดตันลำไส้.",
-    ref:"Ruminants II – Toxocara vitulorum"
-  },
-  {
-    q:"พยาธิชนิดใดมีการสืบพันธุ์แบบ parthenogenetic",
-    choices:["Strongyloides papillosus","Trichuris spp.","Capillaria philippinensis","Haemonchus contortus"],
-    a:0,
-    why:"Strongyloides papillosus ตัวเมียในโฮสต์สามารถวางไข่ได้โดยไม่ต้องผสมพันธุ์ (parthenogenesis).",
-    ref:"Ruminants I – Strongyloides papillosus life cycle"
-  }
+    
   ];
 
-// True/False — Poultry Nematodes (Refined & Re-checked, 20 ข้อ)
+// True/False — horse Nematodes (Refined & Re-checked, 20 ข้อ)
 const TF = [
   
 ];
