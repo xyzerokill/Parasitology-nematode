@@ -86,57 +86,38 @@ const SITES = [
   "Abomasum",
   "Small intestine",
   "Large intestine & Caecum",
-  "Trachea / Bronchi / Lungs",
-  "Esophagus / Rumen",
-  "Eyes",
-  "Skin / Subcutis & Connective tissue"
+  "Lungs / Bronchi",
+  "Eyes (Conjunctival sac)",
+  "Skin / Subcutis & Connective tissue",
+  "Arteries (carotid/ophthalmic)",
+  "Peritoneal cavity (free)"
 ];
 
+// รายชื่อพยาธิและคำตอบ site ที่ถูกต้อง (จากรายการที่ให้มา)
 const PARASITES = [
-  // Abomasum
-  { name:"Haemonchus contortus", site:"Abomasum" },
-  { name:"Haemonchus placei", site:"Abomasum" },
-  { name:"Ostertagia ostertagi", site:"Abomasum" }, // cattle
-  { name:"Teladorsagia circumcincta", site:"Abomasum" }, // sheep/goat (formerly O. circumcincta)
-  { name:"Trichostrongylus axei", site:"Abomasum" },
-  { name:"Marshallagia marshalli", site:"Abomasum" },
+  // Abomasum — Nematodes in ruminants
+  { name: "Haemonchus contortus",            site: "Abomasum" },
+  { name: "Ostertagia ostertagi",            site: "Abomasum" },
+  { name: "Trichostrongylus spp.",           site: "Abomasum" }, // ในกลุ่มนี้นับ T. axei เป็น abomasum
+  { name: "Mecistocirrus digitatus",         site: "Abomasum" },
 
-  // Small intestine
-  { name:"Trichostrongylus colubriformis", site:"Small intestine" },
-  { name:"Trichostrongylus vitrinus", site:"Small intestine" },
-  { name:"Cooperia oncophora", site:"Small intestine" },
-  { name:"Cooperia pectinata", site:"Small intestine" },
-  { name:"Nematodirus spathiger", site:"Small intestine" },
-  { name:"Nematodirus battus", site:"Small intestine" },
-  { name:"Bunostomum phlebotomum", site:"Small intestine" }, // cattle hookworm
-  { name:"Bunostomum trigonocephalum", site:"Small intestine" }, // sheep/goat hookworm
-  { name:"Strongyloides papillosus", site:"Small intestine" },
-  { name:"Toxocara vitulorum", site:"Small intestine" }, // calves
+  // Intestinal — Nematodes in ruminants
+  { name: "Toxocara vitulorum",              site: "Small intestine" },
+  { name: "Cooperia spp.",                   site: "Small intestine" },
+  { name: "Nematodirus spp.",                site: "Small intestine" },
+  { name: "Strongyloides papillosus",        site: "Small intestine" },
+  { name: "Bunostomum spp.",                 site: "Small intestine" }, // hookworm (jejunum)
+  { name: "Oesophagostomum spp.",            site: "Large intestine & Caecum" },
+  { name: "Trichuris spp.",                  site: "Large intestine & Caecum" },
+  { name: "Capillaria spp.",                 site: "Small intestine" },
 
-  // Large intestine & Caecum
-  { name:"Oesophagostomum radiatum", site:"Large intestine & Caecum" }, // cattle nodular worm
-  { name:"Oesophagostomum columbianum", site:"Large intestine & Caecum" }, // sheep/goat
-  { name:"Chabertia ovina", site:"Large intestine & Caecum" }, // colon
-  { name:"Trichuris ovis", site:"Large intestine & Caecum" },
-  { name:"Trichuris discolor", site:"Large intestine & Caecum" },
-
-  // Respiratory (Trachea / Bronchi / Lungs)
-  { name:"Dictyocaulus viviparus", site:"Trachea / Bronchi / Lungs" }, // cattle lungworm
-  { name:"Dictyocaulus filaria", site:"Trachea / Bronchi / Lungs" },   // sheep/goat
-  { name:"Muellerius capillaris", site:"Trachea / Bronchi / Lungs" },  // alveoli (sheep/goat)
-  { name:"Protostrongylus rufescens", site:"Trachea / Bronchi / Lungs" }, // small bronchioles
-
-  // Esophagus / Rumen
-  { name:"Gongylonema spp.", site:"Esophagus / Rumen" },
-
-  // Eyes
-  { name:"Thelazia spp.", site:"Eyes" },
-
-  // Skin / Subcutis & Connective tissue (filarial)
-  { name:"Onchocerca spp.", site:"Skin / Subcutis & Connective tissue" }, // nuchal ligament (cattle)
-  { name:"Stephanofilaria stilesi", site:"Skin / Subcutis & Connective tissue" } // skin lesions (cattle)
+  // Miscellaneous — Nematodes in ruminants
+  { name: "Dictyocaulus spp.",               site: "Lungs / Bronchi" },
+  { name: "Thelazia rhodesii",               site: "Eyes (Conjunctival sac)" },
+  { name: "Onchocerca volvulus",             site: "Skin / Subcutis & Connective tissue" }, // ในโคจะพบ Onchocerca spp. ในนิวชัลลิกาเมนต์/ใต้ผิวหนัง
+  { name: "Elaeophora spp.",                 site: "Arteries (carotid/ophthalmic)" },
+  { name: "Setaria labiatopapillosa",        site: "Peritoneal cavity (free)" }
 ];
-
 
 /* ---------- MCQ datasets: ใช้ชื่อ mcq1/mcq2 เท่านั้น ---------- */
 const mcq1 = [
